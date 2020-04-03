@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.SparseIntArray;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -20,12 +21,13 @@ public class MainActivity extends AppCompatActivity {
      private int clickCount = 0;
      private ArrayList<Integer> listOfCellsAlreadySet = new ArrayList<>();
      private boolean foundWinner = false;
-     public static List<Integer> Player1 = new ArrayList<>();
-     public static List<Integer> Player2 = new ArrayList<>();
+     public static List<Integer> Player1 ;
+     public static List<Integer> Player2 ;
      public static SparseIntArray cellMap;
      static ArrayList<List<Integer>> winningSet;
 
-    ImageView cell00,cell01,cell02,cell10,cell11,cell12,cell20,cell21,cell22;
+     TextView messageBox;
+     ImageView cell00,cell01,cell02,cell10,cell11,cell12,cell20,cell21,cell22;
 
 
     @Override
@@ -36,6 +38,9 @@ public class MainActivity extends AppCompatActivity {
         listOfCellsAlreadySet.add(-1);
         cellMap = new SparseIntArray();
         winningSet = new ArrayList<>();
+        messageBox = findViewById(R.id.textviewmessage);
+        Player1 = new ArrayList<>();
+        Player2 = new ArrayList<>();
 
         /*
         * All the possibles set of cells to win
@@ -159,23 +164,31 @@ public class MainActivity extends AppCompatActivity {
 
         if( !listOfCellsAlreadySet.contains(view.getId()) && !foundWinner){ // To check if the cell has been clicked already or not.
             clickCount++;
-        if(clickCount%2 == 0){
-            Player2.add(cellMap.get(view.getId()));
-            imageView.setImageResource(R.drawable.kuti);
-            /*Toast.makeText(MainActivity.this,"Clicked on "+cellMap.get(view.getId())+"th cell",Toast.LENGTH_SHORT).show();*/}
-        else{
-            Player1.add(cellMap.get(view.getId()));
-            imageView.setImageResource(R.drawable.kata);
-            /*Toast.makeText(MainActivity.this,"Clicked on "+cellMap.get(view.getId())+"th cell",Toast.LENGTH_SHORT).show();*/}
+            /*
+            * clickCount will decide player 1 OR 2 based on odd-even logic
+            * */
+            if(clickCount%2 == 0){
+                Player2.add(cellMap.get(view.getId()));
+                imageView.setImageResource(R.drawable.kuti);
+                /*Toast.makeText(MainActivity.this,"Clicked on "+cellMap.get(view.getId())+"th cell",Toast.LENGTH_SHORT).show();*/}
+            else{
+                Player1.add(cellMap.get(view.getId()));
+                imageView.setImageResource(R.drawable.kata);
+                /*Toast.makeText(MainActivity.this,"Clicked on "+cellMap.get(view.getId())+"th cell",Toast.LENGTH_SHORT).show();*/}
 
-        listOfCellsAlreadySet.add(view.getId()); // Once Clicked the value of the cell can't be changed
+            listOfCellsAlreadySet.add(view.getId()); // Once Clicked the value of the cell can't be changed
 
-
-        foundWinner = theWinner(clickCount);
+            if(clickCount > 3)foundWinner = theWinner(clickCount);
             if(foundWinner){
-                if(clickCount%2 == 0)Toast.makeText(MainActivity.this,"PLAYER 2 WON",Toast.LENGTH_SHORT).show();
-                else Toast.makeText(MainActivity.this,"PLAYER 1 WON",Toast.LENGTH_SHORT).show();
+                if(clickCount%2 == 0)messageBox.setText("PLAYER 2 WON");
+                else messageBox.setText("PLAYER 1 WON");
 
+            }else if(clickCount == 9){
+                /*All cells have been set but winner is still not found
+                 *Logic for handling Tie
+                 * */
+                //Toast.makeText(MainActivity.this,"It's a Tie",Toast.LENGTH_SHORT).show();
+                messageBox.setText("IT'S A TIE");
             }
 
         }
