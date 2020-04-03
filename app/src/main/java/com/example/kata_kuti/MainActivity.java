@@ -3,19 +3,29 @@ package com.example.kata_kuti;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.SparseIntArray;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import static com.example.kata_kuti.WinningLogic.theWinner;
+
 
 public class MainActivity extends AppCompatActivity {
 
-    private int clickCount = 0;
-    private ArrayList<Integer> listOfCellsAlreadySet = new ArrayList<>();
-    private boolean foundWinner = false;
-    private ArrayList<ImageView> Player1 = new ArrayList<>();
-    private ArrayList<ImageView> Player2 = new ArrayList<>();
+     private int clickCount = 0;
+     private ArrayList<Integer> listOfCellsAlreadySet = new ArrayList<>();
+     private boolean foundWinner = false;
+     public static List<Integer> Player1 = new ArrayList<>();
+     public static List<Integer> Player2 = new ArrayList<>();
+     public static SparseIntArray cellMap;
+     static ArrayList<List<Integer>> winningSet;
+
+    ImageView cell00,cell01,cell02,cell10,cell11,cell12,cell20,cell21,cell22;
 
 
     @Override
@@ -24,21 +34,56 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         listOfCellsAlreadySet.add(-1);
+        cellMap = new SparseIntArray();
+        winningSet = new ArrayList<>();
 
-        ImageView cell00 = findViewById(R.id.cell00);
-        ImageView cell01 = findViewById(R.id.cell01);
-        ImageView cell02 = findViewById(R.id.cell02);
+        /*
+        * All the possibles set of cells to win
+        * */
+        winningSet.add(Arrays.asList(1,2,3));
+        winningSet.add(Arrays.asList(4,5,6));
+        winningSet.add(Arrays.asList(7,8,9));
+
+        winningSet.add(Arrays.asList(1,4,7));
+        winningSet.add(Arrays.asList(2,5,8));
+        winningSet.add(Arrays.asList(3,6,9));
+
+        winningSet.add(Arrays.asList(1,5,9));
+        winningSet.add(Arrays.asList(3,5,7));
+
+        /*
+        * all cells found by Ids
+        * */
+        cell00 = findViewById(R.id.cell00);
+         cell01 = findViewById(R.id.cell01);
+         cell02 = findViewById(R.id.cell02);
 
 
-        ImageView cell10 = findViewById(R.id.cell10);
-        ImageView cell11 = findViewById(R.id.cell11);
-        ImageView cell12 = findViewById(R.id.cell12);
+         cell10 = findViewById(R.id.cell10);
+         cell11 = findViewById(R.id.cell11);
+         cell12 = findViewById(R.id.cell12);
 
 
-        ImageView cell20 = findViewById(R.id.cell20);
-        ImageView cell21 = findViewById(R.id.cell21);
-        ImageView cell22 = findViewById(R.id.cell22);
+         cell20 = findViewById(R.id.cell20);
+         cell21 = findViewById(R.id.cell21);
+         cell22 = findViewById(R.id.cell22);
 
+         /*
+         * to ease the use of Id .. to find the winner
+         * */
+         cellMap.put(R.id.cell00,1);
+         cellMap.put(R.id.cell01,2);
+         cellMap.put(R.id.cell02,3);
+
+
+         cellMap.put(R.id.cell10,4);
+         cellMap.put(R.id.cell11,5);
+         cellMap.put(R.id.cell12,6);
+
+
+         cellMap.put(R.id.cell20,7);
+         cellMap.put(R.id.cell21,8);
+         cellMap.put(R.id.cell22,9);
 
         /*
          * Click Listeners for the first row Cells
@@ -109,18 +154,30 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void nextSymbol(View view){
-        Toast.makeText(MainActivity.this,"Clicked on "+view.getId(),Toast.LENGTH_SHORT).show();
+        //Toast.makeText(MainActivity.this,"Clicked on "+view.getId(),Toast.LENGTH_SHORT).show();
         ImageView imageView = findViewById(view.getId());
-        if( !listOfCellsAlreadySet.contains(view.getId())){
+
+        if( !listOfCellsAlreadySet.contains(view.getId()) && !foundWinner){ // To check if the cell has been clicked already or not.
             clickCount++;
         if(clickCount%2 == 0){
-            Player2.add(imageView);
-            imageView.setImageResource(R.drawable.kuti);}
+            Player2.add(cellMap.get(view.getId()));
+            imageView.setImageResource(R.drawable.kuti);
+            /*Toast.makeText(MainActivity.this,"Clicked on "+cellMap.get(view.getId())+"th cell",Toast.LENGTH_SHORT).show();*/}
         else{
-            Player1.add(imageView);
-            imageView.setImageResource(R.drawable.kata);}
+            Player1.add(cellMap.get(view.getId()));
+            imageView.setImageResource(R.drawable.kata);
+            /*Toast.makeText(MainActivity.this,"Clicked on "+cellMap.get(view.getId())+"th cell",Toast.LENGTH_SHORT).show();*/}
 
-        listOfCellsAlreadySet.add(view.getId());
+        listOfCellsAlreadySet.add(view.getId()); // Once Clicked the value of the cell can't be changed
+
+
+        foundWinner = theWinner(clickCount);
+            if(foundWinner){
+                if(clickCount%2 == 0)Toast.makeText(MainActivity.this,"PLAYER 2 WON",Toast.LENGTH_SHORT).show();
+                else Toast.makeText(MainActivity.this,"PLAYER 1 WON",Toast.LENGTH_SHORT).show();
+
+            }
+
         }
     }
 }
