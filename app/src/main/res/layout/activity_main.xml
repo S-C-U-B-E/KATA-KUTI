@@ -88,13 +88,15 @@
                 android:layout_width="match_parent"
                 android:layout_weight="1.8"
                 android:orientation="vertical"
-                android:padding="18dp">
+                android:padding="18dp"
+                android:background="#BCAAA4">
 
                 <!--TABLE FOR MAIN GAME FIELD-->
                 <TableLayout
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
-                    android:background="#616161">
+                    android:background="#616161"
+                    android:elevation="8dp">
 
                     <!--ROW NUMBERE 1-->
                     <TableRow
@@ -108,22 +110,19 @@
                             android:id="@+id/cell00"
                             style="@style/GameField"
                             android:layout_marginRight="4dp"
-                            android:layout_marginEnd="4dp"
-                            android:src="@drawable/kuti"/>
+                            android:layout_marginEnd="4dp"/>
 
                         <!--cell 01-->
                         <ImageView
                             android:id="@+id/cell01"
                             style="@style/GameField"
                             android:layout_marginRight="4dp"
-                            android:layout_marginEnd="4dp"
-                            android:src="@drawable/kata"/>
+                            android:layout_marginEnd="4dp"/>
 
                         <!--cell 02-->
                         <ImageView
                             android:id="@+id/cell02"
-                            style="@style/GameField"
-                            android:src="@drawable/kata"/>
+                            style="@style/GameField"/>
 
                     </TableRow>
 
@@ -139,22 +138,19 @@
                             android:id="@+id/cell10"
                             style="@style/GameField"
                             android:layout_marginRight="4dp"
-                            android:layout_marginEnd="4dp"
-                            android:src="@drawable/kata"/>
+                            android:layout_marginEnd="4dp"/>
 
                         <!--cell 11-->
                         <ImageView
                             android:id="@+id/cell11"
                             style="@style/GameField"
                             android:layout_marginRight="4dp"
-                            android:layout_marginEnd="4dp"
-                            android:src="@drawable/kuti"/>
+                            android:layout_marginEnd="4dp"/>
 
                         <!--cell 12-->
                         <ImageView
                             android:id="@+id/cell12"
-                            style="@style/GameField"
-                            android:src="@drawable/kata"/>
+                            style="@style/GameField"/>
 
                     </TableRow>
 
@@ -169,22 +165,19 @@
                             android:id="@+id/cell20"
                             style="@style/GameField"
                             android:layout_marginRight="4dp"
-                            android:layout_marginEnd="4dp"
-                            android:src="@drawable/kata"/>
+                            android:layout_marginEnd="4dp"/>
 
                         <!--cell 21-->
                         <ImageView
                             android:id="@+id/cell21"
                             style="@style/GameField"
                             android:layout_marginRight="4dp"
-                            android:layout_marginEnd="4dp"
-                            android:src="@drawable/kata"/>
+                            android:layout_marginEnd="4dp"/>
 
                         <!--cell 22-->
                         <ImageView
                             android:id="@+id/cell22"
-                            style="@style/GameField"
-                            android:src="@drawable/kuti"/>
+                            style="@style/GameField"/>
 
                     </TableRow>
 
