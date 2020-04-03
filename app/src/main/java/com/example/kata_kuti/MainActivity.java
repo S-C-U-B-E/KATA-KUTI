@@ -2,12 +2,12 @@ package com.example.kata_kuti;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.SparseIntArray;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -34,6 +34,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        TextView textViewPlayer1 = findViewById(R.id.textviewplayer1);
+        textViewPlayer1.setBackgroundColor(Color.parseColor("#424242"));// SET TO INITIAL COLOR DENOTING 1's TURN AT THE BEGINNING OF GAME
+        TextView textViewPlayer2 = findViewById(R.id.textviewplayer2);
+        textViewPlayer2.setBackgroundColor(Color.parseColor("#757575"));// SET TO INITIAL COLOR DENOTING 1's TURN AT THE BEGINNING OF GAME
 
         listOfCellsAlreadySet.add(-1);
         cellMap = new SparseIntArray();
@@ -96,19 +101,19 @@ public class MainActivity extends AppCompatActivity {
         cell00.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                nextSymbol(view);
+                gamePlay(view);
             }
         });
         cell01.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                nextSymbol(view);
+                gamePlay(view);
             }
         });
         cell02.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                nextSymbol(view);
+                gamePlay(view);
             }
         });
 
@@ -119,19 +124,19 @@ public class MainActivity extends AppCompatActivity {
         cell10.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                nextSymbol(view);
+                gamePlay(view);
             }
         });
         cell11.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                nextSymbol(view);
+                gamePlay(view);
             }
         });
         cell12.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                nextSymbol(view);
+                gamePlay(view);
             }
         });
 
@@ -141,26 +146,28 @@ public class MainActivity extends AppCompatActivity {
         cell20.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                nextSymbol(view);
+                gamePlay(view);
             }
         });
         cell21.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                nextSymbol(view);
+                gamePlay(view);
             }
         });
         cell22.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                nextSymbol(view);
+                gamePlay(view);
             }
         });
     }
 
-    private void nextSymbol(View view){
-        //Toast.makeText(MainActivity.this,"Clicked on "+view.getId(),Toast.LENGTH_SHORT).show();
+    private void gamePlay(View view){
+
         ImageView imageView = findViewById(view.getId());
+        TextView textViewPlayer1 = findViewById(R.id.textviewplayer1);
+        TextView textViewPlayer2 = findViewById(R.id.textviewplayer2);
 
         if( !listOfCellsAlreadySet.contains(view.getId()) && !foundWinner){ // To check if the cell has been clicked already or not.
             clickCount++;
@@ -170,11 +177,13 @@ public class MainActivity extends AppCompatActivity {
             if(clickCount%2 == 0){
                 Player2.add(cellMap.get(view.getId()));
                 imageView.setImageResource(R.drawable.kuti);
-                /*Toast.makeText(MainActivity.this,"Clicked on "+cellMap.get(view.getId())+"th cell",Toast.LENGTH_SHORT).show();*/}
+                textViewPlayer2.setBackgroundColor(Color.parseColor("#757575")); // SET TO RED DENOTING 2 HAS GIVEN ITS CHOICE
+                textViewPlayer1.setBackgroundColor(Color.parseColor("#424242"));/*SET TO GREEN DENOTING 1's TURN NEXT*/ }
             else{
                 Player1.add(cellMap.get(view.getId()));
                 imageView.setImageResource(R.drawable.kata);
-                /*Toast.makeText(MainActivity.this,"Clicked on "+cellMap.get(view.getId())+"th cell",Toast.LENGTH_SHORT).show();*/}
+                textViewPlayer1.setBackgroundColor(Color.parseColor("#757575"));// SET TO RED DENOTING 1 HAS GIVEN ITS CHOICE
+                textViewPlayer2.setBackgroundColor(Color.parseColor("#424242"));/*SET TO GREEN DENOTING 2's TURN NEXT*/}
 
             listOfCellsAlreadySet.add(view.getId()); // Once Clicked the value of the cell can't be changed
 
