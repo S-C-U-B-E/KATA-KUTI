@@ -177,20 +177,20 @@ public class MainActivity extends AppCompatActivity {
             if(clickCount%2 == 0){
                 Player2.add(cellMap.get(view.getId()));
                 imageView.setImageResource(R.drawable.kuti);
-                textViewPlayer2.setBackgroundColor(Color.parseColor("#757575")); // SET TO RED DENOTING 2 HAS GIVEN ITS CHOICE
-                textViewPlayer1.setBackgroundColor(Color.parseColor("#424242"));/*SET TO GREEN DENOTING 1's TURN NEXT*/ }
+                textViewPlayer2.setBackgroundColor(Color.parseColor("#757575")); // SET TO scorerowfield color DENOTING 2 HAS GIVEN ITS CHOICE
+                textViewPlayer1.setBackgroundColor(Color.parseColor("#424242"));/*SET TO gameplayfield color DENOTING 1's TURN NEXT*/ }
             else{
                 Player1.add(cellMap.get(view.getId()));
                 imageView.setImageResource(R.drawable.kata);
-                textViewPlayer1.setBackgroundColor(Color.parseColor("#757575"));// SET TO RED DENOTING 1 HAS GIVEN ITS CHOICE
-                textViewPlayer2.setBackgroundColor(Color.parseColor("#424242"));/*SET TO GREEN DENOTING 2's TURN NEXT*/}
+                textViewPlayer1.setBackgroundColor(Color.parseColor("#757575"));// SET TO scorerowfield color DENOTING 1 HAS GIVEN ITS CHOICE
+                textViewPlayer2.setBackgroundColor(Color.parseColor("#424242"));/*SET TO gameplayfield color DENOTING 2's TURN NEXT*/}
 
             listOfCellsAlreadySet.add(view.getId()); // Once Clicked the value of the cell can't be changed
 
             if(clickCount > 3)foundWinner = theWinner(clickCount);
             if(foundWinner){
-                if(clickCount%2 == 0)messageBox.setText("PLAYER 2 WON");
-                else messageBox.setText("PLAYER 1 WON");
+                if(clickCount%2 == 0){messageBox.setText("PLAYER 2 WON");textViewPlayer2.setBackgroundColor(Color.parseColor("#757575"));textViewPlayer1.setBackgroundColor(Color.parseColor("#757575"));}
+                else {messageBox.setText("PLAYER 1 WON");textViewPlayer2.setBackgroundColor(Color.parseColor("#757575"));textViewPlayer1.setBackgroundColor(Color.parseColor("#757575"));}
 
             }else if(clickCount == 9){
                 /*All cells have been set but winner is still not found
@@ -198,6 +198,7 @@ public class MainActivity extends AppCompatActivity {
                  * */
                 //Toast.makeText(MainActivity.this,"It's a Tie",Toast.LENGTH_SHORT).show();
                 messageBox.setText("IT'S A TIE");
+                textViewPlayer2.setBackgroundColor(Color.parseColor("#757575"));textViewPlayer1.setBackgroundColor(Color.parseColor("#757575"));
             }
 
         }
