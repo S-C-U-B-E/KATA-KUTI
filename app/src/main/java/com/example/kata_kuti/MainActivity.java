@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Toast.makeText(MainActivity.this,"On Create has been called",Toast.LENGTH_LONG).show();
+
         /*TextView textViewPlayer1 = findViewById(R.id.textviewplayer1);
         textViewPlayer1.setBackgroundColor(Color.parseColor("#424242"));// SET TO INITIAL COLOR DENOTING 1's TURN AT THE BEGINNING OF GAME
         */
@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
         /*
         * Initially (Before selection of mround and start of game) Gamee Round text box is disabeled.
         * */
-        gameRoundMessageBox.setVisibility(View.GONE);
+        //gameRoundMessageBox.setVisibility(View.GONE);
 
        /* spinner = (Spinner) findViewById(R.id.rounds);
         setupSpinner();*/
@@ -290,6 +290,5 @@ public class MainActivity extends AppCompatActivity {
 
         }
 
-        Toast.makeText(MainActivity.this,"Click Count: "+clickCount,Toast.LENGTH_SHORT).show();
     }
 }

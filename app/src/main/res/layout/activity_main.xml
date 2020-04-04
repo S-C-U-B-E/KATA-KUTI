@@ -10,15 +10,14 @@
         android:id="@+id/parentlayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:weightSum="3">
+        android:orientation="vertical">
 
         <!--<<<<<<<<<< GAME PLAYER INFO >>>>>>>>>>-->
             <LinearLayout
                 android:id="@+id/playerinfo"
                 android:layout_height="0dp"
                 android:layout_width="match_parent"
-                android:layout_weight="0.8"
+                android:layout_weight="5"
                 android:orientation="vertical">
 
                     <TableLayout
@@ -111,7 +110,7 @@
                 android:id="@+id/playerplayfield"
                 android:layout_height="0dp"
                 android:layout_width="match_parent"
-                android:layout_weight="1.8"
+                android:layout_weight="10"
                 android:orientation="vertical"
                 android:padding="18dp"
                 android:background="#424242">
@@ -214,29 +213,40 @@
                 android:id="@+id/playermessage"
                 android:layout_height="0dp"
                 android:layout_width="match_parent"
-                android:layout_weight="0.4"
+                android:layout_weight="2"
                 android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/textviewgameroundmessage"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="0.3"
+                    android:layout_weight=".5"
                     android:text="Round - 1/4"
                     android:gravity="center"
                     android:textSize="12sp"
                     android:textStyle="bold"
                     android:background="@color/colorAccent"/>
-                <TextView
-                    android:id="@+id/textviewgameresultmessage"
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="0.7"
-                    android:gravity="center"
-                    android:textSize="24sp"
-                    android:textStyle="bold"
-                    android:background="@color/colorPrimaryDark"/>
+                    android:layout_weight="2"
+                    android:background="@color/colorPrimaryDark">
+                    <TextView
+                        android:id="@+id/textviewgameresultmessage"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:textSize="24sp"
+                        android:textStyle="bold"
+                        android:background="@color/colorPrimaryDark"/>
 
+                    <Button
+                        android:id="@+id/buttonstart"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="START"
+                        android:layout_centerInParent="true"/>
+                </RelativeLayout>
             </LinearLayout>
 
 
@@ -245,3 +255,28 @@
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+<!--
+
+<RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.7"
+                    android:background="@color/colorPrimaryDark">
+                    <TextView
+                        android:id="@+id/textviewgameresultmessage"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:textSize="24sp"
+                        android:textStyle="bold"
+                        android:background="@color/colorPrimaryDark"/>
+
+                    <Button
+                        android:id="@+id/buttonstart"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="START"/>
+                </RelativeLayout>
+
+-->
