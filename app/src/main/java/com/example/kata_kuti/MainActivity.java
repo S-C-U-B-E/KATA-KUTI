@@ -4,8 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.SparseIntArray;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -20,16 +24,36 @@ import static com.example.kata_kuti.WinningLogic.theWinner;
 
 public class MainActivity extends AppCompatActivity {
 
+    //To count the number of clicks on Cells
      private static int clickCount;
+
+    //To mark the cells already clicked
      private static ArrayList<Integer> listOfCellsAlreadySet ;
+
+    //To determine if there is any valid winner after every move
      private static boolean foundWinner;
+
+    //To mark the choice of cells opted by individual players
      public static List<Integer> Player1 ;
      public static List<Integer> Player2 ;
+
+    //New Thing learnt (to use instead of HashMap) for an easy use of the CellIds
      public static SparseIntArray cellMap;
+
+    //To store all the possible sets of cells required to Win
      static ArrayList<List<Integer>> winningSet;
-     private static int mround = 1;
-     private Spinner spinner;
-     private boolean roundValueSelected = false;
+
+    //Stores the choice of the number of rounds the players wanted to play
+     private static int mRound = 1;
+
+    //choice List
+     private Spinner mChoiceList;
+
+    //Start Button
+     private Button mButtonStart;
+
+    //To display the current Onging round
+     private String mGameRoundMessage;
 
      TextView gameResultMessageBox,gameRoundMessageBox;
      ImageView cell00,cell01,cell02,cell10,cell11,cell12,cell20,cell21,cell22;
@@ -41,32 +65,26 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
-        /*TextView textViewPlayer1 = findViewById(R.id.textviewplayer1);
-        textViewPlayer1.setBackgroundColor(Color.parseColor("#424242"));// SET TO INITIAL COLOR DENOTING 1's TURN AT THE BEGINNING OF GAME
-        */
         TextView textViewPlayer1 = findViewById(R.id.textviewplayer1);
         textViewPlayer1.setBackgroundColor(Color.parseColor("#757575"));// SET TO INITIAL COLOR DENOTING 1's TURN AT THE BEGINNING OF GAME
         TextView textViewPlayer2 = findViewById(R.id.textviewplayer2);
         textViewPlayer2.setBackgroundColor(Color.parseColor("#757575"));// SET TO INITIAL COLOR DENOTING 1's TURN AT THE BEGINNING OF GAME
 
-        clickCount = 0;
-        foundWinner = false;
-        listOfCellsAlreadySet = new ArrayList<>();
-        listOfCellsAlreadySet.add(-1);
+
         cellMap = new SparseIntArray();
         winningSet = new ArrayList<>();
         gameResultMessageBox = findViewById(R.id.textviewgameresultmessage);
         gameRoundMessageBox = findViewById(R.id.textviewgameroundmessage);
-        Player1 = new ArrayList<>();
-        Player2 = new ArrayList<>();
+        mButtonStart = findViewById(R.id.buttonstart);
 
-        /*
-        * Initially (Before selection of mround and start of game) Gamee Round text box is disabeled.
+
+                /*
+        * Initially (Before selection of mRound and start of game) Gamee Round text box is disabeled.
         * */
-        //gameRoundMessageBox.setVisibility(View.GONE);
+        gameRoundMessageBox.setVisibility(View.GONE);
 
-       /* spinner = (Spinner) findViewById(R.id.rounds);
-        setupSpinner();*/
+        mChoiceList = (Spinner) findViewById(R.id.rounds);
+        setupSpinner();
 
         /*
         * All the possibles set of cells to win
@@ -91,7 +109,13 @@ public class MainActivity extends AppCompatActivity {
             setupOnClickListeners();
         }*/
 
-        setupOnClickListeners();
+        //setupOnClickListeners();
+        mButtonStart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startGame();
+            }
+        });
 
     }
 
@@ -210,30 +234,30 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    /*private void setupSpinner(){
-        // Created an ArrayAdapter using the string array and a default spinner layout
+    private void setupSpinner(){
+        // Created an ArrayAdapter using the string array and a default mChoiceList layout
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.rounds_array, android.R.layout.simple_spinner_item);
         // the layout to use when the list of choices appears
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        // the adapter to the spinner XD
-                spinner.setAdapter(adapter);
+        // the adapter to the mChoiceList XD
+                mChoiceList.setAdapter(adapter);
 
 
         // Set the integer mSelected to the constant values
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        mChoiceList.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String selection = (String) parent.getItemAtPosition(position);
                 if (!TextUtils.isEmpty(selection)) {
                     if (selection.equals("1")) {
-                        mround = 1;
+                        mRound = 1;
                     } else if (selection.equals("2")) {
-                        mround = 2;
+                        mRound = 2;
                     } else if (selection.equals("3")) {
-                        mround = 3;
+                        mRound = 3;
                     } else {
-                        mround = 4;
+                        mRound = 4;
                     }
                 }
             }
@@ -241,12 +265,10 @@ public class MainActivity extends AppCompatActivity {
             // Because AdapterView is an abstract class, onNothingSelected must be defined
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-                mround = 1;
+                mRound = 1;
             }
         });
-
-        roundValueSelected = true;
-    }*/
+    }
 
     private void gamePlay(View view){
 
@@ -290,5 +312,33 @@ public class MainActivity extends AppCompatActivity {
 
         }
 
+    }
+
+    private void startGame(){
+        TextView textViewGameRoundMessage;
+        TextView textViewPlayer1 = findViewById(R.id.textviewplayer1);
+        textViewPlayer1.setBackgroundColor(Color.parseColor("#424242"));// SET TO INITIAL COLOR DENOTING 1's TURN AT THE BEGINNING OF GAME
+        textViewGameRoundMessage = findViewById(R.id.textviewgameroundmessage);
+
+        clickCount = 0;
+        foundWinner = false;
+        listOfCellsAlreadySet = new ArrayList<>();
+        listOfCellsAlreadySet.add(-1);
+        Player1 = new ArrayList<>();
+        Player2 = new ArrayList<>();
+
+        mChoiceList.setEnabled(false);
+
+        createGameRoundMessage();
+
+        gameRoundMessageBox.setVisibility(View.VISIBLE);
+        mButtonStart.setVisibility(View.GONE);
+
+        textViewGameRoundMessage.setText(mGameRoundMessage);
+        setupOnClickListeners();
+    }
+
+    private void createGameRoundMessage(){
+        mGameRoundMessage = "Round - 1/"+mRound;
     }
 }

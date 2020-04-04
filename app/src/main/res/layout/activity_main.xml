@@ -221,7 +221,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight=".5"
-                    android:text="Round - 1/4"
                     android:gravity="center"
                     android:textSize="12sp"
                     android:textStyle="bold"
