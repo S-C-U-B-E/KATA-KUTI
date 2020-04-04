@@ -6,7 +6,9 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.util.SparseIntArray;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -18,9 +20,9 @@ import static com.example.kata_kuti.WinningLogic.theWinner;
 
 public class MainActivity extends AppCompatActivity {
 
-     private int clickCount = 0;
-     private ArrayList<Integer> listOfCellsAlreadySet = new ArrayList<>();
-     private boolean foundWinner = false;
+     private static int clickCount = 0;
+     private static ArrayList<Integer> listOfCellsAlreadySet = new ArrayList<>();
+     private static boolean foundWinner = false;
      public static List<Integer> Player1 ;
      public static List<Integer> Player2 ;
      public static SparseIntArray cellMap;
@@ -43,9 +45,18 @@ public class MainActivity extends AppCompatActivity {
         listOfCellsAlreadySet.add(-1);
         cellMap = new SparseIntArray();
         winningSet = new ArrayList<>();
-        messageBox = findViewById(R.id.textviewmessage);
+        messageBox = findViewById(R.id.textviewgameresultmessage);
         Player1 = new ArrayList<>();
         Player2 = new ArrayList<>();
+
+        Spinner spinner = (Spinner) findViewById(R.id.rounds);
+// Created an ArrayAdapter using the string array and a default spinner layout
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.rounds_array, android.R.layout.simple_spinner_item);
+// the layout to use when the list of choices appears
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+// the adapter to the spinner XD
+        spinner.setAdapter(adapter);
 
         /*
         * All the possibles set of cells to win

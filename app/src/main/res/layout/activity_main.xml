@@ -13,7 +13,7 @@
         android:orientation="vertical"
         android:weightSum="3">
 
-        <!--GAME PLAYER INFO-->
+        <!--<<<<<<<<<< GAME PLAYER INFO >>>>>>>>>>-->
             <LinearLayout
                 android:id="@+id/playerinfo"
                 android:layout_height="0dp"
@@ -78,16 +78,14 @@
                                     android:textColor="#E0E0E0"
                                     android:layout_marginRight="4dp"
                                     android:layout_marginEnd="4dp"/>
-                                <TextView
-                                    android:id="@+id/round"
+                                <Spinner
+                                    android:id="@+id/rounds"
                                     android:layout_width="0dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="0.2"
-                                    android:text="1/3"
                                     android:gravity="center"
-                                    android:textAllCaps="true"
-                                    android:textSize="34sp"
-                                    android:textColor="#E0E0E0"
+                                    android:textAlignment="center"
+                                    android:autofillHints="Round"
                                     android:background="#757575"
                                     android:layout_marginRight="4dp"
                                     android:layout_marginEnd="4dp"
@@ -108,7 +106,7 @@
 
             </LinearLayout>
 
-        <!--GAME FIELD-->
+        <!--<<<<<<<<<< GAME FIELD >>>>>>>>>>>-->
             <LinearLayout
                 android:id="@+id/playerplayfield"
                 android:layout_height="0dp"
@@ -211,21 +209,33 @@
 
             </LinearLayout>
 
-        <!--GAME RESULT MESSAGE DISPLAYER -->
+        <!--<<<<<<<<<<< GAME RESULT MESSAGE DISPLAYER >>>>>>>>>>>>>>>>-->
             <LinearLayout
                 android:id="@+id/playermessage"
                 android:layout_height="0dp"
                 android:layout_width="match_parent"
                 android:layout_weight="0.4"
-                android:orientation="horizontal">
+                android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/textviewmessage"
+                    android:id="@+id/textviewgameroundmessage"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.3"
+                    android:text="Round - 1/4"
+                    android:gravity="center"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:background="@color/colorAccent"/>
+                <TextView
+                    android:id="@+id/textviewgameresultmessage"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.7"
                     android:gravity="center"
                     android:textSize="24sp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold"
+                    android:background="@color/colorPrimaryDark"/>
 
             </LinearLayout>
 
