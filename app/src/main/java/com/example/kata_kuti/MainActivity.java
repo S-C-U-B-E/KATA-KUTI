@@ -325,22 +325,19 @@ public class MainActivity extends AppCompatActivity {
                 if(clickCount%2 == 0)
                 {
                     mScorePlayer2++;
-                    mStringScorePlayer2 = mScorePlayer2+"";
                     gameResultMessageBox.setText("PLAYER 2 WON");
                     textViewPlayer2.setBackgroundColor(Color.parseColor("#757575"));
                     textViewPlayer1.setBackgroundColor(Color.parseColor("#757575"));
                 }else {
                     mScorePlayer1++;
-                    mStringScorePlayer1 = mScorePlayer1+"";
                     gameResultMessageBox.setText("PLAYER 1 WON");
                     textViewPlayer2.setBackgroundColor(Color.parseColor("#757575"));
                     textViewPlayer1.setBackgroundColor(Color.parseColor("#757575"));
                     }
-                gameScorePlayer2.setText(mStringScorePlayer2);
-                gameScorePlayer1.setText(mStringScorePlayer1);
-                Toast.makeText(MainActivity.this,"Player 1: "+mScorePlayer1,Toast.LENGTH_SHORT).show();
-                Toast.makeText(MainActivity.this,"Player 2: "+mScorePlayer2,Toast.LENGTH_SHORT).show();
-               if(mCurrentRound<mRound)mButtonNext.setVisibility(View.VISIBLE);
+                if(mCurrentRound<mRound)mButtonNext.setVisibility(View.VISIBLE);
+
+                updateScores();
+
             }else if(clickCount == 9){
                 /*All cells have been set but winner is still not found
                  *Logic for handling Tie
@@ -348,13 +345,10 @@ public class MainActivity extends AppCompatActivity {
                 //Toast.makeText(MainActivity.this,"It's a Tie",Toast.LENGTH_SHORT).show();
                 gameResultMessageBox.setText("IT'S A TIE");
                 textViewPlayer2.setBackgroundColor(Color.parseColor("#757575"));textViewPlayer1.setBackgroundColor(Color.parseColor("#757575"));
-                if(mCurrentRound<mRound)mButtonNext.setVisibility(View.VISIBLE);
                 mScorePlayer2++;mScorePlayer1++;
-                mStringScorePlayer2 = mScorePlayer2+""; mStringScorePlayer1 = mScorePlayer1+"";
-                gameScorePlayer2.setText(mStringScorePlayer2);
-                gameScorePlayer1.setText(mStringScorePlayer1);
-                Toast.makeText(MainActivity.this,"Player 1: "+mScorePlayer1,Toast.LENGTH_SHORT).show();
-                Toast.makeText(MainActivity.this,"Player 2: "+mScorePlayer2,Toast.LENGTH_SHORT).show();
+                if(mCurrentRound<mRound)mButtonNext.setVisibility(View.VISIBLE);
+
+                updateScores();
             }
 
         }
@@ -392,8 +386,6 @@ public class MainActivity extends AppCompatActivity {
 
             createGameRoundMessage(mCurrentRound);
             textViewGameRoundMessage.setText(mGameRoundMessage);
-
-            updateScores();
     }
 
     private void createGameRoundMessage(int mCurrentRound){
@@ -401,7 +393,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void updateScores(){
-
+        mStringScorePlayer2 = mScorePlayer2+""; mStringScorePlayer1 = mScorePlayer1+"";
+        gameScorePlayer2.setText(mStringScorePlayer2);
+        gameScorePlayer1.setText(mStringScorePlayer1);
     }
 
     private void refreshTheCellsForNextRound(){
