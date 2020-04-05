@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.SparseIntArray;
+import android.util.TypedValue;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -333,7 +334,8 @@ public class MainActivity extends AppCompatActivity {
                     textViewPlayer2.setBackgroundColor(Color.parseColor("#757575"));
                     textViewPlayer1.setBackgroundColor(Color.parseColor("#757575"));
                     }
-                if(mCurrentRound<mRound)mButtonNext.setVisibility(View.VISIBLE);
+                if(mCurrentRound<mRound){
+                    mButtonNext.setVisibility(View.VISIBLE); }
 
                 /*
                  * To display the scores in the Score Display Box
@@ -348,7 +350,8 @@ public class MainActivity extends AppCompatActivity {
                 gameResultMessageBox.setText("IT'S A TIE");
                 textViewPlayer2.setBackgroundColor(Color.parseColor("#757575"));textViewPlayer1.setBackgroundColor(Color.parseColor("#757575"));
                 mScorePlayer2++;mScorePlayer1++;
-                if(mCurrentRound<mRound)mButtonNext.setVisibility(View.VISIBLE);
+                if(mCurrentRound<mRound){
+                    mButtonNext.setVisibility(View.VISIBLE); }
 
                 /*
                 * To display the scores in the Score Display Box
@@ -358,6 +361,9 @@ public class MainActivity extends AppCompatActivity {
 
         }
 
+        /*if(mCurrentRound == mRound){
+            displayFinalWinner();
+        }*/
     }
 
     private void startGame(){
@@ -408,6 +414,10 @@ public class MainActivity extends AppCompatActivity {
         mStringScorePlayer2 = mScorePlayer2+""; mStringScorePlayer1 = mScorePlayer1+"";
         gameScorePlayer2.setText(mStringScorePlayer2);
         gameScorePlayer1.setText(mStringScorePlayer1);
+
+        if(mCurrentRound == mRound)displayFinalWinner();
+        Toast.makeText(MainActivity.this,"mCurrentRound: "+mCurrentRound,Toast.LENGTH_SHORT).show();
+        Toast.makeText(MainActivity.this,"mRound: "+mRound,Toast.LENGTH_SHORT).show();
     }
 
     /*
@@ -427,5 +437,21 @@ public class MainActivity extends AppCompatActivity {
         cell20.setImageResource(0);
         cell21.setImageResource(0);
         cell22.setImageResource(0);
+    }
+
+    private void displayFinalWinner(){
+        gameScorePlayer2.setTextSize(TypedValue.COMPLEX_UNIT_SP,20);
+        gameScorePlayer1.setTextSize(TypedValue.COMPLEX_UNIT_SP,20);
+
+        if(mScorePlayer1>mScorePlayer2){
+            gameScorePlayer1.setText("WINNER!!");
+            gameScorePlayer2.setText("GET LOST!!");
+        }else if(mScorePlayer2>mScorePlayer1){
+            gameScorePlayer1.setText("GET LOST!!");
+            gameScorePlayer2.setText("WINNER!!");
+        }else if(mScorePlayer2==mScorePlayer1){
+            gameScorePlayer1.setText("LEARN TO");
+            gameScorePlayer2.setText("PLAY DUH!");
+        }
     }
 }
