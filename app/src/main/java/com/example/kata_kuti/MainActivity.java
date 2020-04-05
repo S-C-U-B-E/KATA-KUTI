@@ -61,6 +61,8 @@ public class MainActivity extends AppCompatActivity {
     //To store scores of players in a match.
      private int mScorePlayer1;
      private int mScorePlayer2;
+     private String mStringScorePlayer1;
+    private String mStringScorePlayer2;
 
      TextView gameResultMessageBox,gameRoundMessageBox,gameScorePlayer1,gameScorePlayer2;
      ImageView cell00,cell01,cell02,cell10,cell11,cell12,cell20,cell21,cell22;
@@ -88,8 +90,11 @@ public class MainActivity extends AppCompatActivity {
         gameRoundMessageBox = findViewById(R.id.textviewgameroundmessage);
         gameScorePlayer1 = findViewById(R.id.textviewscore1);
         gameScorePlayer2 = findViewById(R.id.textviewscore2);
-        gameScorePlayer1.setText("0");
-        gameScorePlayer2.setText("0");
+        mStringScorePlayer1  = mScorePlayer1+"";
+        mStringScorePlayer2 = mScorePlayer2+"";
+        gameScorePlayer1.setText(mStringScorePlayer1);
+        gameScorePlayer2.setText(mStringScorePlayer2);
+
 
         mButtonStart = findViewById(R.id.buttonstart);
         mButtonNext = findViewById(R.id.buttonnext);
@@ -320,17 +325,19 @@ public class MainActivity extends AppCompatActivity {
                 if(clickCount%2 == 0)
                 {
                     mScorePlayer2++;
+                    mStringScorePlayer2 = mScorePlayer2+"";
                     gameResultMessageBox.setText("PLAYER 2 WON");
                     textViewPlayer2.setBackgroundColor(Color.parseColor("#757575"));
                     textViewPlayer1.setBackgroundColor(Color.parseColor("#757575"));
                 }else {
                     mScorePlayer1++;
+                    mStringScorePlayer1 = mScorePlayer1+"";
                     gameResultMessageBox.setText("PLAYER 1 WON");
                     textViewPlayer2.setBackgroundColor(Color.parseColor("#757575"));
                     textViewPlayer1.setBackgroundColor(Color.parseColor("#757575"));
                     }
-                /*gameScorePlayer2.setText(mScorePlayer2);
-                gameScorePlayer1.setText(mScorePlayer1);*/
+                gameScorePlayer2.setText(mStringScorePlayer2);
+                gameScorePlayer1.setText(mStringScorePlayer1);
                 Toast.makeText(MainActivity.this,"Player 1: "+mScorePlayer1,Toast.LENGTH_SHORT).show();
                 Toast.makeText(MainActivity.this,"Player 2: "+mScorePlayer2,Toast.LENGTH_SHORT).show();
                if(mCurrentRound<mRound)mButtonNext.setVisibility(View.VISIBLE);
@@ -343,14 +350,14 @@ public class MainActivity extends AppCompatActivity {
                 textViewPlayer2.setBackgroundColor(Color.parseColor("#757575"));textViewPlayer1.setBackgroundColor(Color.parseColor("#757575"));
                 if(mCurrentRound<mRound)mButtonNext.setVisibility(View.VISIBLE);
                 mScorePlayer2++;mScorePlayer1++;
-                /*gameScorePlayer2.setText(mScorePlayer2);
-                gameScorePlayer1.setText(mScorePlayer1);*/
+                mStringScorePlayer2 = mScorePlayer2+""; mStringScorePlayer1 = mScorePlayer1+"";
+                gameScorePlayer2.setText(mStringScorePlayer2);
+                gameScorePlayer1.setText(mStringScorePlayer1);
                 Toast.makeText(MainActivity.this,"Player 1: "+mScorePlayer1,Toast.LENGTH_SHORT).show();
                 Toast.makeText(MainActivity.this,"Player 2: "+mScorePlayer2,Toast.LENGTH_SHORT).show();
             }
 
         }
-
 
     }
 
