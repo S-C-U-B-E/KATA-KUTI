@@ -81,11 +81,15 @@ public class MainActivity extends AppCompatActivity {
         mCurrentRound = 0;
         cellMap = new SparseIntArray();
         winningSet = new ArrayList<>();
+        mScorePlayer1 = 0;
+        mScorePlayer2 = 0;
 
         gameResultMessageBox = findViewById(R.id.textviewgameresultmessage);
         gameRoundMessageBox = findViewById(R.id.textviewgameroundmessage);
         gameScorePlayer1 = findViewById(R.id.textviewscore1);
         gameScorePlayer2 = findViewById(R.id.textviewscore2);
+        gameScorePlayer1.setText("0");
+        gameScorePlayer2.setText("0");
 
         mButtonStart = findViewById(R.id.buttonstart);
         mButtonNext = findViewById(R.id.buttonnext);
@@ -313,13 +317,22 @@ public class MainActivity extends AppCompatActivity {
 
             if(clickCount > 3)foundWinner = theWinner(clickCount);
             if(foundWinner){
-                if(clickCount%2 == 0){
-                   // mScorePlayer2++;
-                    gameResultMessageBox.setText("PLAYER 2 WON");textViewPlayer2.setBackgroundColor(Color.parseColor("#757575"));textViewPlayer1.setBackgroundColor(Color.parseColor("#757575"));}
-                else {
-                    //mScorePlayer1++;
-                    gameResultMessageBox.setText("PLAYER 1 WON");textViewPlayer2.setBackgroundColor(Color.parseColor("#757575"));textViewPlayer1.setBackgroundColor(Color.parseColor("#757575"));}
-
+                if(clickCount%2 == 0)
+                {
+                    mScorePlayer2++;
+                    gameResultMessageBox.setText("PLAYER 2 WON");
+                    textViewPlayer2.setBackgroundColor(Color.parseColor("#757575"));
+                    textViewPlayer1.setBackgroundColor(Color.parseColor("#757575"));
+                }else {
+                    mScorePlayer1++;
+                    gameResultMessageBox.setText("PLAYER 1 WON");
+                    textViewPlayer2.setBackgroundColor(Color.parseColor("#757575"));
+                    textViewPlayer1.setBackgroundColor(Color.parseColor("#757575"));
+                    }
+                /*gameScorePlayer2.setText(mScorePlayer2);
+                gameScorePlayer1.setText(mScorePlayer1);*/
+                Toast.makeText(MainActivity.this,"Player 1: "+mScorePlayer1,Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this,"Player 2: "+mScorePlayer2,Toast.LENGTH_SHORT).show();
                if(mCurrentRound<mRound)mButtonNext.setVisibility(View.VISIBLE);
             }else if(clickCount == 9){
                 /*All cells have been set but winner is still not found
@@ -329,13 +342,16 @@ public class MainActivity extends AppCompatActivity {
                 gameResultMessageBox.setText("IT'S A TIE");
                 textViewPlayer2.setBackgroundColor(Color.parseColor("#757575"));textViewPlayer1.setBackgroundColor(Color.parseColor("#757575"));
                 if(mCurrentRound<mRound)mButtonNext.setVisibility(View.VISIBLE);
-               // mScorePlayer2++;mScorePlayer1++;
+                mScorePlayer2++;mScorePlayer1++;
+                /*gameScorePlayer2.setText(mScorePlayer2);
+                gameScorePlayer1.setText(mScorePlayer1);*/
+                Toast.makeText(MainActivity.this,"Player 1: "+mScorePlayer1,Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this,"Player 2: "+mScorePlayer2,Toast.LENGTH_SHORT).show();
             }
 
         }
 
-        /*gameScorePlayer2.setText(mScorePlayer2);
-        gameScorePlayer1.setText(mScorePlayer1);*/
+
     }
 
     private void startGame(){
@@ -358,8 +374,7 @@ public class MainActivity extends AppCompatActivity {
 
             mCurrentRound++;Toast.makeText(MainActivity.this,"mCurrentRound: "+mCurrentRound,Toast.LENGTH_SHORT).show();
 
-            mScorePlayer1 = 0;
-            mScorePlayer2 = 0;
+
             clickCount = 0;
             foundWinner = false;
             listOfCellsAlreadySet = new ArrayList<>();
