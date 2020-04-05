@@ -131,7 +131,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startGame();
-                Toast.makeText(MainActivity.this,"Out of startGame()",Toast.LENGTH_SHORT).show();
             }
         });
 
