@@ -40,7 +40,7 @@
                                     android:layout_height="match_parent"
                                     android:text="0"
                                     android:gravity="center"
-                                    android:textSize="64sp"
+                                    android:textSize="72sp"
                                     android:textColor="#212121"
                                     android:background="#757575"
                                     android:layout_marginRight="4dp"
@@ -52,7 +52,7 @@
                                     android:layout_height="match_parent"
                                     android:text="0"
                                     android:gravity="center"
-                                    android:textSize="64sp"
+                                    android:textSize="72sp"
                                     android:textColor="#212121"
                                     android:background="#757575"/>
                             </TableRow>
@@ -216,13 +216,16 @@
                 android:layout_weight="2"
                 android:orientation="vertical">
 
+                <!--
+                Current Game Round Display Box
+                -->
                 <TextView
                     android:id="@+id/textviewgameroundmessage"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight=".5"
+                    android:layout_weight=".7"
                     android:gravity="center"
-                    android:textSize="12sp"
+                    android:textSize="14sp"
                     android:textStyle="bold"
                     android:background="@color/colorAccent"/>
                 <RelativeLayout
@@ -245,6 +248,15 @@
                         android:layout_height="match_parent"
                         android:text="START"
                         android:layout_centerInParent="true"/>
+
+                    <Button
+                        android:id="@+id/buttonnext"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text=">"
+                        android:textSize="32sp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true" />
                 </RelativeLayout>
             </LinearLayout>
 
@@ -255,27 +267,3 @@
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 
-<!--
-
-<RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="0.7"
-                    android:background="@color/colorPrimaryDark">
-                    <TextView
-                        android:id="@+id/textviewgameresultmessage"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:textSize="24sp"
-                        android:textStyle="bold"
-                        android:background="@color/colorPrimaryDark"/>
-
-                    <Button
-                        android:id="@+id/buttonstart"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:text="START"/>
-                </RelativeLayout>
-
--->
