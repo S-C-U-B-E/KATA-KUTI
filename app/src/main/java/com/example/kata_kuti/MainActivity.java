@@ -321,7 +321,7 @@ public class MainActivity extends AppCompatActivity {
             listOfCellsAlreadySet.add(view.getId()); // Once Clicked the value of the cell can't be changed
 
             if(clickCount > 3)foundWinner = theWinner(clickCount);
-            if(foundWinner){
+            if(foundWinner){ //Logics after a winner is found
                 if(clickCount%2 == 0)
                 {
                     mScorePlayer2++;
@@ -336,9 +336,12 @@ public class MainActivity extends AppCompatActivity {
                     }
                 if(mCurrentRound<mRound)mButtonNext.setVisibility(View.VISIBLE);
 
+                /*
+                 * To display the scores in the Score Display Box
+                 * */
                 updateScores();
 
-            }else if(clickCount == 9){
+            }else if(clickCount == 9){ // What if no winner is found AND all cells are set.. Boom It's a TIE
                 /*All cells have been set but winner is still not found
                  *Logic for handling Tie
                  * */
@@ -348,6 +351,9 @@ public class MainActivity extends AppCompatActivity {
                 mScorePlayer2++;mScorePlayer1++;
                 if(mCurrentRound<mRound)mButtonNext.setVisibility(View.VISIBLE);
 
+                /*
+                * To display the scores in the Score Display Box
+                * */
                 updateScores();
             }
 
@@ -366,16 +372,17 @@ public class MainActivity extends AppCompatActivity {
         mChoiceList.setEnabled(false);
 
         gameRoundMessageBox.setVisibility(View.VISIBLE);
-        mButtonStart.setVisibility(View.GONE);
-        mButtonNext.setVisibility(View.GONE);
+        mButtonStart.setVisibility(View.GONE);//No need of the start button after the game has started
+        mButtonNext.setVisibility(View.GONE);//Next Round button only required after completion of a round
 
         setupOnClickListeners();
 
-        Toast.makeText(MainActivity.this,"mRound: "+mRound,Toast.LENGTH_SHORT).show();
+            mCurrentRound++; // Update Current Round
 
-            mCurrentRound++;Toast.makeText(MainActivity.this,"mCurrentRound: "+mCurrentRound,Toast.LENGTH_SHORT).show();
-
-
+        /*
+        * Initialize all the variables to their initials
+        * for individual Rounds
+        * */
             clickCount = 0;
             foundWinner = false;
             listOfCellsAlreadySet = new ArrayList<>();
@@ -388,16 +395,25 @@ public class MainActivity extends AppCompatActivity {
             textViewGameRoundMessage.setText(mGameRoundMessage);
     }
 
+    /*
+    * Game rounds message creator
+    * */
     private void createGameRoundMessage(int mCurrentRound){
         mGameRoundMessage = "Round - "+mCurrentRound+"/"+mRound;
     }
 
+    /*
+    * To display the score for individual rounds
+    * */
     private void updateScores(){
         mStringScorePlayer2 = mScorePlayer2+""; mStringScorePlayer1 = mScorePlayer1+"";
         gameScorePlayer2.setText(mStringScorePlayer2);
         gameScorePlayer1.setText(mStringScorePlayer1);
     }
 
+    /*
+    * Empty the cells from their image resources set for next round
+    * */
     private void refreshTheCellsForNextRound(){
         cell00.setImageResource(0);
         cell01.setImageResource(0);
