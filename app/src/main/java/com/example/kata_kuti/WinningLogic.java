@@ -12,23 +12,23 @@ public class WinningLogic {
      static boolean theWinner(int clickCount){
 
          if(clickCount%2 == 0){
-             return(calcTheWinner(Player2));
+             return(calcTheWinner(Player2)); //Player 2 wins (even click)
          }else{
-             return(calcTheWinner(Player1));
+             return(calcTheWinner(Player1)); //Player 1 wins (odd click)
          }
 
     }
 
     private static boolean calcTheWinner(List<Integer> Player){
-     boolean answer = false;
+     boolean anyWinnigSetFoundAmongTheCellsSetByAPlayer = false;
 
      for(List<Integer> i: winningSet){
          if(Player.containsAll(i)){
-             answer = true;
+             anyWinnigSetFoundAmongTheCellsSetByAPlayer = true;
              break;
          }
      }
-         return answer;
+         return anyWinnigSetFoundAmongTheCellsSetByAPlayer;
     }
 
 }
