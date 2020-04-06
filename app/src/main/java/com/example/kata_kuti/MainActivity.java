@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -54,7 +55,8 @@ public class MainActivity extends AppCompatActivity {
 
     //Start Button , Next Round Button
      private Button mButtonStart;
-     private Button mButtonNext;
+     private ImageButton mButtonNext;
+     private ImageButton mButtonRestart;
 
     //To display the current Onging round
      private String mGameRoundMessage;
@@ -99,6 +101,7 @@ public class MainActivity extends AppCompatActivity {
 
         mButtonStart = findViewById(R.id.buttonstart);
         mButtonNext = findViewById(R.id.buttonnext);
+        mButtonRestart = findViewById(R.id.buttonrestart);
 
                 /*
         * Initially (Before selection of mRound and start of game) Gamee Round text box is disabeled.
@@ -295,6 +298,34 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+    private void disableOnClickListeners(){
+
+         /*
+          DISABLE Listeners for the first row Cells
+         */
+        cell00.setOnClickListener(null);
+        cell01.setOnClickListener(null);
+        cell02.setOnClickListener(null);
+
+
+         /*
+          DISABLE Listeners for the first row Cells
+         */
+        cell10.setOnClickListener(null);
+        cell11.setOnClickListener(null);
+        cell12.setOnClickListener(null);
+
+
+         /*
+          DISABLE Listeners for the first row Cells
+         */
+        cell20.setOnClickListener(null);
+        cell21.setOnClickListener(null);
+        cell22.setOnClickListener(null);
+
+    }
+
 
     private void gamePlay(View view){
 
