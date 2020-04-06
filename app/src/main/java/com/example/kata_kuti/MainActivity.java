@@ -2,6 +2,8 @@ package com.example.kata_kuti;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -65,7 +67,10 @@ public class MainActivity extends AppCompatActivity {
      private int mScorePlayer1;
      private int mScorePlayer2;
      private String mStringScorePlayer1;
-    private String mStringScorePlayer2;
+     private String mStringScorePlayer2;
+
+    //To Handle Back Press
+    private boolean mIsMatchInProgress;
 
      TextView gameResultMessageBox,gameRoundMessageBox,gameScorePlayer1,gameScorePlayer2;
      ImageView cell00,cell01,cell02,cell10,cell11,cell12,cell20,cell21,cell22;
@@ -335,6 +340,8 @@ public class MainActivity extends AppCompatActivity {
 
     private void initialSetupBeforeEveryMatch(){
 
+        mIsMatchInProgress = false;
+
         mCurrentRound = 0;
         mScorePlayer1 = 0;
         mScorePlayer2 = 0;
@@ -354,6 +361,7 @@ public class MainActivity extends AppCompatActivity {
         mButtonNext.setVisibility(View.GONE);
         gameResultMessageBox.setText("");
         mButtonRestart.setVisibility(View.GONE);
+
     }
 
     private void gamePlay(View view){
@@ -398,6 +406,7 @@ public class MainActivity extends AppCompatActivity {
                     mButtonNext.setVisibility(View.VISIBLE);
                 }else{
                     mButtonRestart.setVisibility(View.VISIBLE);
+                    mIsMatchInProgress = false;
                 }
 
                 /*
@@ -418,6 +427,7 @@ public class MainActivity extends AppCompatActivity {
                     mButtonNext.setVisibility(View.VISIBLE);
                 }else{
                     mButtonRestart.setVisibility(View.VISIBLE);
+                    mIsMatchInProgress = false;
                 }
 
                 /*
@@ -456,6 +466,7 @@ public class MainActivity extends AppCompatActivity {
         * Initialize all the variables to their initials
         * for individual Rounds
         * */
+            mIsMatchInProgress = true;
             clickCount = 0;
             foundWinner = false;
             listOfCellsAlreadySet = new ArrayList<>();
@@ -522,4 +533,60 @@ public class MainActivity extends AppCompatActivity {
             gameScorePlayer2.setText("PLAY DUH!");
         }
     }
+
+    /**
+     * This method is called when the back button is pressed.
+     */
+    @Override
+    public void onBackPressed() {
+        // If the match hasn't started, continue with handling back button press and exit successfully
+        if (!mIsMatchInProgress) {
+            super.onBackPressed();
+            return;
+        }
+
+        // Otherwise if there are unfinished match, setup a dialog to warn the user.
+        // Create a click listener to handle the user confirming that changes should be discarded.
+        DialogInterface.OnClickListener discardButtonClickListener =
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        // User clicked "Discard" button, close the current activity.
+                        finish();
+                    }
+                };
+
+        // Show dialog that there are unfinished match.
+        showUnsavedChangesDialog(discardButtonClickListener);
+    }
+
+    /**
+     * Show a dialog that warns the user there are unfinished match that will be lost
+     * if they continue leaving the editor.
+     *
+     * @param discardButtonClickListener is the click listener for what to do when
+     *                                   the user confirms they want to discard their changes
+     */
+    private void showUnsavedChangesDialog(
+            DialogInterface.OnClickListener discardButtonClickListener) {
+        // Create an AlertDialog.Builder and set the message, and click listeners
+        // for the positive and negative response buttons on the dialog.
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Current Match In Progress,Want to Exit?");
+        builder.setPositiveButton("Exit Match", discardButtonClickListener);
+        builder.setNegativeButton("Keep Playing", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                // User clicked the "Keep Playing" button, so dismiss the dialog
+                // and continue enjoying the match XD.
+                if (dialog != null) {
+                    dialog.dismiss();
+                }
+            }
+        });
+
+        // Create and show the AlertDialog
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+    }
+
 }
