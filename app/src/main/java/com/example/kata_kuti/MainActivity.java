@@ -83,34 +83,27 @@ public class MainActivity extends AppCompatActivity {
         textViewPlayer2.setBackgroundColor(Color.parseColor("#757575"));// SET TO INITIAL COLOR DENOTING 1's TURN AT THE BEGINNING OF GAME
 
 
-        mCurrentRound = 0;
-        cellMap = new SparseIntArray();
-        winningSet = new ArrayList<>();
-        mScorePlayer1 = 0;
-        mScorePlayer2 = 0;
-
         gameResultMessageBox = findViewById(R.id.textviewgameresultmessage);
         gameRoundMessageBox = findViewById(R.id.textviewgameroundmessage);
+
         gameScorePlayer1 = findViewById(R.id.textviewscore1);
         gameScorePlayer2 = findViewById(R.id.textviewscore2);
-        mStringScorePlayer1  = mScorePlayer1+"";
-        mStringScorePlayer2 = mScorePlayer2+"";
-        gameScorePlayer1.setText(mStringScorePlayer1);
-        gameScorePlayer2.setText(mStringScorePlayer2);
 
 
         mButtonStart = findViewById(R.id.buttonstart);
         mButtonNext = findViewById(R.id.buttonnext);
         mButtonRestart = findViewById(R.id.buttonrestart);
 
-                /*
-        * Initially (Before selection of mRound and start of game) Gamee Round text box is disabeled.
-        * */
-        gameRoundMessageBox.setVisibility(View.GONE);
-        mButtonNext.setVisibility(View.GONE);
 
         mChoiceList = (Spinner) findViewById(R.id.rounds);
+
+        cellMap = new SparseIntArray();
+        winningSet = new ArrayList<>();
+
+        initialSetupBeforeEveryMatch(); // Clearing The scores rounds and text values i.e. setting the game field fresh
+                                        // for every individual Match.
         setupSpinner();
+
 
         /*
         * All the possibles set of cells to win
@@ -138,11 +131,21 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
         mButtonNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startGame();
+            }
+        });
+
+        mButtonRestart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                initialSetupBeforeEveryMatch();
+                refreshTheCellsForNextRound();
+                mChoiceList.setEnabled(true);
+                disableOnClickListeners();
+                mButtonStart.setVisibility(View.VISIBLE);
             }
         });
 
@@ -299,6 +302,10 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    /*
+    * Very important to disable the listeners.. as
+    * I don't want the game to start before selecting rounds at the begining of every Match. :D
+    * */
     private void disableOnClickListeners(){
 
          /*
@@ -326,6 +333,28 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    private void initialSetupBeforeEveryMatch(){
+
+        mCurrentRound = 0;
+        mScorePlayer1 = 0;
+        mScorePlayer2 = 0;
+
+        gameScorePlayer2.setTextSize(TypedValue.COMPLEX_UNIT_SP,72);
+        gameScorePlayer1.setTextSize(TypedValue.COMPLEX_UNIT_SP,72);
+
+        mStringScorePlayer1  = mScorePlayer1+"";
+        mStringScorePlayer2 = mScorePlayer2+"";
+        gameScorePlayer1.setText(mStringScorePlayer1); //To display an initial score of 0
+        gameScorePlayer2.setText(mStringScorePlayer2); //To display an initial score of 0
+
+        /*
+         * Initially (Before selection of mRound and start of game) Gamee Round text box is disabeled.
+         * */
+        gameRoundMessageBox.setVisibility(View.GONE);
+        mButtonNext.setVisibility(View.GONE);
+        gameResultMessageBox.setText("");
+        mButtonRestart.setVisibility(View.GONE);
+    }
 
     private void gamePlay(View view){
 
@@ -366,12 +395,15 @@ public class MainActivity extends AppCompatActivity {
                     textViewPlayer1.setBackgroundColor(Color.parseColor("#757575"));
                     }
                 if(mCurrentRound<mRound){
-                    mButtonNext.setVisibility(View.VISIBLE); }
+                    mButtonNext.setVisibility(View.VISIBLE);
+                }else{
+                    mButtonRestart.setVisibility(View.VISIBLE);
+                }
 
                 /*
                  * To display the scores in the Score Display Box
                  * */
-                updateScores();
+                displayScores();
 
             }else if(clickCount == 9){ // What if no winner is found AND all cells are set.. Boom It's a TIE
                 /*All cells have been set but winner is still not found
@@ -380,14 +412,18 @@ public class MainActivity extends AppCompatActivity {
                 //Toast.makeText(MainActivity.this,"It's a Tie",Toast.LENGTH_SHORT).show();
                 gameResultMessageBox.setText("IT'S A TIE");
                 textViewPlayer2.setBackgroundColor(Color.parseColor("#757575"));textViewPlayer1.setBackgroundColor(Color.parseColor("#757575"));
-                mScorePlayer2++;mScorePlayer1++;
+                mScorePlayer2+=0;//No increment of score on tie
+                mScorePlayer1+=0;//No increment of score on tie
                 if(mCurrentRound<mRound){
-                    mButtonNext.setVisibility(View.VISIBLE); }
+                    mButtonNext.setVisibility(View.VISIBLE);
+                }else{
+                    mButtonRestart.setVisibility(View.VISIBLE);
+                }
 
                 /*
                 * To display the scores in the Score Display Box
                 * */
-                updateScores();
+                displayScores();
             }
 
         }
@@ -410,6 +446,7 @@ public class MainActivity extends AppCompatActivity {
         gameRoundMessageBox.setVisibility(View.VISIBLE);
         mButtonStart.setVisibility(View.GONE);//No need of the start button after the game has started
         mButtonNext.setVisibility(View.GONE);//Next Round button only required after completion of a round
+        mButtonRestart.setVisibility(View.GONE);//No Reset option available after Match starts
 
         setupOnClickListeners();
 
@@ -441,7 +478,7 @@ public class MainActivity extends AppCompatActivity {
     /*
     * To display the score for individual rounds
     * */
-    private void updateScores(){
+    private void displayScores(){
         mStringScorePlayer2 = mScorePlayer2+""; mStringScorePlayer1 = mScorePlayer1+"";
         gameScorePlayer2.setText(mStringScorePlayer2);
         gameScorePlayer1.setText(mStringScorePlayer1);
