@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.graphics.Color;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.SparseIntArray;
@@ -72,6 +73,9 @@ public class MainActivity extends AppCompatActivity {
     //To Handle Back Press
     private boolean mIsMatchInProgress;
 
+    //To set Audio Media
+    private static MediaPlayer mMediaPlayer;
+
      TextView gameResultMessageBox,gameRoundMessageBox,gameScorePlayer1,gameScorePlayer2;
      ImageView cell00,cell01,cell02,cell10,cell11,cell12,cell20,cell21,cell22;
 
@@ -80,6 +84,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        mMediaPlayer = MediaPlayer.create(MainActivity.this,R.raw.before_start);
+        mMediaPlayer.setLooping(true);
+        mMediaPlayer.start();
 
 
         TextView textViewPlayer1 = findViewById(R.id.textviewplayer1);
@@ -217,14 +225,19 @@ public class MainActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String selection = (String) parent.getItemAtPosition(position);
                 if (!TextUtils.isEmpty(selection)) {
-                    if (selection.equals("1")) {
-                        mRound = 1;
-                    } else if (selection.equals("2")) {
-                        mRound = 2;
-                    } else if (selection.equals("3")) {
-                        mRound = 3;
-                    } else {
-                        mRound = 4;
+                    switch (selection) {
+                        case "1":
+                            mRound = 1;
+                            break;
+                        case "2":
+                            mRound = 2;
+                            break;
+                        case "3":
+                            mRound = 3;
+                            break;
+                        default:
+                            mRound = 4;
+                            break;
                     }
                 }
             }
@@ -623,5 +636,47 @@ public class MainActivity extends AppCompatActivity {
         // Create and show the AlertDialog
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
+    }
+
+    /*
+    * To play separate audio at every individual rounds
+    * */
+    private void playAudio(){
+        refreshMediaPlayer();
+
+        switch (mRound - mCurrentRound){
+            case 0:
+                mMediaPlayer = MediaPlayer.create(MainActivity.this,R.raw.final_round);
+                break;
+            case 1:
+                mMediaPlayer = MediaPlayer.create(MainActivity.this,R.raw.third_round);
+                break;
+            case 2:
+                mMediaPlayer = MediaPlayer.create(MainActivity.this,R.raw.second_round);
+                break;
+            default:
+                mMediaPlayer = MediaPlayer.create(MainActivity.this,R.raw.first_round);
+                break;
+        }
+        mMediaPlayer.setLooping(true);
+        mMediaPlayer.start();
+    }
+
+    /*
+    * To release any resourse set with MediaPlayer
+    *
+    * */
+    private void refreshMediaPlayer(){
+        if(mMediaPlayer != null){
+            if(mMediaPlayer.isPlaying()){mMediaPlayer.stop();}
+            mMediaPlayer.release();
+            mMediaPlayer = null;
+        }
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        refreshMediaPlayer();
     }
 }
