@@ -492,6 +492,7 @@ public class MainActivity extends AppCompatActivity {
     * To display the score for individual rounds
     * */
     private void displayScores(){
+
         mStringScorePlayer2 = mScorePlayer2+""; mStringScorePlayer1 = mScorePlayer1+"";
         gameScorePlayer2.setText(mStringScorePlayer2);
         gameScorePlayer1.setText(mStringScorePlayer1);
@@ -595,15 +596,22 @@ public class MainActivity extends AppCompatActivity {
         // for the positive and negative response buttons on the dialog.
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         if(mScorePlayer1>mScorePlayer2){
-            builder.setMessage("Player 1 WON");
+            builder.setMessage("Player 1 WON this Match");
         }else if(mScorePlayer2>mScorePlayer1){
-            builder.setMessage("Player 2 WON");
+            builder.setMessage("Player 2 WON this Match");
         }else{
             builder.setMessage("It's a TIE, Oops!");
         }
         builder.setPositiveButton("Exit Game", discardButtonClickListener);
         builder.setNegativeButton("Start New Match", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
+
+                initialSetupBeforeEveryMatch();
+                refreshTheCellsForNextRound();
+                mChoiceList.setEnabled(true);
+                disableOnClickListeners();
+                mButtonStart.setVisibility(View.VISIBLE);
+
                 // User clicked the "Keep Playing" button, so dismiss the dialog
                 // and continue enjoying the match XD.
                 if (dialog != null) {
