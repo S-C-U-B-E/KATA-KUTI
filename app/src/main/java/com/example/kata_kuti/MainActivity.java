@@ -407,6 +407,7 @@ public class MainActivity extends AppCompatActivity {
                 }else{
                     mButtonRestart.setVisibility(View.VISIBLE);
                     mIsMatchInProgress = false;
+                    displayFinalWinner();
                 }
 
                 /*
@@ -428,6 +429,7 @@ public class MainActivity extends AppCompatActivity {
                 }else{
                     mButtonRestart.setVisibility(View.VISIBLE);
                     mIsMatchInProgress = false;
+                    displayFinalWinner();
                 }
 
                 /*
@@ -494,9 +496,9 @@ public class MainActivity extends AppCompatActivity {
         gameScorePlayer2.setText(mStringScorePlayer2);
         gameScorePlayer1.setText(mStringScorePlayer1);
 
-        if(mCurrentRound == mRound)displayFinalWinner();
+       /* if(mCurrentRound == mRound)displayFinalWinner();
         Toast.makeText(MainActivity.this,"mCurrentRound: "+mCurrentRound,Toast.LENGTH_SHORT).show();
-        Toast.makeText(MainActivity.this,"mRound: "+mRound,Toast.LENGTH_SHORT).show();
+        Toast.makeText(MainActivity.this,"mRound: "+mRound,Toast.LENGTH_SHORT).show();*/
     }
 
     /*
@@ -519,19 +521,17 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void displayFinalWinner(){
-        gameScorePlayer2.setTextSize(TypedValue.COMPLEX_UNIT_SP,20);
-        gameScorePlayer1.setTextSize(TypedValue.COMPLEX_UNIT_SP,20);
+        DialogInterface.OnClickListener discardButtonClickListener =
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        // User clicked "Discard" button, close the current activity.
+                        finish();
+                    }
+                };
 
-        if(mScorePlayer1>mScorePlayer2){
-            gameScorePlayer1.setText("WINNER!!");
-            gameScorePlayer2.setText("GET LOST!!");
-        }else if(mScorePlayer2>mScorePlayer1){
-            gameScorePlayer1.setText("GET LOST!!");
-            gameScorePlayer2.setText("WINNER!!");
-        }else if(mScorePlayer2==mScorePlayer1){
-            gameScorePlayer1.setText("LEARN TO");
-            gameScorePlayer2.setText("PLAY DUH!");
-        }
+        // Show dialog that there are unfinished match.
+        showFinalWinnerDialog(discardButtonClickListener);
     }
 
     /**
@@ -589,4 +589,31 @@ public class MainActivity extends AppCompatActivity {
         alertDialog.show();
     }
 
+    private void showFinalWinnerDialog(
+            DialogInterface.OnClickListener discardButtonClickListener) {
+        // Create an AlertDialog.Builder and set the message, and click listeners
+        // for the positive and negative response buttons on the dialog.
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        if(mScorePlayer1>mScorePlayer2){
+            builder.setMessage("Player 1 WON");
+        }else if(mScorePlayer2>mScorePlayer1){
+            builder.setMessage("Player 2 WON");
+        }else{
+            builder.setMessage("It's a TIE, Oops!");
+        }
+        builder.setPositiveButton("Exit Game", discardButtonClickListener);
+        builder.setNegativeButton("Start New Match", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                // User clicked the "Keep Playing" button, so dismiss the dialog
+                // and continue enjoying the match XD.
+                if (dialog != null) {
+                    dialog.dismiss();
+                }
+            }
+        });
+
+        // Create and show the AlertDialog
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+    }
 }
