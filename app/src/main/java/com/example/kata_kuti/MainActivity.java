@@ -630,6 +630,17 @@ public class MainActivity extends AppCompatActivity {
         // Create an AlertDialog.Builder and set the message, and click listeners
         // for the positive and negative response buttons on the dialog.
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        refreshMediaPlayer();
+        mMediaPlayer = MediaPlayer.create(MainActivity.this,R.raw.before_winningmessage);
+        mMediaPlayer.start();
+        mMediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mediaPlayer) {
+                refreshMediaPlayer();
+                mMediaPlayer = MediaPlayer.create(MainActivity.this,R.raw.during_winningmessage);
+                mMediaPlayer.start();
+            }
+        });
         if(mScorePlayer1>mScorePlayer2){
             builder.setMessage("Player 1 WON this Match");
         }else if(mScorePlayer2>mScorePlayer1){
