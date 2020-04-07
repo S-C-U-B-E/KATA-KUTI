@@ -134,13 +134,17 @@ public class MainActivity extends AppCompatActivity {
          * */
          setupCellMap();
 
+
+        mButtonMediaplayer = MediaPlayer.create(MainActivity.this,R.raw.button_clicks);
+
         /*
          * Click on Start Button to start the game XD
          * */
         mButtonStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                playButtonAudio();
+                //playButtonAudio();
+                mButtonMediaplayer.start();
                 startGame();
             }
         });
@@ -148,7 +152,8 @@ public class MainActivity extends AppCompatActivity {
         mButtonNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                playButtonAudio();
+                //playButtonAudio();
+                mButtonMediaplayer.start();
                 startGame();
             }
         });
@@ -156,7 +161,8 @@ public class MainActivity extends AppCompatActivity {
         mButtonRestart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                playButtonAudio();
+                //playButtonAudio();
+                mButtonMediaplayer.start();
                 restartGame();
             }
         });
@@ -495,6 +501,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void restartGame(){
+        TextView textViewPlayer1 = findViewById(R.id.textviewplayer1);
+        TextView textViewPlayer2 = findViewById(R.id.textviewplayer2);
+        textViewPlayer2.setBackgroundColor(Color.parseColor("#757575"));
+        textViewPlayer1.setBackgroundColor(Color.parseColor("#757575"));
+
         initialSetupBeforeEveryMatch();
         refreshTheCellsForNextRound();
         mChoiceList.setEnabled(true);
