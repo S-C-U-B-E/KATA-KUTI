@@ -75,6 +75,8 @@ public class MainActivity extends AppCompatActivity {
 
     //To set Audio Media
     private static MediaPlayer mMediaPlayer;
+    private static MediaPlayer mButtonMediaplayer;
+    private static MediaPlayer mGameButtonsMediaPlayer;
 
      TextView gameResultMessageBox,gameRoundMessageBox,gameScorePlayer1,gameScorePlayer2;
      ImageView cell00,cell01,cell02,cell10,cell11,cell12,cell20,cell21,cell22;
@@ -138,6 +140,7 @@ public class MainActivity extends AppCompatActivity {
         mButtonStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                playButtonAudio();
                 startGame();
             }
         });
@@ -145,6 +148,7 @@ public class MainActivity extends AppCompatActivity {
         mButtonNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                playButtonAudio();
                 startGame();
             }
         });
@@ -152,6 +156,7 @@ public class MainActivity extends AppCompatActivity {
         mButtonRestart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                playButtonAudio();
                 restartGame();
             }
         });
@@ -539,20 +544,6 @@ public class MainActivity extends AppCompatActivity {
         cell22.setImageResource(0);
     }
 
-    private void displayFinalWinner(){
-        DialogInterface.OnClickListener discardButtonClickListener =
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        // User clicked "Discard" button, close the current activity.
-                        finish();
-                    }
-                };
-
-        // Show dialog that there are unfinished match.
-        showFinalWinnerDialog(discardButtonClickListener);
-    }
-
     /**
      * This method is called when the back button is pressed.
      */
@@ -560,6 +551,7 @@ public class MainActivity extends AppCompatActivity {
     public void onBackPressed() {
         // If the match hasn't started, continue with handling back button press and exit successfully
         if (!mIsMatchInProgress) {
+            Toast.makeText(MainActivity.this,"Have a good day!!",Toast.LENGTH_SHORT).show();
             super.onBackPressed();
             return;
         }
@@ -571,7 +563,8 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         // User clicked "Discard" button, close the current activity.
-                        finish();
+                        restartGame();
+                        Toast.makeText(MainActivity.this,"Press back button again to Exit",Toast.LENGTH_SHORT).show();
                     }
                 };
 
@@ -582,9 +575,6 @@ public class MainActivity extends AppCompatActivity {
     /**
      * Show a dialog that warns the user there are unfinished match that will be lost
      * if they continue leaving the editor.
-     *
-     * @param discardButtonClickListener is the click listener for what to do when
-     *                                   the user confirms they want to discard their changes
      */
     private void showUnsavedChangesDialog(
             DialogInterface.OnClickListener discardButtonClickListener) {
@@ -606,6 +596,21 @@ public class MainActivity extends AppCompatActivity {
         // Create and show the AlertDialog
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
+    }
+
+
+    private void displayFinalWinner(){
+        DialogInterface.OnClickListener discardButtonClickListener =
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        // User clicked "Discard" button, close the current activity.
+                        finish();
+                    }
+                };
+
+        // Show dialog that there are unfinished match.
+        showFinalWinnerDialog(discardButtonClickListener);
     }
 
     private void showFinalWinnerDialog(
@@ -646,28 +651,37 @@ public class MainActivity extends AppCompatActivity {
         mMediaPlayer.start();
     }
 
+    private void playButtonAudio(){
+        refreshButtonMediaPlayer();
+        mButtonMediaplayer = MediaPlayer.create(MainActivity.this,R.raw.button_clicks);
+        mButtonMediaplayer.start();
+    }
+
+    private void refreshButtonMediaPlayer(){
+        if(mButtonMediaplayer != null){
+            if(mButtonMediaplayer.isPlaying()){mButtonMediaplayer.stop();}
+            mButtonMediaplayer.release();
+            mButtonMediaplayer = null;
+        }
+    }
+
     /*
     * To play separate audio at every individual rounds
     * */
     private void playAudio(){
         refreshMediaPlayer();
-        printDetails();
         int caseValue = mRound - mCurrentRound -1;
         switch (caseValue){
             case 0:
-                Toast.makeText(MainActivity.this,"case0: "+(mRound - mCurrentRound),Toast.LENGTH_SHORT).show();
                 mMediaPlayer = MediaPlayer.create(MainActivity.this,R.raw.final_round);
                 break;
             case 1:
-                Toast.makeText(MainActivity.this,"case1: "+(mRound - mCurrentRound),Toast.LENGTH_SHORT).show();
                 mMediaPlayer = MediaPlayer.create(MainActivity.this,R.raw.third_round);
                 break;
             case 2:
-                Toast.makeText(MainActivity.this,"case2: "+(mRound - mCurrentRound),Toast.LENGTH_SHORT).show();
                 mMediaPlayer = MediaPlayer.create(MainActivity.this,R.raw.second_round);
                 break;
              default:
-                 Toast.makeText(MainActivity.this,"default: "+(mRound - mCurrentRound),Toast.LENGTH_SHORT).show();
                 mMediaPlayer = MediaPlayer.create(MainActivity.this,R.raw.first_round);
                 break;
         }
@@ -691,11 +705,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onStop() {
         super.onStop();
         refreshMediaPlayer();
+        refreshButtonMediaPlayer();
+
     }
 
-    private void printDetails(){
-        Toast.makeText(MainActivity.this,"mRound: "+mRound,Toast.LENGTH_SHORT).show();
-        Toast.makeText(MainActivity.this,"mCurrentRound: "+mCurrentRound,Toast.LENGTH_SHORT).show();
-        Toast.makeText(MainActivity.this,"mRound - mCurrentRound: "+(mRound-mCurrentRound),Toast.LENGTH_SHORT).show();
-    }
 }
