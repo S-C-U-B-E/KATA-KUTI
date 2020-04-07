@@ -459,6 +459,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void startGame(){
+        playAudio();
         refreshTheCellsForNextRound();
 
         TextView textViewGameRoundMessage;
