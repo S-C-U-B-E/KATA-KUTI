@@ -85,9 +85,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mMediaPlayer = MediaPlayer.create(MainActivity.this,R.raw.before_start);
-        mMediaPlayer.setLooping(true);
-        mMediaPlayer.start();
+        playAudioBeforeStart();
 
 
         TextView textViewPlayer1 = findViewById(R.id.textviewplayer1);
@@ -154,11 +152,7 @@ public class MainActivity extends AppCompatActivity {
         mButtonRestart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                initialSetupBeforeEveryMatch();
-                refreshTheCellsForNextRound();
-                mChoiceList.setEnabled(true);
-                disableOnClickListeners();
-                mButtonStart.setVisibility(View.VISIBLE);
+                restartGame();
             }
         });
 
@@ -495,6 +489,16 @@ public class MainActivity extends AppCompatActivity {
             textViewGameRoundMessage.setText(mGameRoundMessage);
     }
 
+    private void restartGame(){
+        initialSetupBeforeEveryMatch();
+        refreshTheCellsForNextRound();
+        mChoiceList.setEnabled(true);
+        disableOnClickListeners();
+        mButtonStart.setVisibility(View.VISIBLE);
+
+        playAudioBeforeStart();
+    }
+
     /*
     * Game rounds message creator
     * */
@@ -620,11 +624,7 @@ public class MainActivity extends AppCompatActivity {
         builder.setNegativeButton("Start New Match", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
 
-                initialSetupBeforeEveryMatch();
-                refreshTheCellsForNextRound();
-                mChoiceList.setEnabled(true);
-                disableOnClickListeners();
-                mButtonStart.setVisibility(View.VISIBLE);
+                restartGame();
 
                 // User clicked the "Keep Playing" button, so dismiss the dialog
                 // and continue enjoying the match XD.
@@ -639,23 +639,35 @@ public class MainActivity extends AppCompatActivity {
         alertDialog.show();
     }
 
+    private void playAudioBeforeStart(){
+        refreshMediaPlayer();
+        mMediaPlayer = MediaPlayer.create(MainActivity.this,R.raw.before_start);
+        mMediaPlayer.setLooping(true);
+        mMediaPlayer.start();
+    }
+
     /*
     * To play separate audio at every individual rounds
     * */
     private void playAudio(){
         refreshMediaPlayer();
-
-        switch (mRound - mCurrentRound){
+        printDetails();
+        int caseValue = mRound - mCurrentRound -1;
+        switch (caseValue){
             case 0:
+                Toast.makeText(MainActivity.this,"case0: "+(mRound - mCurrentRound),Toast.LENGTH_SHORT).show();
                 mMediaPlayer = MediaPlayer.create(MainActivity.this,R.raw.final_round);
                 break;
             case 1:
+                Toast.makeText(MainActivity.this,"case1: "+(mRound - mCurrentRound),Toast.LENGTH_SHORT).show();
                 mMediaPlayer = MediaPlayer.create(MainActivity.this,R.raw.third_round);
                 break;
             case 2:
+                Toast.makeText(MainActivity.this,"case2: "+(mRound - mCurrentRound),Toast.LENGTH_SHORT).show();
                 mMediaPlayer = MediaPlayer.create(MainActivity.this,R.raw.second_round);
                 break;
-            default:
+             default:
+                 Toast.makeText(MainActivity.this,"default: "+(mRound - mCurrentRound),Toast.LENGTH_SHORT).show();
                 mMediaPlayer = MediaPlayer.create(MainActivity.this,R.raw.first_round);
                 break;
         }
@@ -679,5 +691,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onStop() {
         super.onStop();
         refreshMediaPlayer();
+    }
+
+    private void printDetails(){
+        Toast.makeText(MainActivity.this,"mRound: "+mRound,Toast.LENGTH_SHORT).show();
+        Toast.makeText(MainActivity.this,"mCurrentRound: "+mCurrentRound,Toast.LENGTH_SHORT).show();
+        Toast.makeText(MainActivity.this,"mRound - mCurrentRound: "+(mRound-mCurrentRound),Toast.LENGTH_SHORT).show();
     }
 }
