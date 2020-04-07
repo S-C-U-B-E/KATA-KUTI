@@ -78,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
     private static MediaPlayer mButtonMediaplayer;
     private static MediaPlayer mGameButtonsMediaPlayer;
 
-     TextView gameResultMessageBox,gameRoundMessageBox,gameScorePlayer1,gameScorePlayer2;
+     TextView gameResultMessageBox,gameRoundMessageBox,gameScorePlayer1,gameScorePlayer2,textViewPlayer1,textViewPlayer2;
      ImageView cell00,cell01,cell02,cell10,cell11,cell12,cell20,cell21,cell22;
 
 
@@ -90,9 +90,9 @@ public class MainActivity extends AppCompatActivity {
         playAudioBeforeStart();
 
 
-        TextView textViewPlayer1 = findViewById(R.id.textviewplayer1);
+        textViewPlayer1 = findViewById(R.id.textviewplayer1);
         textViewPlayer1.setBackgroundColor(Color.parseColor("#757575"));// SET TO INITIAL COLOR DENOTING 1's TURN AT THE BEGINNING OF GAME
-        TextView textViewPlayer2 = findViewById(R.id.textviewplayer2);
+        textViewPlayer2 = findViewById(R.id.textviewplayer2);
         textViewPlayer2.setBackgroundColor(Color.parseColor("#757575"));// SET TO INITIAL COLOR DENOTING 1's TURN AT THE BEGINNING OF GAME
 
 
@@ -385,8 +385,8 @@ public class MainActivity extends AppCompatActivity {
     private void gamePlay(View view){
 
         ImageView imageView = findViewById(view.getId());
-        TextView textViewPlayer1 = findViewById(R.id.textviewplayer1);
-        TextView textViewPlayer2 = findViewById(R.id.textviewplayer2);
+         textViewPlayer1 = findViewById(R.id.textviewplayer1);
+         textViewPlayer2 = findViewById(R.id.textviewplayer2);
 
         if( !listOfCellsAlreadySet.contains(view.getId()) && !foundWinner){ // To check if the cell has been clicked already or not.
             clickCount++;
@@ -468,7 +468,7 @@ public class MainActivity extends AppCompatActivity {
         refreshTheCellsForNextRound();
 
         TextView textViewGameRoundMessage;
-        TextView textViewPlayer1 = findViewById(R.id.textviewplayer1);
+        textViewPlayer1 = findViewById(R.id.textviewplayer1);
         textViewPlayer1.setBackgroundColor(Color.parseColor("#424242"));// SET TO INITIAL COLOR DENOTING 1's TURN AT THE BEGINNING OF GAME
         textViewGameRoundMessage = findViewById(R.id.textviewgameroundmessage);
 
@@ -501,8 +501,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void restartGame(){
-        TextView textViewPlayer1 = findViewById(R.id.textviewplayer1);
-        TextView textViewPlayer2 = findViewById(R.id.textviewplayer2);
+
+        textViewPlayer1 = findViewById(R.id.textviewplayer1);
+        textViewPlayer2 = findViewById(R.id.textviewplayer2);
         textViewPlayer2.setBackgroundColor(Color.parseColor("#757575"));
         textViewPlayer1.setBackgroundColor(Color.parseColor("#757575"));
 
