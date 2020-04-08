@@ -80,6 +80,9 @@ public class MainActivity extends AppCompatActivity {
     private static MediaPlayer mButtonMediaplayer;
     private static MediaPlayer mGameButtonsMediaPlayer;
 
+    //To Call onResume after onStop called atleast once
+    private static boolean mWasOnStopCalled;
+
     /** Handles audio focus when playing a sound file */
     private AudioManager mAudioManager;
 
@@ -122,10 +125,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        mWasOnStopCalled = false;
+
         // Create and setup the to request audio focus
         mAudioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
 
-        playAudioBeforeStart();
+        playAudioBeforeMatchStart();
 
 
         textViewPlayer1 = findViewById(R.id.textviewplayer1);
@@ -499,7 +504,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void startGame(){
-        playAudio();
+        playAudioAfterMatchStart();
         refreshTheCellsForNextRound();
 
         TextView textViewGameRoundMessage;
@@ -548,7 +553,7 @@ public class MainActivity extends AppCompatActivity {
         disableOnClickListeners();
         mButtonStart.setVisibility(View.VISIBLE);
 
-        playAudioBeforeStart();
+        playAudioBeforeMatchStart();
     }
 
     /*
@@ -700,7 +705,7 @@ public class MainActivity extends AppCompatActivity {
         alertDialog.show();
     }
 
-    private void playAudioBeforeStart(){
+    private void playAudioBeforeMatchStart(){
 
         releaseMediaPlayer();
 
@@ -731,7 +736,7 @@ public class MainActivity extends AppCompatActivity {
     /*
     * To play separate audio at every individual rounds
     * */
-    private void playAudio(){
+    private void playAudioAfterMatchStart(){
         releaseMediaPlayer();
 
         int result = mAudioManager.requestAudioFocus(mOnAudioFocusChangeListener,
@@ -775,10 +780,29 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStop() {
         super.onStop();
+
+        mWasOnStopCalled = true;
+
         releaseMediaPlayer();
         refreshButtonMediaPlayer();
 
         mAudioManager.abandonAudioFocus(mOnAudioFocusChangeListener);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        if(mWasOnStopCalled){
+
+            // Create and setup the to request audio focus
+            mAudioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
+
+            if(mIsMatchInProgress){
+                playAudioAfterMatchStart();
+            }else{
+                playAudioBeforeMatchStart();
+            }
+        }
+    }
 }
