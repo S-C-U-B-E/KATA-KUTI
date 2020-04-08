@@ -77,8 +77,6 @@ public class MainActivity extends AppCompatActivity {
 
     //To set Audio Media
     private static MediaPlayer mMediaPlayer;
-    private static MediaPlayer mButtonMediaplayer;
-    private static MediaPlayer mGameButtonsMediaPlayer;
 
     //To Call onResume after onStop called atleast once
     private static boolean mWasOnStopCalled;
@@ -178,7 +176,6 @@ public class MainActivity extends AppCompatActivity {
          setupCellMap();
 
 
-        mButtonMediaplayer = MediaPlayer.create(MainActivity.this,R.raw.button_clicks);
 
         /*
          * Click on Start Button to start the game XD
@@ -775,23 +772,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void playButtonAudio(){
-        refreshButtonMediaPlayer();
-        mButtonMediaplayer = MediaPlayer.create(MainActivity.this,R.raw.button_clicks);
-        mButtonMediaplayer.start();
-    }
-
-    /*
-    * To set the MediaPlayer instance null when new Clip is to be played
-    * or when app stops to release resources.
-    * */
-    private void refreshButtonMediaPlayer(){
-        if(mButtonMediaplayer != null){
-            if(mButtonMediaplayer.isPlaying()){mButtonMediaplayer.stop();}
-            mButtonMediaplayer.release();
-            mButtonMediaplayer = null;
-        }
-    }
 
     /*
     * To play separate audio at every individual rounds
@@ -845,9 +825,7 @@ public class MainActivity extends AppCompatActivity {
         super.onStop();
 
         mWasOnStopCalled = true;
-
         releaseMediaPlayer();
-        refreshButtonMediaPlayer();
 
         mAudioManager.abandonAudioFocus(mOnAudioFocusChangeListener);
     }
