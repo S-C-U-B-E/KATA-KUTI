@@ -3,8 +3,10 @@ package com.example.kata_kuti;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Color;
+import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -78,14 +80,50 @@ public class MainActivity extends AppCompatActivity {
     private static MediaPlayer mButtonMediaplayer;
     private static MediaPlayer mGameButtonsMediaPlayer;
 
-     TextView gameResultMessageBox,gameRoundMessageBox,gameScorePlayer1,gameScorePlayer2,textViewPlayer1,textViewPlayer2;
+    /** Handles audio focus when playing a sound file */
+    private AudioManager mAudioManager;
+
+
+    TextView gameResultMessageBox,gameRoundMessageBox,gameScorePlayer1,gameScorePlayer2,textViewPlayer1,textViewPlayer2;
      ImageView cell00,cell01,cell02,cell10,cell11,cell12,cell20,cell21,cell22;
+
+    /**
+     * This listener gets triggered whenever the audio focus changes
+     * (i.e., we gain or lose audio focus because of another app or device).
+     */
+    private AudioManager.OnAudioFocusChangeListener mOnAudioFocusChangeListener = new AudioManager.OnAudioFocusChangeListener() {
+        @Override
+        public void onAudioFocusChange(int focusChange) {
+            if (focusChange == AudioManager.AUDIOFOCUS_LOSS_TRANSIENT ||
+                    focusChange == AudioManager.AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK) {
+                // The AUDIOFOCUS_LOSS_TRANSIENT case means that we've lost audio focus for a
+                // short amount of time. The AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK case means that
+                // our app is allowed to continue playing sound but at a lower volume. We'll treat
+                // both cases the same way because our app is playing short sound files.
+
+                // Pause playback and reset player to the start of the file. That way, we can
+                // play the word from the beginning when we resume playback.
+                mMediaPlayer.pause();
+            } else if (focusChange == AudioManager.AUDIOFOCUS_GAIN) {
+                // The AUDIOFOCUS_GAIN case means we have regained focus and can resume playback.
+                mMediaPlayer.start();
+            } else if (focusChange == AudioManager.AUDIOFOCUS_LOSS) {
+                // The AUDIOFOCUS_LOSS case means we've lost audio focus and
+                // Stop playback and clean up resources
+                releaseMediaPlayer();
+            }
+        }
+    };
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // Create and setup the to request audio focus
+        mAudioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
 
         playAudioBeforeStart();
 
@@ -143,8 +181,7 @@ public class MainActivity extends AppCompatActivity {
         mButtonStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //playButtonAudio();
-                mButtonMediaplayer.start();
+
                 startGame();
             }
         });
@@ -152,8 +189,7 @@ public class MainActivity extends AppCompatActivity {
         mButtonNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //playButtonAudio();
-                mButtonMediaplayer.start();
+
                 startGame();
             }
         });
@@ -161,8 +197,7 @@ public class MainActivity extends AppCompatActivity {
         mButtonRestart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //playButtonAudio();
-                mButtonMediaplayer.start();
+
                 restartGame();
             }
         });
@@ -630,17 +665,15 @@ public class MainActivity extends AppCompatActivity {
         // Create an AlertDialog.Builder and set the message, and click listeners
         // for the positive and negative response buttons on the dialog.
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        refreshMediaPlayer();
-        mMediaPlayer = MediaPlayer.create(MainActivity.this,R.raw.before_winningmessage);
-        mMediaPlayer.start();
-        mMediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-            @Override
-            public void onCompletion(MediaPlayer mediaPlayer) {
-                refreshMediaPlayer();
-                mMediaPlayer = MediaPlayer.create(MainActivity.this,R.raw.during_winningmessage);
-                mMediaPlayer.start();
-            }
-        });
+
+        releaseMediaPlayer();
+        int result = mAudioManager.requestAudioFocus(mOnAudioFocusChangeListener,
+                AudioManager.STREAM_MUSIC, AudioManager.AUDIOFOCUS_GAIN);
+
+        if (result == AudioManager.AUDIOFOCUS_REQUEST_GRANTED) {
+        mMediaPlayer = MediaPlayer.create(MainActivity.this,R.raw.during_winningmessage);
+        mMediaPlayer.start();}
+
         if(mScorePlayer1>mScorePlayer2){
             builder.setMessage("Player 1 WON this Match");
         }else if(mScorePlayer2>mScorePlayer1){
@@ -668,10 +701,17 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void playAudioBeforeStart(){
-        refreshMediaPlayer();
-        mMediaPlayer = MediaPlayer.create(MainActivity.this,R.raw.before_start);
-        mMediaPlayer.setLooping(true);
-        mMediaPlayer.start();
+
+        releaseMediaPlayer();
+
+        int result = mAudioManager.requestAudioFocus(mOnAudioFocusChangeListener,
+                AudioManager.STREAM_MUSIC, AudioManager.AUDIOFOCUS_GAIN);
+
+        if (result == AudioManager.AUDIOFOCUS_REQUEST_GRANTED) {
+            mMediaPlayer = MediaPlayer.create(MainActivity.this,R.raw.before_start);
+            mMediaPlayer.setLooping(true);
+            mMediaPlayer.start();
+        }
     }
 
     private void playButtonAudio(){
@@ -692,31 +732,39 @@ public class MainActivity extends AppCompatActivity {
     * To play separate audio at every individual rounds
     * */
     private void playAudio(){
-        refreshMediaPlayer();
-        int caseValue = mRound - mCurrentRound -1;
-        switch (caseValue){
-            case 0:
-                mMediaPlayer = MediaPlayer.create(MainActivity.this,R.raw.final_round);
-                break;
-            case 1:
-                mMediaPlayer = MediaPlayer.create(MainActivity.this,R.raw.third_round);
-                break;
-            case 2:
-                mMediaPlayer = MediaPlayer.create(MainActivity.this,R.raw.second_round);
-                break;
-             default:
-                mMediaPlayer = MediaPlayer.create(MainActivity.this,R.raw.first_round);
-                break;
+        releaseMediaPlayer();
+
+        int result = mAudioManager.requestAudioFocus(mOnAudioFocusChangeListener,
+                AudioManager.STREAM_MUSIC, AudioManager.AUDIOFOCUS_GAIN);
+
+        if (result == AudioManager.AUDIOFOCUS_REQUEST_GRANTED) {
+
+            int caseValue = mRound - mCurrentRound -1;
+            switch (caseValue){
+                case 0:
+                    mMediaPlayer = MediaPlayer.create(MainActivity.this,R.raw.final_round);
+                    break;
+                case 1:
+                    mMediaPlayer = MediaPlayer.create(MainActivity.this,R.raw.third_round);
+                    break;
+                case 2:
+                    mMediaPlayer = MediaPlayer.create(MainActivity.this,R.raw.second_round);
+                    break;
+                default:
+                    mMediaPlayer = MediaPlayer.create(MainActivity.this,R.raw.first_round);
+                    break;
+            }
+            mMediaPlayer.setLooping(true);
+            mMediaPlayer.start();
         }
-        mMediaPlayer.setLooping(true);
-        mMediaPlayer.start();
+
     }
 
     /*
     * To release any resourse set with MediaPlayer
     *
     * */
-    private void refreshMediaPlayer(){
+    private void releaseMediaPlayer(){
         if(mMediaPlayer != null){
             if(mMediaPlayer.isPlaying()){mMediaPlayer.stop();}
             mMediaPlayer.release();
@@ -727,9 +775,10 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStop() {
         super.onStop();
-        refreshMediaPlayer();
+        releaseMediaPlayer();
         refreshButtonMediaPlayer();
 
+        mAudioManager.abandonAudioFocus(mOnAudioFocusChangeListener);
     }
 
 }
