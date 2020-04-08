@@ -209,6 +209,9 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    /*
+     * Function name is self-explanatory of it's purpose
+     * */
     private void setupCellsById(){
         cell00 = findViewById(R.id.cell00);
         cell01 = findViewById(R.id.cell01);
@@ -225,6 +228,9 @@ public class MainActivity extends AppCompatActivity {
         cell22 = findViewById(R.id.cell22);
     }
 
+    /*
+     * Function name is self-explanatory of it's purpose
+     * */
     private void setupWinnigSet(){
         winningSet.add(Arrays.asList(1,2,3));
         winningSet.add(Arrays.asList(4,5,6));
@@ -238,6 +244,9 @@ public class MainActivity extends AppCompatActivity {
         winningSet.add(Arrays.asList(3,5,7));
     }
 
+    /*
+     * Function name is self-explanatory of it's purpose
+     * */
     private void setupCellMap(){
         cellMap.put(R.id.cell00,1);
         cellMap.put(R.id.cell01,2);
@@ -254,6 +263,9 @@ public class MainActivity extends AppCompatActivity {
         cellMap.put(R.id.cell22,9);
     }
 
+    /*
+     * Function name is self-explanatory of it's purpose
+     * */
     private void setupSpinner(){
         // Created an ArrayAdapter using the string array and a default mChoiceList layout
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
@@ -295,6 +307,10 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    /*
+    * The cells only have to respond after a match starts (After The Start Button Is Clicked)
+    * Thats why it is defined outside of onCreate()
+    * */
     private void setupOnClickListeners(){
 
         /*
@@ -396,6 +412,9 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    /*
+     * Function name is self-explanatory of it's purpose
+     * */
     private void initialSetupBeforeEveryMatch(){
 
         mIsMatchInProgress = false;
@@ -422,6 +441,9 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    /*
+    * The Main Game Logic is in here ... Take a look :D
+    * */
     private void gamePlay(View view){
 
         ImageView imageView = findViewById(view.getId());
@@ -503,6 +525,9 @@ public class MainActivity extends AppCompatActivity {
         }*/
     }
 
+    /*
+     * Function name is self-explanatory of it's purpose
+     * */
     private void startGame(){
         playAudioAfterMatchStart();
         refreshTheCellsForNextRound();
@@ -540,6 +565,9 @@ public class MainActivity extends AppCompatActivity {
             textViewGameRoundMessage.setText(mGameRoundMessage);
     }
 
+    /*
+    * Function name is self-explanatory of it's purpose
+    * */
     private void restartGame(){
 
         textViewPlayer1 = findViewById(R.id.textviewplayer1);
@@ -665,6 +693,9 @@ public class MainActivity extends AppCompatActivity {
         showFinalWinnerDialog(discardButtonClickListener);
     }
 
+    /*
+    * The name of the function is self-explanatory
+    * */
     private void showFinalWinnerDialog(
             DialogInterface.OnClickListener discardButtonClickListener) {
         // Create an AlertDialog.Builder and set the message, and click listeners
@@ -675,14 +706,36 @@ public class MainActivity extends AppCompatActivity {
         int result = mAudioManager.requestAudioFocus(mOnAudioFocusChangeListener,
                 AudioManager.STREAM_MUSIC, AudioManager.AUDIOFOCUS_GAIN);
 
-        if (result == AudioManager.AUDIOFOCUS_REQUEST_GRANTED) {
-        mMediaPlayer = MediaPlayer.create(MainActivity.this,R.raw.during_winningmessage);
-        mMediaPlayer.start();}
-
+        if(result == AudioManager.AUDIOFOCUS_REQUEST_GRANTED){
+            if(mScorePlayer1!=mScorePlayer2)
+            {
+                mMediaPlayer = MediaPlayer.create(MainActivity.this,R.raw.drum_roll_audio_clip);
+                mMediaPlayer.start();
+                mMediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mediaPlayer) {
+                        mMediaPlayer = MediaPlayer.create(MainActivity.this,R.raw.during_winningmessage);
+                        mMediaPlayer.start();
+                    }
+                });
+            }
+            else{
+                mMediaPlayer = MediaPlayer.create(MainActivity.this,R.raw.sad_gamelost_audio_clip);
+                mMediaPlayer.start();
+                mMediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mediaPlayer) {
+                        mMediaPlayer = MediaPlayer.create(MainActivity.this,R.raw.bruh_audio_clip);
+                        mMediaPlayer.start();
+                    }
+                });
+            }
+        } //Play different audio clips for different
+                                                                    //winning or tie situations
         if(mScorePlayer1>mScorePlayer2){
-            builder.setMessage("Player 1 WON this Match");
+            builder.setMessage("Player 1 WON This Match");
         }else if(mScorePlayer2>mScorePlayer1){
-            builder.setMessage("Player 2 WON this Match");
+            builder.setMessage("Player 2 WON This Match");
         }else{
             builder.setMessage("It's a TIE, Oops!");
         }
@@ -705,6 +758,9 @@ public class MainActivity extends AppCompatActivity {
         alertDialog.show();
     }
 
+    /*
+    * Audio Before a Match Starts
+    * */
     private void playAudioBeforeMatchStart(){
 
         releaseMediaPlayer();
@@ -725,6 +781,10 @@ public class MainActivity extends AppCompatActivity {
         mButtonMediaplayer.start();
     }
 
+    /*
+    * To set the MediaPlayer instance null when new Clip is to be played
+    * or when app stops to release resources.
+    * */
     private void refreshButtonMediaPlayer(){
         if(mButtonMediaplayer != null){
             if(mButtonMediaplayer.isPlaying()){mButtonMediaplayer.stop();}
@@ -777,6 +837,9 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    /*
+    * called onStop to release resources when app is closed
+    * */
     @Override
     protected void onStop() {
         super.onStop();
@@ -789,6 +852,12 @@ public class MainActivity extends AppCompatActivity {
         mAudioManager.abandonAudioFocus(mOnAudioFocusChangeListener);
     }
 
+    /*
+    * To handle the case when another app comes up
+    * and the lifecycle of this app goes to Stop() Or Pause() state And;
+    * the app is opened up again .. to resume where user left. :D
+    *
+    * */
     @Override
     protected void onResume() {
         super.onResume();
