@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
 
     //Stores the choice of the number of rounds the players wanted to play
     //Strores the current Round Number
-     private static int mRound = 1;
+     private static int mRound;
      private static int mCurrentRound ;
 
     //choice List
@@ -204,6 +204,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        Toast.makeText(MainActivity.this,"onCreate()",Toast.LENGTH_SHORT).show();
     }
 
     /*
@@ -419,6 +420,8 @@ public class MainActivity extends AppCompatActivity {
         mCurrentRound = 0;
         mScorePlayer1 = 0;
         mScorePlayer2 = 0;
+
+        mRound = 1;
 
         gameScorePlayer2.setTextSize(TypedValue.COMPLEX_UNIT_SP,72);
         gameScorePlayer1.setTextSize(TypedValue.COMPLEX_UNIT_SP,72);
@@ -828,6 +831,8 @@ public class MainActivity extends AppCompatActivity {
         releaseMediaPlayer();
 
         mAudioManager.abandonAudioFocus(mOnAudioFocusChangeListener);
+
+        Toast.makeText(MainActivity.this,"onStop()",Toast.LENGTH_SHORT).show();
     }
 
     /*
@@ -851,5 +856,44 @@ public class MainActivity extends AppCompatActivity {
                 playAudioBeforeMatchStart();
             }
         }
+
+        Toast.makeText(MainActivity.this,"onResume()",Toast.LENGTH_SHORT).show();
+
+
+        NotificationUtils.clearAllNotifications(MainActivity.this);
     }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if(mIsMatchInProgress){
+        NotificationUtils.remindUserOfTheOnGoingMatch(MainActivity.this);}
+
+        Toast.makeText(MainActivity.this,"onPause()",Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        NotificationUtils.clearAllNotifications(MainActivity.this);
+
+        Toast.makeText(MainActivity.this,"onDestroy()",Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+
+        Toast.makeText(MainActivity.this,"onRestart()",Toast.LENGTH_SHORT).show();
+    }
+
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+       // if(mIsMatchInProgress){Toast.makeText(MainActivity.this,"finished from onStart()",Toast.LENGTH_SHORT).show();finish();}
+        Toast.makeText(MainActivity.this,"onStart()",Toast.LENGTH_SHORT).show();
+    }
+
 }
