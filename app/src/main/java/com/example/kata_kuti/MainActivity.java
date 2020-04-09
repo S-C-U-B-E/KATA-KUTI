@@ -13,6 +13,8 @@ import android.text.TextUtils;
 import android.util.SparseIntArray;
 import android.util.TypedValue;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -86,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     TextView gameResultMessageBox,gameRoundMessageBox,gameScorePlayer1,gameScorePlayer2,textViewPlayer1,textViewPlayer2;
-     ImageView cell00,cell01,cell02,cell10,cell11,cell12,cell20,cell21,cell22;
+     public ImageView cell00,cell01,cell02,cell10,cell11,cell12,cell20,cell21,cell22;
 
     /**
      * This listener gets triggered whenever the audio focus changes
@@ -318,18 +320,21 @@ public class MainActivity extends AppCompatActivity {
         cell00.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                didTapButton(view);
                 gamePlay(view);
             }
         });
         cell01.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                didTapButton(view);
                 gamePlay(view);
             }
         });
         cell02.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                didTapButton(view);
                 gamePlay(view);
             }
         });
@@ -341,18 +346,21 @@ public class MainActivity extends AppCompatActivity {
         cell10.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                didTapButton(view);
                 gamePlay(view);
             }
         });
         cell11.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                didTapButton(view);
                 gamePlay(view);
             }
         });
         cell12.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                didTapButton(view);
                 gamePlay(view);
             }
         });
@@ -363,18 +371,21 @@ public class MainActivity extends AppCompatActivity {
         cell20.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                didTapButton(view);
                 gamePlay(view);
             }
         });
         cell21.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                didTapButton(view);
                 gamePlay(view);
             }
         });
         cell22.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                didTapButton(view);
                 gamePlay(view);
             }
         });
@@ -932,20 +943,14 @@ public class MainActivity extends AppCompatActivity {
        //Toast.makeText(MainActivity.this,"onDestroy()",Toast.LENGTH_SHORT).show();
     }
 
-   /* @Override
-    protected void onRestart() {
-        super.onRestart();
+    public void didTapButton(View view) {
+        final Animation myAnim = AnimationUtils.loadAnimation(this, R.anim.bounce);
 
-        Toast.makeText(MainActivity.this,"onRestart()",Toast.LENGTH_SHORT).show();
+        // Use bounce interpolator with amplitude 0.2 and frequency 20
+        MyBounceInterpolator interpolator = new MyBounceInterpolator(0.2, 20);
+        myAnim.setInterpolator(interpolator);
+
+        view.startAnimation(myAnim);
     }
-
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-
-       // if(mIsMatchInProgress){Toast.makeText(MainActivity.this,"finished from onStart()",Toast.LENGTH_SHORT).show();finish();}
-        Toast.makeText(MainActivity.this,"onStart()",Toast.LENGTH_SHORT).show();
-    }*/
 
 }
