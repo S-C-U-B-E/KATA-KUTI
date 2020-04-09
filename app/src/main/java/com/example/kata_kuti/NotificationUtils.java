@@ -68,7 +68,7 @@ public class NotificationUtils {
                 .setSmallIcon(R.drawable.ic_launcher_background)
                 .setContentTitle("Kata Kuti")
                 .setContentText("Match in Progress..")
-                .setStyle(new NotificationCompat.BigTextStyle().bigText("Current match is in progress... Tap here to resume!!"+"\nIf the app is removed from recent apps... Tap here to begin the gaeme"))
+                .setStyle(new NotificationCompat.BigTextStyle().bigText("Current match is in progress... Tap here to resume!!"))
                 .setDefaults(Notification.DEFAULT_VIBRATE)
                 .setContentIntent(pendingIntent)
                 .setOnlyAlertOnce(true)

@@ -1,3 +1,28 @@
 <resources>
     <string name="app_name">Kata Kuti</string>
+
+    <string name="game_result_player2won">PLAYER 2 WON</string>
+    <string name="game_result_player1won">PLAYER 1 WON</string>
+    <string name="game_result_tie">IT\'S A TIE</string>
+    <string name="game_end_greetings">Have a good day!!</string>
+    <string name="game_exit_direction">Press back button again to Exit</string>
+
+    <string name="game_exit_positive_button">Exit Game</string>
+    <string name="game_exit_negative_button">Start New Match</string>
+
+    <string name="match_result_Player1Won_message">Player 1 WON This Match</string>
+    <string name="match_result_Player2Won_message">Player 2 WON This Match</string>
+    <string name="match_result_Tie_message">It\'s a TIE, Oops!</string>
+
+    <string name="match_exit_dialog_warning">Current Match In Progress,Want to Exit?</string>
+    <string name="match_exit_positive_button">Exit Match</string>
+    <string name="match_exit_negative_button">Keep Playing</string>
+
+    <string name="match_in_progress_notification_channel_id">match_in_progress_notification_channel</string>
+    <string name="match_in_progress_notification_channel_name">MATCH IN PROGRESS CHANNEL</string>
+    <string name="notificaation_content_title">Kata Kuti</string>
+    <string name="notification_content_text">Match In Progress</string>
+    <string name="notification_content_big_text_part1">Current match is in progress</string>
+    <string name="notification_content_big_text_part2">Tap here to resume!!</string>
+    <string name="notification_content_action_button_ignore">IGNORE</string>
 </resources>
