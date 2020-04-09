@@ -124,6 +124,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         mWasOnStopCalled = false;
+        mRound = 1;
 
         // Create and setup the to request audio focus
         mAudioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
@@ -204,7 +205,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        Toast.makeText(MainActivity.this,"onCreate()",Toast.LENGTH_SHORT).show();
+        //Toast.makeText(MainActivity.this,"onCreate()",Toast.LENGTH_SHORT).show();
     }
 
     /*
@@ -421,7 +422,6 @@ public class MainActivity extends AppCompatActivity {
         mScorePlayer1 = 0;
         mScorePlayer2 = 0;
 
-        mRound = 1;
 
         gameScorePlayer2.setTextSize(TypedValue.COMPLEX_UNIT_SP,72);
         gameScorePlayer1.setTextSize(TypedValue.COMPLEX_UNIT_SP,72);
@@ -731,7 +731,7 @@ public class MainActivity extends AppCompatActivity {
                 });
             }
         } //Play different audio clips for different
-                                                                    //winning or tie situations
+        //winning or tie situations
         if(mScorePlayer1>mScorePlayer2){
             builder.setMessage("Player 1 WON This Match");
         }else if(mScorePlayer2>mScorePlayer1){
@@ -788,18 +788,63 @@ public class MainActivity extends AppCompatActivity {
         if (result == AudioManager.AUDIOFOCUS_REQUEST_GRANTED) {
 
             int caseValue = mRound - mCurrentRound -1;
+            //Toast.makeText(MainActivity.this, "mRound:"+mRound+" mCurrentR:"+mCurrentRound, Toast.LENGTH_SHORT).show();
             switch (caseValue){
                 case 0:
                     mMediaPlayer = MediaPlayer.create(MainActivity.this,R.raw.final_round);
+                    //Toast.makeText(MainActivity.this, "case:"+(mRound - mCurrentRound -1), Toast.LENGTH_SHORT).show();
                     break;
                 case 1:
                     mMediaPlayer = MediaPlayer.create(MainActivity.this,R.raw.third_round);
+                    //Toast.makeText(MainActivity.this, "case:"+(mRound - mCurrentRound -1), Toast.LENGTH_SHORT).show();
                     break;
                 case 2:
                     mMediaPlayer = MediaPlayer.create(MainActivity.this,R.raw.second_round);
+                    //Toast.makeText(MainActivity.this, "case:"+(mRound - mCurrentRound -1), Toast.LENGTH_SHORT).show();
                     break;
                 default:
                     mMediaPlayer = MediaPlayer.create(MainActivity.this,R.raw.first_round);
+                    //Toast.makeText(MainActivity.this, "case:"+(mRound - mCurrentRound -1), Toast.LENGTH_SHORT).show();
+                    break;
+            }
+            mMediaPlayer.setLooping(true);
+            mMediaPlayer.start();
+        }
+
+    }
+
+    /*
+     * To play separate audio at every individual rounds
+     *
+     * NOTE: THIS IS A PARAMETERIZED VERSION WHICH PLAYS THE CORRECT AUDIO AFTER MATCH RESUMES (onResume() called)
+     * (i am to lazy to think more XD)
+     * */
+    private void playAudioAfterMatchStart(int mCurrentRound){
+        releaseMediaPlayer();
+
+        int result = mAudioManager.requestAudioFocus(mOnAudioFocusChangeListener,
+                AudioManager.STREAM_MUSIC, AudioManager.AUDIOFOCUS_GAIN);
+
+        if (result == AudioManager.AUDIOFOCUS_REQUEST_GRANTED) {
+
+            int caseValue = mRound - mCurrentRound -1;
+            //Toast.makeText(MainActivity.this, "mRound:"+mRound+" mCurrentR:"+mCurrentRound, Toast.LENGTH_SHORT).show();
+            switch (caseValue){
+                case 0:
+                    mMediaPlayer = MediaPlayer.create(MainActivity.this,R.raw.final_round);
+                    //Toast.makeText(MainActivity.this, "case:"+(mRound - mCurrentRound -1), Toast.LENGTH_SHORT).show();
+                    break;
+                case 1:
+                    mMediaPlayer = MediaPlayer.create(MainActivity.this,R.raw.third_round);
+                    //Toast.makeText(MainActivity.this, "case:"+(mRound - mCurrentRound -1), Toast.LENGTH_SHORT).show();
+                    break;
+                case 2:
+                    mMediaPlayer = MediaPlayer.create(MainActivity.this,R.raw.second_round);
+                    //Toast.makeText(MainActivity.this, "case:"+(mRound - mCurrentRound -1), Toast.LENGTH_SHORT).show();
+                    break;
+                default:
+                    mMediaPlayer = MediaPlayer.create(MainActivity.this,R.raw.first_round);
+                    //Toast.makeText(MainActivity.this, "case:"+(mRound - mCurrentRound -1), Toast.LENGTH_SHORT).show();
                     break;
             }
             mMediaPlayer.setLooping(true);
@@ -832,7 +877,7 @@ public class MainActivity extends AppCompatActivity {
 
         mAudioManager.abandonAudioFocus(mOnAudioFocusChangeListener);
 
-        Toast.makeText(MainActivity.this,"onStop()",Toast.LENGTH_SHORT).show();
+        //Toast.makeText(MainActivity.this,"onStop()",Toast.LENGTH_SHORT).show();
     }
 
     /*
@@ -850,26 +895,33 @@ public class MainActivity extends AppCompatActivity {
             // Create and setup the to request audio focus
             mAudioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
 
+
+
             if(mIsMatchInProgress){
-                playAudioAfterMatchStart();
+                playAudioAfterMatchStart(mCurrentRound-1);
             }else{
                 playAudioBeforeMatchStart();
             }
         }
 
-        Toast.makeText(MainActivity.this,"onResume()",Toast.LENGTH_SHORT).show();
+        //Toast.makeText(MainActivity.this,"onResume()",Toast.LENGTH_SHORT).show();
 
 
         NotificationUtils.clearAllNotifications(MainActivity.this);
     }
 
+
+    /*
+    * Provide a notification only when A game was in progress before user moves to another app
+    * Cool nuh?.. i know.. i rock XD
+    * */
     @Override
     protected void onPause() {
         super.onPause();
         if(mIsMatchInProgress){
         NotificationUtils.remindUserOfTheOnGoingMatch(MainActivity.this);}
 
-        Toast.makeText(MainActivity.this,"onPause()",Toast.LENGTH_SHORT).show();
+        //Toast.makeText(MainActivity.this,"onPause()",Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -877,10 +929,10 @@ public class MainActivity extends AppCompatActivity {
         super.onDestroy();
         NotificationUtils.clearAllNotifications(MainActivity.this);
 
-        Toast.makeText(MainActivity.this,"onDestroy()",Toast.LENGTH_SHORT).show();
+       //Toast.makeText(MainActivity.this,"onDestroy()",Toast.LENGTH_SHORT).show();
     }
 
-    @Override
+   /* @Override
     protected void onRestart() {
         super.onRestart();
 
@@ -894,6 +946,6 @@ public class MainActivity extends AppCompatActivity {
 
        // if(mIsMatchInProgress){Toast.makeText(MainActivity.this,"finished from onStart()",Toast.LENGTH_SHORT).show();finish();}
         Toast.makeText(MainActivity.this,"onStart()",Toast.LENGTH_SHORT).show();
-    }
+    }*/
 
 }
