@@ -13,11 +13,14 @@
         android:orientation="vertical">
 
         <!--<<<<<<<<<< GAME PLAYER INFO >>>>>>>>>>-->
+        <RelativeLayout
+            android:layout_height="0dp"
+            android:layout_weight="5"
+            android:layout_width="match_parent">
             <LinearLayout
                 android:id="@+id/playerinfo"
-                android:layout_height="0dp"
+                android:layout_height="match_parent"
                 android:layout_width="match_parent"
-                android:layout_weight="5"
                 android:orientation="vertical">
 
                     <TableLayout
@@ -101,6 +104,17 @@
 
             </LinearLayout>
 
+            <ImageButton
+                android:id="@+id/buttonsettings"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@android:color/transparent"
+                android:src="@drawable/ic_settings"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_margin="5dp"/>
+        </RelativeLayout>
         <!--<<<<<<<<<< GAME FIELD >>>>>>>>>>>-->
             <LinearLayout
                 android:id="@+id/playerplayfield"

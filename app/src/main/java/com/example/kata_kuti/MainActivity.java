@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
@@ -64,6 +65,7 @@ public class MainActivity extends AppCompatActivity {
      private Button mButtonStart;
      private ImageButton mButtonNext;
      private ImageButton mButtonRestart;
+     private ImageButton mButtonSettings;
 
     //To display the current Onging round
      private String mGameRoundMessage;
@@ -150,6 +152,7 @@ public class MainActivity extends AppCompatActivity {
         mButtonStart = findViewById(R.id.buttonstart);
         mButtonNext = findViewById(R.id.buttonnext);
         mButtonRestart = findViewById(R.id.buttonrestart);
+        mButtonSettings = findViewById(R.id.buttonsettings);
 
 
         mChoiceList = (Spinner) findViewById(R.id.rounds);
@@ -207,7 +210,19 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        //Toast.makeText(MainActivity.this,"onCreate()",Toast.LENGTH_SHORT).show();
+        mButtonSettings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openSettings();
+            }
+        });
+
+        Toast.makeText(MainActivity.this,"onCreate()",Toast.LENGTH_SHORT).show();
+    }
+
+    private void openSettings(){
+        Intent intent = new Intent(MainActivity.this,SettingsActivity.class);
+        startActivity(intent);
     }
 
     /*
