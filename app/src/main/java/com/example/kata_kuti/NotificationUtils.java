@@ -69,11 +69,18 @@ public class NotificationUtils {
                 .setContentTitle("Kata Kuti")
                 .setContentText("Match in Progress..")
                 .setStyle(new NotificationCompat.BigTextStyle().bigText("Current match is in progress... Tap here to resume!!"))
-                .setDefaults(Notification.DEFAULT_VIBRATE)
                 .setContentIntent(pendingIntent)
                 .setOnlyAlertOnce(true)
                 .addAction(R.drawable.ic_notification_action,"IGNORE",actionIntent)
                 .setAutoCancel(true);
+
+        if(MainActivity.isNotificationVibrationAllowed){
+            notificationBuilder.setVibrate(new long[] { 0, 200, 300, 200, 300 });
+        }
+
+        if(MainActivity.isNotificationSoundAllowed){
+            notificationBuilder.setDefaults(Notification.DEFAULT_SOUND);
+        }
 
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN
             && Build.VERSION.SDK_INT < Build.VERSION_CODES.O){

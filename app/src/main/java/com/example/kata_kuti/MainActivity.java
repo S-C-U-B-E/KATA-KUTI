@@ -90,10 +90,12 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
     /** Handles audio focus when playing a sound file */
     private AudioManager mAudioManager;
 
+    private boolean isSettingsScreenOpened;
     private boolean isMusicAllowed;
     private boolean isApplauseAllowewd;
     private boolean isNotificationAllowed;
-    private boolean isSettingsScreenOpened;
+    public static boolean isNotificationSoundAllowed;
+    public static boolean isNotificationVibrationAllowed;
 
 
     TextView gameResultMessageBox,gameRoundMessageBox,gameScorePlayer1,gameScorePlayer2,textViewPlayer1,textViewPlayer2;
@@ -236,6 +238,9 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         isMusicAllowed = sharedPreferences.getBoolean("music",true);
         isApplauseAllowewd = sharedPreferences.getBoolean("applause",true);
         isNotificationAllowed = sharedPreferences.getBoolean("notification",true);
+        isNotificationSoundAllowed = sharedPreferences.getBoolean("sound",true);
+        isNotificationVibrationAllowed = sharedPreferences.getBoolean("vibration",true);
+
         sharedPreferences.registerOnSharedPreferenceChangeListener(MainActivity.this);
     }
 
@@ -248,6 +253,10 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
             isApplauseAllowewd = sharedPreferences.getBoolean("applause",true);
         }else if(s.equals("notification")){
             isNotificationAllowed = sharedPreferences.getBoolean("notification",true);
+        }else if(s.equals("sound")){
+            isNotificationSoundAllowed = sharedPreferences.getBoolean("sound",true);
+        }else if(s.equals("vibration")){
+            isNotificationVibrationAllowed = sharedPreferences.getBoolean("vibration",true);
         }
     }
 

@@ -2,7 +2,7 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <PreferenceCategory android:title="Sound">
+    <PreferenceCategory android:title="Music">
         <CheckBoxPreference
             android:defaultValue="true"
             android:key="music"
@@ -20,14 +20,30 @@
             android:icon="@drawable/ic_applause_up"/>
     </PreferenceCategory>
 
-    <PreferenceCategory android:title="Notificatioin">
+    <PreferenceCategory android:title="Notification">
         <CheckBoxPreference
             android:defaultValue="true"
             android:key="notification"
             android:summaryOff="Notification turned Off"
             android:summaryOn="Notification turned On"
-            android:title="Match In Progress Notification"
+            android:title="Match In Progress"
             android:icon="@drawable/ic_notifications_active"/>
+
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="vibration"
+            android:summaryOn="Vibration turned On"
+            android:summaryOff="Vibration turned Off"
+            android:title="Vibration"
+            android:icon="@drawable/ic_notification_vibration"/>
+
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="sound"
+            android:summaryOn="Notification sound turned On"
+            android:summaryOff="Notification sound turned Off"
+            android:title="Sound"
+            android:icon="@drawable/ic_notification_sound"/>
 
     </PreferenceCategory>
 

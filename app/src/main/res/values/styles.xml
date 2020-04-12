@@ -11,9 +11,9 @@
 
     <style name="SettingAppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorPrimary">@color/colorSettingPrimary</item>
+        <item name="colorPrimaryDark">@color/colorSettingPrimaryDark</item>
+        <item name="colorAccent">@color/colorSettingAccent</item>
         <item name="preferenceTheme">@style/PreferenceThemeOverlay</item>
     </style>
     
