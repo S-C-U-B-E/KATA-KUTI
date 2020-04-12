@@ -1,11 +1,13 @@
 package com.example.kata_kuti;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.preference.PreferenceManager;
 
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
@@ -32,7 +34,7 @@ import java.util.List;
 import static com.example.kata_kuti.WinningLogic.theWinner;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements SharedPreferences.OnSharedPreferenceChangeListener {
 
     //To count the number of clicks on Cells
      private static int clickCount;
@@ -88,6 +90,8 @@ public class MainActivity extends AppCompatActivity {
     /** Handles audio focus when playing a sound file */
     private AudioManager mAudioManager;
 
+    private boolean isMusicAllowed;
+
 
     TextView gameResultMessageBox,gameRoundMessageBox,gameScorePlayer1,gameScorePlayer2,textViewPlayer1,textViewPlayer2;
      public ImageView cell00,cell01,cell02,cell10,cell11,cell12,cell20,cell21,cell22;
@@ -132,6 +136,8 @@ public class MainActivity extends AppCompatActivity {
 
         // Create and setup the to request audio focus
         mAudioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
+
+        setupSharedPreferences();
 
         playAudioBeforeMatchStart();
 
@@ -218,6 +224,21 @@ public class MainActivity extends AppCompatActivity {
         });
 
         Toast.makeText(MainActivity.this,"onCreate()",Toast.LENGTH_SHORT).show();
+    }
+
+    private void setupSharedPreferences(){
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        isMusicAllowed = sharedPreferences.getBoolean("music",true);
+
+        sharedPreferences.registerOnSharedPreferenceChangeListener(MainActivity.this);
+    }
+
+
+    @Override
+    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String s) {
+        if(s.equals("music")){
+            isMusicAllowed = sharedPreferences.getBoolean("music",true);
+        }
     }
 
     private void openSettings(){
@@ -795,9 +816,11 @@ public class MainActivity extends AppCompatActivity {
                 AudioManager.STREAM_MUSIC, AudioManager.AUDIOFOCUS_GAIN);
 
         if (result == AudioManager.AUDIOFOCUS_REQUEST_GRANTED) {
+
+            if(isMusicAllowed){
             mMediaPlayer = MediaPlayer.create(MainActivity.this,R.raw.before_start);
             mMediaPlayer.setLooping(true);
-            mMediaPlayer.start();
+            mMediaPlayer.start();}
         }
     }
 
@@ -813,6 +836,7 @@ public class MainActivity extends AppCompatActivity {
 
         if (result == AudioManager.AUDIOFOCUS_REQUEST_GRANTED) {
 
+            if(isMusicAllowed){
             int caseValue = mRound - mCurrentRound -1;
             //Toast.makeText(MainActivity.this, "mRound:"+mRound+" mCurrentR:"+mCurrentRound, Toast.LENGTH_SHORT).show();
             switch (caseValue){
@@ -834,7 +858,7 @@ public class MainActivity extends AppCompatActivity {
                     break;
             }
             mMediaPlayer.setLooping(true);
-            mMediaPlayer.start();
+            mMediaPlayer.start();}
         }
 
     }
@@ -853,6 +877,7 @@ public class MainActivity extends AppCompatActivity {
 
         if (result == AudioManager.AUDIOFOCUS_REQUEST_GRANTED) {
 
+            if(isMusicAllowed){
             int caseValue = mRound - mCurrentRound -1;
             //Toast.makeText(MainActivity.this, "mRound:"+mRound+" mCurrentR:"+mCurrentRound, Toast.LENGTH_SHORT).show();
             switch (caseValue){
@@ -874,7 +899,7 @@ public class MainActivity extends AppCompatActivity {
                     break;
             }
             mMediaPlayer.setLooping(true);
-            mMediaPlayer.start();
+            mMediaPlayer.start();}
         }
 
     }
@@ -936,6 +961,11 @@ public class MainActivity extends AppCompatActivity {
         NotificationUtils.clearAllNotifications(MainActivity.this);
     }
 
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        //Toast.makeText(MainActivity.this,"onPause()",Toast.LENGTH_SHORT).show();
+    }
 
     /*
     * Provide a notification only when A game was in progress before user moves to another app
@@ -953,6 +983,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+
+        PreferenceManager.getDefaultSharedPreferences(this).unregisterOnSharedPreferenceChangeListener(this);
+
         NotificationUtils.clearAllNotifications(MainActivity.this);
 
        //Toast.makeText(MainActivity.this,"onDestroy()",Toast.LENGTH_SHORT).show();
