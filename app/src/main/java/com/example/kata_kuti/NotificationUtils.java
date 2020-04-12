@@ -72,7 +72,7 @@ public class NotificationUtils {
                 .setDefaults(Notification.DEFAULT_VIBRATE)
                 .setContentIntent(pendingIntent)
                 .setOnlyAlertOnce(true)
-                .addAction(R.drawable.ic_launcher_foreground,"IGNORE",actionIntent)
+                .addAction(R.drawable.ic_notification_action,"IGNORE",actionIntent)
                 .setAutoCancel(true);
 
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN

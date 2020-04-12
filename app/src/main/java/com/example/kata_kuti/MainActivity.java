@@ -92,6 +92,8 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
 
     private boolean isMusicAllowed;
     private boolean isApplauseAllowewd;
+    private boolean isNotificationAllowed;
+    private boolean isSettingsScreenOpened;
 
 
     TextView gameResultMessageBox,gameRoundMessageBox,gameScorePlayer1,gameScorePlayer2,textViewPlayer1,textViewPlayer2;
@@ -132,6 +134,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        isSettingsScreenOpened = false;
         mWasOnStopCalled = false;
         mRound = 1;
 
@@ -220,6 +223,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         mButtonSettings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                isSettingsScreenOpened = true;
                 openSettings();
             }
         });
@@ -231,6 +235,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         isMusicAllowed = sharedPreferences.getBoolean("music",true);
         isApplauseAllowewd = sharedPreferences.getBoolean("applause",true);
+        isNotificationAllowed = sharedPreferences.getBoolean("notification",true);
         sharedPreferences.registerOnSharedPreferenceChangeListener(MainActivity.this);
     }
 
@@ -241,6 +246,8 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
             isMusicAllowed = sharedPreferences.getBoolean("music",true);
         }else if(s.equals("applause")){
             isApplauseAllowewd = sharedPreferences.getBoolean("applause",true);
+        }else if(s.equals("notification")){
+            isNotificationAllowed = sharedPreferences.getBoolean("notification",true);
         }
     }
 
@@ -946,6 +953,8 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
     protected void onResume() {
         super.onResume();
 
+        isSettingsScreenOpened = false;
+
         if(mWasOnStopCalled){
 
             // Create and setup the to request audio focus
@@ -979,7 +988,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
     @Override
     protected void onPause() {
         super.onPause();
-        if(mIsMatchInProgress){
+        if(mIsMatchInProgress && isNotificationAllowed && !isSettingsScreenOpened){
         NotificationUtils.remindUserOfTheOnGoingMatch(MainActivity.this);}
 
         //Toast.makeText(MainActivity.this,"onPause()",Toast.LENGTH_SHORT).show();

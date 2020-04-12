@@ -20,4 +20,15 @@
             android:icon="@drawable/ic_applause_up"/>
     </PreferenceCategory>
 
+    <PreferenceCategory android:title="Notificatioin">
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="notification"
+            android:summaryOff="Notification turned Off"
+            android:summaryOn="Notification turned On"
+            android:title="Match In Progress Notification"
+            android:icon="@drawable/ic_notifications_active"/>
+
+    </PreferenceCategory>
+
 </PreferenceScreen>
