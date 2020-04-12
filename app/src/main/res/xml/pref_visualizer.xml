@@ -29,7 +29,7 @@
             android:title="Match In Progress"
             android:icon="@drawable/ic_notifications_active"/>
 
-        <CheckBoxPreference
+        <SwitchPreference
             android:defaultValue="true"
             android:key="vibration"
             android:summaryOn="Vibration turned On"
@@ -37,7 +37,7 @@
             android:title="Vibration"
             android:icon="@drawable/ic_notification_vibration"/>
 
-        <CheckBoxPreference
+        <SwitchPreference
             android:defaultValue="true"
             android:key="sound"
             android:summaryOn="Notification sound turned On"

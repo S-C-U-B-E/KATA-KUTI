@@ -6,5 +6,29 @@
 
     <color name="colorSettingPrimary">#2962FF</color>
     <color name="colorSettingPrimaryDark">#0D47A1</color>
-    <color name="colorSettingAccent">#BBDEFB</color>
+    <color name="colorSettingAccent">#01579B</color>
+
+    <color name="colorScoreTableRow_Background">#424242</color>
+    <color name="colorScore_TextColor">#212121</color>
+    <color name="colorScore_BackgroundColor">#757575</color>
+
+    <color name="colorPlayerTableRow_Background">#424242</color>
+    <color name="colorPlayer_TextColor">#E0E0E0</color>
+    <color name="colorPlayerPlayingTextView_Background">#424242</color>
+    <color name="colorPlayerIdleTextView_Background">#757575</color>
+    <color name="colorPlayerSpinner_Background">#757575</color>
+    <color name="colorPlayerSettingsButtonColor">#424242</color>
+
+    <color name="colorGameFieldLinearLayout_Background">#424242</color>
+    <color name="colorGameFieldTableLayout_Background">#616161</color>
+    <color name="colorGameFieldCells_Background">#BDBDBD</color>
+
+    <color name="colorGameRoundTextView_Background">#BDBDBD</color>
+    <color name="colorGameRoundTextColor">#212121</color>
+
+    <color name="colorGameRelativeLayout_Background">#424242</color>
+    <color name="colorGameResultTextView_Backgroround">#424242</color>
+    <color name="colorGameResultTextColor">#212121</color>
+
+
 </resources>
