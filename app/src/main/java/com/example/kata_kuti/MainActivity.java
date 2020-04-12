@@ -91,6 +91,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
     private AudioManager mAudioManager;
 
     private boolean isMusicAllowed;
+    private boolean isApplauseAllowewd;
 
 
     TextView gameResultMessageBox,gameRoundMessageBox,gameScorePlayer1,gameScorePlayer2,textViewPlayer1,textViewPlayer2;
@@ -229,7 +230,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
     private void setupSharedPreferences(){
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         isMusicAllowed = sharedPreferences.getBoolean("music",true);
-
+        isApplauseAllowewd = sharedPreferences.getBoolean("applause",true);
         sharedPreferences.registerOnSharedPreferenceChangeListener(MainActivity.this);
     }
 
@@ -238,6 +239,8 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String s) {
         if(s.equals("music")){
             isMusicAllowed = sharedPreferences.getBoolean("music",true);
+        }else if(s.equals("applause")){
+            isApplauseAllowewd = sharedPreferences.getBoolean("applause",true);
         }
     }
 
@@ -754,6 +757,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
                 AudioManager.STREAM_MUSIC, AudioManager.AUDIOFOCUS_GAIN);
 
         if(result == AudioManager.AUDIOFOCUS_REQUEST_GRANTED){
+            if(isApplauseAllowewd){
             if(mScorePlayer1!=mScorePlayer2)
             {
                 mMediaPlayer = MediaPlayer.create(MainActivity.this,R.raw.drum_roll_audio_clip);
@@ -776,7 +780,8 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
                         mMediaPlayer.start();
                     }
                 });
-            }
+            }}
+
         } //Play different audio clips for different
         //winning or tie situations
         if(mScorePlayer1>mScorePlayer2){

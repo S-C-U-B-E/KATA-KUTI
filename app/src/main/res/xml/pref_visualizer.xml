@@ -1,12 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <CheckBoxPreference
-        android:defaultValue="true"
-        android:key="music"
-        android:summaryOff="Tap to turn on music"
-        android:summaryOn="Tap to turn off music"
-        android:title="Background Music"
-        android:icon="@drawable/ic_volume_up"/>
+    <PreferenceCategory android:title="Sound">
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="music"
+            android:summaryOff="Tap to turn on music"
+            android:summaryOn="Tap to turn off music"
+            android:title="Background Music"
+            android:icon="@drawable/ic_volume_up" />
+
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="applause"
+            android:summaryOff="Tap to get applause"
+            android:summaryOn="Everyone loves an applause.. tap if you don't"
+            android:title="Applause"
+            android:icon="@drawable/ic_applause_up"/>
+    </PreferenceCategory>
 
 </PreferenceScreen>
