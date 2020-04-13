@@ -149,9 +149,9 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
 
 
         textViewPlayer1 = findViewById(R.id.textviewplayer1);
-        textViewPlayer1.setBackgroundColor(Color.parseColor("#757575"));// SET TO INITIAL COLOR DENOTING 1's TURN AT THE BEGINNING OF GAME
+        textViewPlayer1.setBackgroundResource(R.color.colorScoreAndPlayer_light);// SET TO INITIAL COLOR DENOTING 1's TURN AT THE BEGINNING OF GAME
         textViewPlayer2 = findViewById(R.id.textviewplayer2);
-        textViewPlayer2.setBackgroundColor(Color.parseColor("#757575"));// SET TO INITIAL COLOR DENOTING 1's TURN AT THE BEGINNING OF GAME
+        textViewPlayer2.setBackgroundResource(R.color.colorScoreAndPlayer_light);// SET TO INITIAL COLOR DENOTING 1's TURN AT THE BEGINNING OF GAME
 
 
         gameResultMessageBox = findViewById(R.id.textviewgameresultmessage);
@@ -524,13 +524,13 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
             if(clickCount%2 == 0){
                 Player2.add(cellMap.get(view.getId()));
                 imageView.setImageResource(R.drawable.kuti);
-                textViewPlayer2.setBackgroundColor(Color.parseColor("#757575")); // SET TO scorerowfield color DENOTING 2 HAS GIVEN ITS CHOICE
-                textViewPlayer1.setBackgroundColor(Color.parseColor("#424242"));/*SET TO gameplayfield color DENOTING 1's TURN NEXT*/ }
+                textViewPlayer2.setBackgroundResource(R.color.colorScoreAndPlayer_light); // SET TO scorerowfield color DENOTING 2 HAS GIVEN ITS CHOICE
+                textViewPlayer1.setBackgroundResource(R.color.colorEntireBackground_light);/*SET TO gameplayfield color DENOTING 1's TURN NEXT*/ }
             else{
                 Player1.add(cellMap.get(view.getId()));
                 imageView.setImageResource(R.drawable.kata);
-                textViewPlayer1.setBackgroundColor(Color.parseColor("#757575"));// SET TO scorerowfield color DENOTING 1 HAS GIVEN ITS CHOICE
-                textViewPlayer2.setBackgroundColor(Color.parseColor("#424242"));/*SET TO gameplayfield color DENOTING 2's TURN NEXT*/}
+                textViewPlayer1.setBackgroundResource(R.color.colorScoreAndPlayer_light);// SET TO scorerowfield color DENOTING 1 HAS GIVEN ITS CHOICE
+                textViewPlayer2.setBackgroundResource(R.color.colorEntireBackground_light);/*SET TO gameplayfield color DENOTING 2's TURN NEXT*/}
 
             listOfCellsAlreadySet.add(view.getId()); // Once Clicked the value of the cell can't be changed
 
@@ -540,13 +540,13 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
                 {
                     mScorePlayer2++;
                     gameResultMessageBox.setText("PLAYER 2 WON");
-                    textViewPlayer2.setBackgroundColor(Color.parseColor("#757575"));
-                    textViewPlayer1.setBackgroundColor(Color.parseColor("#757575"));
+                    textViewPlayer2.setBackgroundResource(R.color.colorScoreAndPlayer_light);
+                    textViewPlayer1.setBackgroundResource(R.color.colorScoreAndPlayer_light);
                 }else {
                     mScorePlayer1++;
                     gameResultMessageBox.setText("PLAYER 1 WON");
-                    textViewPlayer2.setBackgroundColor(Color.parseColor("#757575"));
-                    textViewPlayer1.setBackgroundColor(Color.parseColor("#757575"));
+                    textViewPlayer2.setBackgroundResource(R.color.colorScoreAndPlayer_light);
+                    textViewPlayer1.setBackgroundResource(R.color.colorScoreAndPlayer_light);
                     }
                 if(mCurrentRound<mRound){
                     mButtonNext.setVisibility(View.VISIBLE);
@@ -567,7 +567,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
                  * */
                 //Toast.makeText(MainActivity.this,"It's a Tie",Toast.LENGTH_SHORT).show();
                 gameResultMessageBox.setText("IT'S A TIE");
-                textViewPlayer2.setBackgroundColor(Color.parseColor("#757575"));textViewPlayer1.setBackgroundColor(Color.parseColor("#757575"));
+                textViewPlayer2.setBackgroundResource(R.color.colorScoreAndPlayer_light);textViewPlayer1.setBackgroundResource(R.color.colorScoreAndPlayer_light);
                 mScorePlayer2+=0;//No increment of score on tie
                 mScorePlayer1+=0;//No increment of score on tie
                 if(mCurrentRound<mRound){
@@ -600,7 +600,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
 
         TextView textViewGameRoundMessage;
         textViewPlayer1 = findViewById(R.id.textviewplayer1);
-        textViewPlayer1.setBackgroundColor(Color.parseColor("#424242"));// SET TO INITIAL COLOR DENOTING 1's TURN AT THE BEGINNING OF GAME
+        textViewPlayer1.setBackgroundResource(R.color.colorEntireBackground_light);// SET TO INITIAL COLOR DENOTING 1's TURN AT THE BEGINNING OF GAME
         textViewGameRoundMessage = findViewById(R.id.textviewgameroundmessage);
 
         mChoiceList.setEnabled(false);
@@ -638,8 +638,8 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
 
         textViewPlayer1 = findViewById(R.id.textviewplayer1);
         textViewPlayer2 = findViewById(R.id.textviewplayer2);
-        textViewPlayer2.setBackgroundColor(Color.parseColor("#757575"));
-        textViewPlayer1.setBackgroundColor(Color.parseColor("#757575"));
+        textViewPlayer2.setBackgroundResource(R.color.colorScoreAndPlayer_light);
+        textViewPlayer1.setBackgroundResource(R.color.colorScoreAndPlayer_light);
 
         initialSetupBeforeEveryMatch();
         refreshTheCellsForNextRound();

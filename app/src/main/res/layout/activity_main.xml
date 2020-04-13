@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:background="@color/colorEntireBackground_light">
 
     <TableLayout
         android:id="@+id/parentlayout"
@@ -16,7 +17,8 @@
         <RelativeLayout
             android:layout_height="0dp"
             android:layout_weight="5"
-            android:layout_width="match_parent">
+            android:layout_width="match_parent"
+            android:elevation="32dp">
             <LinearLayout
                 android:id="@+id/playerinfo"
                 android:layout_height="match_parent"
@@ -33,8 +35,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="0dp"
                                 android:layout_weight="0.7"
-                                android:weightSum="1"
-                                android:background="#424242">
+                                android:weightSum="1">
 
                                 <TextView
                                     android:id="@+id/textviewscore1"
@@ -42,8 +43,8 @@
                                     android:layout_weight="0.5"
                                     android:layout_height="match_parent"
                                     android:gravity="center"
-                                    android:textColor="#212121"
-                                    android:background="#757575"
+                                    android:textColor="@color/colorText_light"
+                                    android:background="@color/colorScoreAndPlayer_light"
                                     android:layout_marginRight="4dp"
                                     android:layout_marginEnd="4dp"/>
                                 <TextView
@@ -52,8 +53,8 @@
                                     android:layout_weight="0.5"
                                     android:layout_height="match_parent"
                                     android:gravity="center"
-                                    android:textColor="#212121"
-                                    android:background="#757575"/>
+                                    android:textColor="@color/colorText_light"
+                                    android:background="@color/colorScoreAndPlayer_light"/>
                             </TableRow>
 
                             <!--Player Info Row-->
@@ -61,8 +62,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="0dp"
                                 android:layout_weight="0.3"
-                                android:weightSum="1"
-                                android:background="#424242">
+                                android:weightSum="1">
 
                                 <TextView
                                     android:id="@+id/textviewplayer1"
@@ -73,7 +73,7 @@
                                     android:gravity="center"
                                     android:textAllCaps="true"
                                     android:textSize="18sp"
-                                    android:textColor="#E0E0E0"
+                                    android:textColor="@color/colorText_light"
                                     android:layout_marginRight="4dp"
                                     android:layout_marginEnd="4dp"/>
                                 <Spinner
@@ -84,7 +84,7 @@
                                     android:gravity="center"
                                     android:textAlignment="center"
                                     android:autofillHints="Round"
-                                    android:background="#757575"
+                                    android:background="@color/colorScoreAndPlayer_light"
                                     android:layout_marginRight="4dp"
                                     android:layout_marginEnd="4dp"
                                     android:layout_marginTop="4dp"/>
@@ -97,7 +97,7 @@
                                     android:gravity="center"
                                     android:textAllCaps="true"
                                     android:textSize="18sp"
-                                    android:textColor="#E0E0E0"/>
+                                    android:textColor="@color/colorText_light"/>
                             </TableRow>
                     </TableLayout>
 
@@ -123,14 +123,12 @@
                 android:layout_width="match_parent"
                 android:layout_weight="10"
                 android:orientation="vertical"
-                android:padding="18dp"
-                android:background="#424242">
+                android:padding="18dp">
 
                 <!--TABLE FOR MAIN GAME FIELD-->
                 <TableLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="#616161">
+                    android:layout_height="match_parent">
 
                     <!--ROW NUMBERE 1-->
                     <TableRow
@@ -238,15 +236,15 @@
                     android:gravity="center"
                     android:textSize="14sp"
                     android:textStyle="bold"
-                    android:background="@color/colorAccent"/>
+                    android:background="@color/colorGameAndRound_light"
+                    android:elevation="32dp"/>
                <!--
                Current Game Round Display Box
                -->
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="2"
-                    android:background="@color/colorPrimaryDark">
+                    android:layout_weight="2">
                     <TextView
                         android:id="@+id/textviewgameresultmessage"
                         android:layout_width="match_parent"
@@ -254,14 +252,15 @@
                         android:gravity="center"
                         android:textSize="24sp"
                         android:textStyle="bold"
-                        android:background="@color/colorPrimaryDark"/>
+                        android:textColor="@color/colorText_light"/>
 
                     <Button
                         android:id="@+id/buttonstart"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:text="START"
-                        android:layout_centerInParent="true"/>
+                        android:layout_centerInParent="true"
+                        android:background="@drawable/button_round"/>
 
                     <ImageButton
                         android:id="@+id/buttonnext"

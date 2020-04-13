@@ -1,34 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#424242</color>
-    <color name="colorAccent">#BDBDBD</color>
+    <color name="colorPrimary">#FF6D00</color>
+    <color name="colorPrimaryDark">#B71C1C</color>
+    <color name="colorAccent">#FFCC80</color>
 
-    <color name="colorSettingPrimary">#2962FF</color>
-    <color name="colorSettingPrimaryDark">#0D47A1</color>
-    <color name="colorSettingAccent">#01579B</color>
+    <color name="colorSettingPrimary">#FF6D00</color>
+    <color name="colorSettingPrimaryDark">#B71C1C</color>
+    <color name="colorSettingAccent">#FF6D00</color>
+    <color name="colorSettingPreferenceTitles">#FF9800</color>
+    <color name="colorSettingPreferenceSummary">#FFCC80</color>
+    <color name="colorSettingPreferenceRipple">#FFCC80</color>
 
-    <color name="colorScoreTableRow_Background">#424242</color>
-    <color name="colorScore_TextColor">#212121</color>
-    <color name="colorScore_BackgroundColor">#757575</color>
-
-    <color name="colorPlayerTableRow_Background">#424242</color>
-    <color name="colorPlayer_TextColor">#E0E0E0</color>
-    <color name="colorPlayerPlayingTextView_Background">#424242</color>
-    <color name="colorPlayerIdleTextView_Background">#757575</color>
-    <color name="colorPlayerSpinner_Background">#757575</color>
-    <color name="colorPlayerSettingsButtonColor">#424242</color>
-
-    <color name="colorGameFieldLinearLayout_Background">#424242</color>
-    <color name="colorGameFieldTableLayout_Background">#616161</color>
-    <color name="colorGameFieldCells_Background">#BDBDBD</color>
-
-    <color name="colorGameRoundTextView_Background">#BDBDBD</color>
-    <color name="colorGameRoundTextColor">#212121</color>
-
-    <color name="colorGameRelativeLayout_Background">#424242</color>
-    <color name="colorGameResultTextView_Backgroround">#424242</color>
-    <color name="colorGameResultTextColor">#212121</color>
-
-
+    <color name="colorEntireBackground_light">#FFCC80</color> //entire background
+    <color name="colorScoreAndPlayer_light">#FF9800</color> //score annd player board
+    <color name="colorGameAndRound_light">#FF6D00</color> //game and round board
+    <color name="colorButtonStart_light">#B71C1C</color> //button start
+    <color name="colorButtons_light">#FAFAFA</color> //other buttons
+    <color name="colorText_light">#B71C1C</color> //text
 </resources>

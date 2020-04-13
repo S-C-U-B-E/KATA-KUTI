@@ -4,8 +4,10 @@
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorPrimaryDark">@color/colorAccent</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorControlNormal">@color/colorPrimaryDark</item>
+        <item name="android:textColorPrimary">@color/colorPrimaryDark</item>
         <item name="preferenceTheme">@style/PreferenceThemeOverlay</item>
     </style>
 
@@ -13,7 +15,10 @@
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorSettingPrimary</item>
         <item name="colorPrimaryDark">@color/colorSettingPrimaryDark</item>
-        <item name="colorAccent">@color/colorSettingAccent</item>
+        <item name="colorAccent">@color/colorSettingAccent</item> //Prefernce catagory names, widgets Ture state
+        <item name="android:textColor">@color/colorSettingPreferenceTitles</item> //Preference Titles
+        <item name="android:textColorSecondary">@color/colorSettingPreferenceSummary</item>// Preference Summary Text color
+        <item name="colorControlHighlight">@color/colorSettingPreferenceRipple</item>
         <item name="preferenceTheme">@style/PreferenceThemeOverlay</item>
     </style>
     
@@ -21,7 +26,7 @@
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_weight">1</item>
         <item name="android:layout_height">match_parent</item>
-        <item name="android:background">@color/colorAccent</item>
+        <item name="android:background">@color/colorGameAndRound_light</item>
     </style>
 
 </resources>
