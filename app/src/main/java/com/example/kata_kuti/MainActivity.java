@@ -169,19 +169,21 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         scorePlayerTwo = findViewById(R.id.textviewscore2);
         scorePlayerOneTitle = findViewById(R.id.textviewplayer1);
         scorePlayerTwoTitle = findViewById(R.id.textviewplayer2);
-        //spinner = findViewById(R.id.rounds);
-        //settingsButton = findViewById(R.id.buttonsettings);
+        spinner = findViewById(R.id.rounds);
+        settingsButton = findViewById(R.id.buttonsettings);
         gameRound = findViewById(R.id.textviewgameroundmessage);
         gameresult = findViewById(R.id.textviewgameresultmessage);
-        //start = findViewById(R.id.buttonstart);
-        //restart = findViewById(R.id.buttonrestart);
-        //next = findViewById(R.id.buttonnext);
+        start = findViewById(R.id.buttonstart);
+        restart = findViewById(R.id.buttonrestart);
+        next = findViewById(R.id.buttonnext);
 
 
         /*
          * all cells found by Ids
          * */
         setupCellsById();
+
+        mChoiceList = (Spinner) findViewById(R.id.rounds);
 
         if(mThemeChoice.equals("default")){
             //setTheme(R.style.AppTheme);
@@ -231,15 +233,12 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         mButtonSettings = findViewById(R.id.buttonsettings);
 
 
-        mChoiceList = (Spinner) findViewById(R.id.rounds);
-
         cellMap = new SparseIntArray();
         winningSet = new ArrayList<>();
 
         initialSetupBeforeEveryMatch(); // Clearing The scores rounds and text values i.e. setting the game field fresh
                                         // for every individual Match.
-        setupSpinner();
-
+        /*setupSpinner();*/
 
         /*
         * All the possibles set of cells to win
@@ -393,12 +392,12 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
     /*
      * Function name is self-explanatory of it's purpose
      * */
-    private void setupSpinner(){
+    private void setupSpinner(int spinnerLayoutId){
         // Created an ArrayAdapter using the string array and a default mChoiceList layout
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.rounds_array,R.layout.spinner_item);
+                R.array.rounds_array,spinnerLayoutId);
         // the layout to use when the list of choices appears
-        adapter.setDropDownViewResource(R.layout.spinner_item);
+        adapter.setDropDownViewResource(spinnerLayoutId);
         // the adapter to the mChoiceList XD
         mChoiceList.setAdapter(adapter);
 
@@ -1089,7 +1088,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
     }
 
     public void setCustomColor(String theme){
-        if(mThemeChoice.equals("default")){
+        if(theme.equals("default")){
             parentLayoutBackground.setBackgroundColor(ContextCompat.getColor(MainActivity.this, R.color.colorEntireBackground_light));
             scorePlayerOne.setBackgroundResource(R.color.colorScoreAndPlayer_light);
             scorePlayerOne.setTextColor(getResources().getColor(R.color.colorText_light));
@@ -1102,9 +1101,16 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
             gameRound.setBackgroundResource(R.color.colorGameAndRound_light);
             gameRound.setTextColor(getResources().getColor(R.color.colorText_light));
             gameresult.setTextColor(getResources().getColor(R.color.colorText_light));
+            setupSpinner(R.layout.spinner_item);
+            spinner.setBackgroundResource(R.color.colorScoreAndPlayer_light);
+            settingsButton.setImageResource(R.drawable.ic_settings);
+            restart.setImageResource(R.drawable.restart_game);
+            next.setImageResource(R.drawable.next_round);
+            start.setBackgroundResource(R.drawable.button_round);
+
 
         }
-        else if(mThemeChoice.equals("blue")){
+        else if(theme.equals("blue")){
             parentLayoutBackground.setBackgroundColor(ContextCompat.getColor(MainActivity.this, R.color.colorEntireBackground_light));
             scorePlayerOne.setBackgroundResource(R.color.colorScoreAndPlayer_light);
             scorePlayerOne.setTextColor(getResources().getColor(R.color.colorText_light));
@@ -1117,8 +1123,15 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
             gameRound.setBackgroundResource(R.color.colorGameAndRound_light);
             gameRound.setTextColor(getResources().getColor(R.color.colorText_light));
             gameresult.setTextColor(getResources().getColor(R.color.colorText_light));
+            setupSpinner(R.layout.spinner_item);
+            spinner.setBackgroundResource(R.color.colorScoreAndPlayer_light);
+            settingsButton.setImageResource(R.drawable.ic_settings);
+            restart.setImageResource(R.drawable.restart_game);
+            next.setImageResource(R.drawable.next_round);
+            start.setBackgroundResource(R.drawable.button_round);
+
         }
-        else if(mThemeChoice.equals("red")){
+        else if(theme.equals("red")){
             parentLayoutBackground.setBackgroundColor(ContextCompat.getColor(MainActivity.this, R.color.colorEntireBackground_light));
             scorePlayerOne.setBackgroundResource(R.color.colorScoreAndPlayer_light);
             scorePlayerOne.setTextColor(getResources().getColor(R.color.colorText_light));
@@ -1131,8 +1144,15 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
             gameRound.setBackgroundResource(R.color.colorGameAndRound_light);
             gameRound.setTextColor(getResources().getColor(R.color.colorText_light));
             gameresult.setTextColor(getResources().getColor(R.color.colorText_light));
+            setupSpinner(R.layout.spinner_item);
+            spinner.setBackgroundResource(R.color.colorScoreAndPlayer_light);
+            settingsButton.setImageResource(R.drawable.ic_settings);
+            restart.setImageResource(R.drawable.restart_game);
+            next.setImageResource(R.drawable.next_round);
+            start.setBackgroundResource(R.drawable.button_round);
+
         }
-        else if(mThemeChoice.equals("lime")){
+        else if(theme.equals("lime")){
             parentLayoutBackground.setBackgroundColor(ContextCompat.getColor(MainActivity.this, R.color.colorEntireBackground_light));
             scorePlayerOne.setBackgroundResource(R.color.colorScoreAndPlayer_light);
             scorePlayerOne.setTextColor(getResources().getColor(R.color.colorText_light));
@@ -1145,8 +1165,15 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
             gameRound.setBackgroundResource(R.color.colorGameAndRound_light);
             gameRound.setTextColor(getResources().getColor(R.color.colorText_light));
             gameresult.setTextColor(getResources().getColor(R.color.colorText_light));
+            setupSpinner(R.layout.spinner_item);
+            spinner.setBackgroundResource(R.color.colorScoreAndPlayer_light);
+            settingsButton.setImageResource(R.drawable.ic_settings);
+            restart.setImageResource(R.drawable.restart_game);
+            next.setImageResource(R.drawable.next_round);
+            start.setBackgroundResource(R.drawable.button_round);
+
         }
-        else if(mThemeChoice.equals("green")){
+        else if(theme.equals("green")){
             parentLayoutBackground.setBackgroundColor(ContextCompat.getColor(MainActivity.this, R.color.colorEntireBackground_light));
             scorePlayerOne.setBackgroundResource(R.color.colorScoreAndPlayer_light);
             scorePlayerOne.setTextColor(getResources().getColor(R.color.colorText_light));
@@ -1159,6 +1186,13 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
             gameRound.setBackgroundResource(R.color.colorGameAndRound_light);
             gameRound.setTextColor(getResources().getColor(R.color.colorText_light));
             gameresult.setTextColor(getResources().getColor(R.color.colorText_light));
+            setupSpinner(R.layout.spinner_item);
+            spinner.setBackgroundResource(R.color.colorScoreAndPlayer_light);
+            settingsButton.setImageResource(R.drawable.ic_settings);
+            restart.setImageResource(R.drawable.restart_game);
+            next.setImageResource(R.drawable.next_round);
+            start.setBackgroundResource(R.drawable.button_round);
+
         }
     }
 

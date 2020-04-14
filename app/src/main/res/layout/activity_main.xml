@@ -77,7 +77,6 @@
                                     android:gravity="center"
                                     android:textAlignment="center"
                                     android:autofillHints="Round"
-                                    android:background="@color/colorScoreAndPlayer_light"
                                     android:layout_marginRight="4dp"
                                     android:layout_marginEnd="4dp"
                                     android:layout_marginTop="4dp"/>
@@ -101,7 +100,6 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:background="@android:color/transparent"
-                android:src="@drawable/ic_settings"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"
@@ -250,15 +248,12 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:text="START"
-                        android:layout_centerInParent="true"
-                        android:background="@drawable/button_round"
-                        android:backgroundTint="@color/colorButtonStart_light"/>
+                        android:layout_centerInParent="true"/>
 
                     <ImageButton
                         android:id="@+id/buttonnext"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:src="@drawable/next_round"
                         android:layout_alignParentEnd="true"
                         android:layout_alignParentRight="true"
                         android:background="@android:color/transparent"/>
@@ -267,7 +262,6 @@
                         android:id="@+id/buttonrestart"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:src="@drawable/restart_game"
                         android:layout_alignParentStart="true"
                         android:layout_alignParentLeft="true"
                         android:background="@android:color/transparent"
