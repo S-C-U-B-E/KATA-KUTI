@@ -1,24 +1,24 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="AppTheme_fire" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorAccent</item>
-        <item name="colorAccent">@color/colorAccent</item>
-        <item name="colorControlNormal">@color/colorPrimaryDark</item>
-        <item name="android:textColorPrimary">@color/colorPrimaryDark</item>
+        <item name="colorPrimary">@color/colorPrimary_fire</item>
+        <item name="colorPrimaryDark">@color/colorAccent_fire</item>
+        <item name="colorAccent">@color/colorAccent_fire</item>
+        <item name="colorControlNormal">@color/colorPrimaryDark_fire</item>
+        <item name="android:textColorPrimary">@color/colorPrimaryDark_fire</item>
         <item name="preferenceTheme">@style/PreferenceThemeOverlay</item>
     </style>
 
-    <style name="SettingAppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="SettingAppTheme_fire" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorSettingPrimary</item>
-        <item name="colorPrimaryDark">@color/colorSettingPrimaryDark</item>
-        <item name="colorAccent">@color/colorSettingAccent</item> //Prefernce catagory names, widgets Ture state
-        <item name="android:textColor">@color/colorSettingPreferenceTitles</item> //Preference Titles
-        <item name="android:textColorSecondary">@color/colorSettingPreferenceSummary</item>// Preference Summary Text color
-        <item name="colorControlHighlight">@color/colorSettingPreferenceRipple</item>
+        <item name="colorPrimary">@color/colorSettingPrimary_fire</item>
+        <item name="colorPrimaryDark">@color/colorSettingPrimaryDark_fire</item>
+        <item name="colorAccent">@color/colorSettingAccent_fire</item> //Prefernce catagory names, widgets Ture state
+        <item name="android:textColor">@color/colorSettingPreferenceTitles_fire</item> //Preference Titles
+        <item name="android:textColorSecondary">@color/colorSettingPreferenceSummary_fire</item>// Preference Summary Text color
+        <item name="colorControlHighlight">@color/colorSettingPreferenceRipple_fire</item>
         <item name="preferenceTheme">@style/PreferenceThemeOverlay</item>
     </style>
     
@@ -26,7 +26,6 @@
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_weight">1</item>
         <item name="android:layout_height">match_parent</item>
-        <item name="android:background">@color/colorGameAndRound_light</item>
     </style>
 
 </resources>

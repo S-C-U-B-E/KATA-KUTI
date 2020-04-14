@@ -5,10 +5,10 @@
     <stroke
         android:drawable="@android:color/transparent"
         android:width="2dp"
-        android:color="@color/colorButtonStart_light" >
+        android:color="@color/colorButtonStart_fire" >
     </stroke>
 
-    <solid android:color="@color/colorButtonStart_light" />
+    <solid android:color="@color/colorButtonStart_fire" />
 
     <corners
         android:bottomLeftRadius="0dp"

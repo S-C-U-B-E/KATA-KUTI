@@ -64,7 +64,7 @@ public class NotificationUtils {
         PendingIntent actionIntent = PendingIntent.getBroadcast(context,0,broadCastIntent,PendingIntent.FLAG_UPDATE_CURRENT);
 
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(context, MATCH_IN_PROGRESS_NOTIFICATION_CHANNEL_ID)
-                .setColor(ContextCompat.getColor(context, R.color.colorPrimary))
+                .setColor(ContextCompat.getColor(context, R.color.colorPrimary_fire))
                 .setSmallIcon(R.drawable.ic_launcher_background)
                 .setContentTitle("Kata Kuti")
                 .setContentText("Match in Progress..")

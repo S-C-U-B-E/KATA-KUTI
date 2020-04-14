@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:textSize="20sp"
     android:gravity="center"
-    android:textColor="@color/colorPrimaryDark"
-    android:background="@color/colorScoreAndPlayer_light"
+    android:textColor="@color/colorPrimaryDark_fire"
+    android:background="@color/colorScoreAndPlayer_fire"
     android:padding="5dip"
     />

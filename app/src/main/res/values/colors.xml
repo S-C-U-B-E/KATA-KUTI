@@ -1,20 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#FF6D00</color>
-    <color name="colorPrimaryDark">#B71C1C</color>
-    <color name="colorAccent">#FFCC80</color>
+    <color name="colorPrimary_fire">#FF6D00</color>
+    <color name="colorPrimaryDark_fire">#B71C1C</color>
+    <color name="colorAccent_fire">#FFCC80</color>
 
-    <color name="colorSettingPrimary">#FF6D00</color>
-    <color name="colorSettingPrimaryDark">#B71C1C</color>
-    <color name="colorSettingAccent">#FF6D00</color>
-    <color name="colorSettingPreferenceTitles">#FF9800</color>
-    <color name="colorSettingPreferenceSummary">#FFCC80</color>
-    <color name="colorSettingPreferenceRipple">#FFCC80</color>
+    <color name="colorSettingPrimary_fire">#FF6D00</color>
+    <color name="colorSettingPrimaryDark_fire">#B71C1C</color>
+    <color name="colorSettingAccent_fire">#FF6D00</color>
+    <color name="colorSettingPreferenceTitles_fire">#FF9800</color>
+    <color name="colorSettingPreferenceSummary_fire">#FFCC80</color>
+    <color name="colorSettingPreferenceRipple_fire">#FFCC80</color>
 
-    <color name="colorEntireBackground_light">#FFCC80</color> //entire background
-    <color name="colorScoreAndPlayer_light">#FF9800</color> //score annd player board
-    <color name="colorGameAndRound_light">#FF6D00</color> //game and round board
-    <color name="colorButtonStart_light">#FF9800</color> //button start
-    <color name="colorButtons_light">#FAFAFA</color> //other buttons
-    <color name="colorText_light">#B71C1C</color> //text
+    <color name="colorEntireBackground_fire">#FFCC80</color> //entire background
+    <color name="colorScoreAndPlayer_fire">#FF9800</color> //score annd player board
+    <color name="colorGameAndRound_fire">#FF6D00</color> //game and round board
+    <color name="colorButtonStart_fire">#FF9800</color> //button start
+    <color name="colorButtons_fire">#FAFAFA</color> //other buttons
+    <color name="colorText_fire">#B71C1C</color> //text
+
+
+    <color name="colorPrimary_water">#FF6D00</color>
+    <color name="colorPrimaryDark_water">#B71C1C</color>
+    <color name="colorAccent_water">#FFCC80</color>
+
+    <color name="colorSettingPrimary_water">#FF6D00</color>
+    <color name="colorSettingPrimaryDark_water">#B71C1C</color>
+    <color name="colorSettingAccent_water">#FF6D00</color>
+    <color name="colorSettingPreferenceTitlesv_water">#FF9800</color>
+    <color name="colorSettingPreferenceSummary_water">#FFCC80</color>
+    <color name="colorSettingPreferenceRipple_water">#FFCC80</color>
+
+    <color name="colorEntireBackground_water">#FFCC80</color> //entire background
+    <color name="colorScoreAndPlayer_water">#FF9800</color> //score annd player board
+    <color name="colorGameAndRound_water">#FF6D00</color> //game and round board
+    <color name="colorButtonStart_water">#FF9800</color> //button start
+    <color name="colorButtons_water">#FAFAFA</color> //other buttons
+    <color name="colorText_water">#B71C1C</color> //text
+
 </resources>
