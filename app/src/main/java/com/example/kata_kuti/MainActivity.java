@@ -1,6 +1,7 @@
 package com.example.kata_kuti;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.preference.PreferenceManager;
 
 import android.app.AlertDialog;
@@ -24,6 +25,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TableLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -98,6 +100,18 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
     public static boolean isNotificationVibrationAllowed;
 
 
+    /*
+    * Variables specially declared and set only for THEME CHANGE purpose
+    * */
+    String mThemeChoice;
+    TableLayout parentLayoutBackground;
+    TextView scorePlayerOne,scorePlayerTwo,scorePlayerOneTitle,scorePlayerTwoTitle,gameRound,gameresult;
+    Spinner spinner;
+    ImageButton settingsButton,restart,next;
+    Button start;
+    int playerPlaying,playerIdle;
+
+
     TextView gameResultMessageBox,gameRoundMessageBox,gameScorePlayer1,gameScorePlayer2,textViewPlayer1,textViewPlayer2;
      public ImageView cell00,cell01,cell02,cell10,cell11,cell12,cell20,cell21,cell22;
 
@@ -134,7 +148,57 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        setupSharedPreferences();
+        if(mThemeChoice.equals("default")){
+            setTheme(R.style.AppTheme);
+        }else if(mThemeChoice.equals("red")){
+            setTheme(R.style.AppTheme);
+        }else if(mThemeChoice.equals("lime")){
+            setTheme(R.style.AppTheme);
+        }else if(mThemeChoice.equals("green")){
+            setTheme(R.style.AppTheme);
+        }else if(mThemeChoice.equals("blue")){
+            setTheme(R.style.AppTheme);
+        }
+
         setContentView(R.layout.activity_main);
+
+        parentLayoutBackground = findViewById(R.id.parentlayout);
+        scorePlayerOne = findViewById(R.id.textviewscore1);
+        scorePlayerTwo = findViewById(R.id.textviewscore2);
+        scorePlayerOneTitle = findViewById(R.id.textviewplayer1);
+        scorePlayerTwoTitle = findViewById(R.id.textviewplayer2);
+        //spinner = findViewById(R.id.rounds);
+        //settingsButton = findViewById(R.id.buttonsettings);
+        gameRound = findViewById(R.id.textviewgameroundmessage);
+        gameresult = findViewById(R.id.textviewgameresultmessage);
+        //start = findViewById(R.id.buttonstart);
+        //restart = findViewById(R.id.buttonrestart);
+        //next = findViewById(R.id.buttonnext);
+
+
+        /*
+         * all cells found by Ids
+         * */
+        setupCellsById();
+
+        if(mThemeChoice.equals("default")){
+            //setTheme(R.style.AppTheme);
+            setCustomColor(mThemeChoice);
+        }else if(mThemeChoice.equals("red")){
+            //setTheme(R.style.OverlayThemeRed);
+            setCustomColor(mThemeChoice);
+        }else if(mThemeChoice.equals("lime")){
+            //setTheme(R.style.OverlayThemeLime);
+            setCustomColor(mThemeChoice);
+        }else if(mThemeChoice.equals("green")){
+            //setTheme(R.style.OverlayThemeGreen);
+            setCustomColor(mThemeChoice);
+        }else if(mThemeChoice.equals("blue")){
+            //setTheme(R.style.OverlayThemeBlue);
+            setCustomColor(mThemeChoice);
+        }
 
         isSettingsScreenOpened = false;
         mWasOnStopCalled = false;
@@ -147,11 +211,11 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
 
         playAudioBeforeMatchStart();
 
-
-        textViewPlayer1 = findViewById(R.id.textviewplayer1);
-        textViewPlayer1.setBackgroundResource(R.color.colorScoreAndPlayer_light);// SET TO INITIAL COLOR DENOTING 1's TURN AT THE BEGINNING OF GAME
         textViewPlayer2 = findViewById(R.id.textviewplayer2);
-        textViewPlayer2.setBackgroundResource(R.color.colorScoreAndPlayer_light);// SET TO INITIAL COLOR DENOTING 1's TURN AT THE BEGINNING OF GAME
+        textViewPlayer1 = findViewById(R.id.textviewplayer1);
+
+        textViewPlayer1.setBackgroundResource(playerIdle);// SET TO INITIAL COLOR DENOTING 1's TURN AT THE BEGINNING OF GAME
+        textViewPlayer2.setBackgroundResource(playerIdle);// SET TO INITIAL COLOR DENOTING 1's TURN AT THE BEGINNING OF GAME
 
 
         gameResultMessageBox = findViewById(R.id.textviewgameresultmessage);
@@ -241,9 +305,14 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         isNotificationSoundAllowed = sharedPreferences.getBoolean("sound",true);
         isNotificationVibrationAllowed = sharedPreferences.getBoolean("vibration",true);
 
+        loadColorFromPreferences(sharedPreferences);
+
         sharedPreferences.registerOnSharedPreferenceChangeListener(MainActivity.this);
     }
 
+    void loadColorFromPreferences(SharedPreferences sharedPreferences){
+        mThemeChoice = sharedPreferences.getString("theme","default");
+    }
 
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String s) {
@@ -257,6 +326,8 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
             isNotificationSoundAllowed = sharedPreferences.getBoolean("sound",true);
         }else if(s.equals("vibration")){
             isNotificationVibrationAllowed = sharedPreferences.getBoolean("vibration",true);
+        }else if(s.equals("theme")){
+            loadColorFromPreferences(sharedPreferences);
         }
     }
 
@@ -513,8 +584,6 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
     private void gamePlay(View view){
 
         ImageView imageView = findViewById(view.getId());
-         textViewPlayer1 = findViewById(R.id.textviewplayer1);
-         textViewPlayer2 = findViewById(R.id.textviewplayer2);
 
         if( !listOfCellsAlreadySet.contains(view.getId()) && !foundWinner){ // To check if the cell has been clicked already or not.
             clickCount++;
@@ -524,13 +593,13 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
             if(clickCount%2 == 0){
                 Player2.add(cellMap.get(view.getId()));
                 imageView.setImageResource(R.drawable.kuti);
-                textViewPlayer2.setBackgroundResource(R.color.colorScoreAndPlayer_light); // SET TO scorerowfield color DENOTING 2 HAS GIVEN ITS CHOICE
-                textViewPlayer1.setBackgroundResource(R.color.colorEntireBackground_light);/*SET TO gameplayfield color DENOTING 1's TURN NEXT*/ }
+                textViewPlayer2.setBackgroundResource(playerIdle); // SET TO scorerowfield color DENOTING 2 HAS GIVEN ITS CHOICE
+                textViewPlayer1.setBackgroundResource(playerPlaying);/*SET TO gameplayfield color DENOTING 1's TURN NEXT*/ }
             else{
                 Player1.add(cellMap.get(view.getId()));
                 imageView.setImageResource(R.drawable.kata);
-                textViewPlayer1.setBackgroundResource(R.color.colorScoreAndPlayer_light);// SET TO scorerowfield color DENOTING 1 HAS GIVEN ITS CHOICE
-                textViewPlayer2.setBackgroundResource(R.color.colorEntireBackground_light);/*SET TO gameplayfield color DENOTING 2's TURN NEXT*/}
+                textViewPlayer1.setBackgroundResource(playerIdle);// SET TO scorerowfield color DENOTING 1 HAS GIVEN ITS CHOICE
+                textViewPlayer2.setBackgroundResource(playerPlaying);/*SET TO gameplayfield color DENOTING 2's TURN NEXT*/}
 
             listOfCellsAlreadySet.add(view.getId()); // Once Clicked the value of the cell can't be changed
 
@@ -540,13 +609,13 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
                 {
                     mScorePlayer2++;
                     gameResultMessageBox.setText("PLAYER 2 WON");
-                    textViewPlayer2.setBackgroundResource(R.color.colorScoreAndPlayer_light);
-                    textViewPlayer1.setBackgroundResource(R.color.colorScoreAndPlayer_light);
+                    textViewPlayer2.setBackgroundResource(playerIdle);
+                    textViewPlayer1.setBackgroundResource(playerIdle);
                 }else {
                     mScorePlayer1++;
                     gameResultMessageBox.setText("PLAYER 1 WON");
-                    textViewPlayer2.setBackgroundResource(R.color.colorScoreAndPlayer_light);
-                    textViewPlayer1.setBackgroundResource(R.color.colorScoreAndPlayer_light);
+                    textViewPlayer2.setBackgroundResource(playerIdle);
+                    textViewPlayer1.setBackgroundResource(playerIdle);
                     }
                 if(mCurrentRound<mRound){
                     mButtonNext.setVisibility(View.VISIBLE);
@@ -567,7 +636,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
                  * */
                 //Toast.makeText(MainActivity.this,"It's a Tie",Toast.LENGTH_SHORT).show();
                 gameResultMessageBox.setText("IT'S A TIE");
-                textViewPlayer2.setBackgroundResource(R.color.colorScoreAndPlayer_light);textViewPlayer1.setBackgroundResource(R.color.colorScoreAndPlayer_light);
+                textViewPlayer2.setBackgroundResource(playerIdle);textViewPlayer1.setBackgroundResource(playerIdle);
                 mScorePlayer2+=0;//No increment of score on tie
                 mScorePlayer1+=0;//No increment of score on tie
                 if(mCurrentRound<mRound){
@@ -598,10 +667,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         playAudioAfterMatchStart();
         refreshTheCellsForNextRound();
 
-        TextView textViewGameRoundMessage;
-        textViewPlayer1 = findViewById(R.id.textviewplayer1);
-        textViewPlayer1.setBackgroundResource(R.color.colorEntireBackground_light);// SET TO INITIAL COLOR DENOTING 1's TURN AT THE BEGINNING OF GAME
-        textViewGameRoundMessage = findViewById(R.id.textviewgameroundmessage);
+        textViewPlayer1.setBackgroundResource(playerPlaying);// SET TO INITIAL COLOR DENOTING 1's TURN AT THE BEGINNING OF GAME
 
         mChoiceList.setEnabled(false);
 
@@ -628,7 +694,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
             gameResultMessageBox.setText("");
 
             createGameRoundMessage(mCurrentRound);
-            textViewGameRoundMessage.setText(mGameRoundMessage);
+            gameRoundMessageBox.setText(mGameRoundMessage);
     }
 
     /*
@@ -636,10 +702,8 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
     * */
     private void restartGame(){
 
-        textViewPlayer1 = findViewById(R.id.textviewplayer1);
-        textViewPlayer2 = findViewById(R.id.textviewplayer2);
-        textViewPlayer2.setBackgroundResource(R.color.colorScoreAndPlayer_light);
-        textViewPlayer1.setBackgroundResource(R.color.colorScoreAndPlayer_light);
+        textViewPlayer2.setBackgroundResource(playerIdle);
+        textViewPlayer1.setBackgroundResource(playerIdle);
 
         initialSetupBeforeEveryMatch();
         refreshTheCellsForNextRound();
@@ -1022,6 +1086,80 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         myAnim.setInterpolator(interpolator);
 
         view.startAnimation(myAnim);
+    }
+
+    public void setCustomColor(String theme){
+        if(mThemeChoice.equals("default")){
+            parentLayoutBackground.setBackgroundColor(ContextCompat.getColor(MainActivity.this, R.color.colorEntireBackground_light));
+            scorePlayerOne.setBackgroundResource(R.color.colorScoreAndPlayer_light);
+            scorePlayerOne.setTextColor(getResources().getColor(R.color.colorText_light));
+            scorePlayerTwo.setBackgroundResource(R.color.colorScoreAndPlayer_light);
+            scorePlayerTwo.setTextColor(getResources().getColor(R.color.colorText_light));
+            scorePlayerOneTitle.setTextColor(getResources().getColor(R.color.colorText_light));;
+            scorePlayerTwoTitle.setTextColor(getResources().getColor(R.color.colorText_light));;
+            playerIdle = R.color.colorScoreAndPlayer_light;
+            playerPlaying = R.color.colorEntireBackground_light;
+            gameRound.setBackgroundResource(R.color.colorGameAndRound_light);
+            gameRound.setTextColor(getResources().getColor(R.color.colorText_light));
+            gameresult.setTextColor(getResources().getColor(R.color.colorText_light));
+
+        }
+        else if(mThemeChoice.equals("blue")){
+            parentLayoutBackground.setBackgroundColor(ContextCompat.getColor(MainActivity.this, R.color.colorEntireBackground_light));
+            scorePlayerOne.setBackgroundResource(R.color.colorScoreAndPlayer_light);
+            scorePlayerOne.setTextColor(getResources().getColor(R.color.colorText_light));
+            scorePlayerTwo.setBackgroundResource(R.color.colorScoreAndPlayer_light);
+            scorePlayerTwo.setTextColor(getResources().getColor(R.color.colorText_light));
+            scorePlayerOneTitle.setTextColor(getResources().getColor(R.color.colorText_light));;
+            scorePlayerTwoTitle.setTextColor(getResources().getColor(R.color.colorText_light));;
+            playerIdle = R.color.colorScoreAndPlayer_light;
+            playerPlaying = R.color.colorEntireBackground_light;
+            gameRound.setBackgroundResource(R.color.colorGameAndRound_light);
+            gameRound.setTextColor(getResources().getColor(R.color.colorText_light));
+            gameresult.setTextColor(getResources().getColor(R.color.colorText_light));
+        }
+        else if(mThemeChoice.equals("red")){
+            parentLayoutBackground.setBackgroundColor(ContextCompat.getColor(MainActivity.this, R.color.colorEntireBackground_light));
+            scorePlayerOne.setBackgroundResource(R.color.colorScoreAndPlayer_light);
+            scorePlayerOne.setTextColor(getResources().getColor(R.color.colorText_light));
+            scorePlayerTwo.setBackgroundResource(R.color.colorScoreAndPlayer_light);
+            scorePlayerTwo.setTextColor(getResources().getColor(R.color.colorText_light));
+            scorePlayerOneTitle.setTextColor(getResources().getColor(R.color.colorText_light));;
+            scorePlayerTwoTitle.setTextColor(getResources().getColor(R.color.colorText_light));;
+            playerIdle = R.color.colorScoreAndPlayer_light;
+            playerPlaying = R.color.colorEntireBackground_light;
+            gameRound.setBackgroundResource(R.color.colorGameAndRound_light);
+            gameRound.setTextColor(getResources().getColor(R.color.colorText_light));
+            gameresult.setTextColor(getResources().getColor(R.color.colorText_light));
+        }
+        else if(mThemeChoice.equals("lime")){
+            parentLayoutBackground.setBackgroundColor(ContextCompat.getColor(MainActivity.this, R.color.colorEntireBackground_light));
+            scorePlayerOne.setBackgroundResource(R.color.colorScoreAndPlayer_light);
+            scorePlayerOne.setTextColor(getResources().getColor(R.color.colorText_light));
+            scorePlayerTwo.setBackgroundResource(R.color.colorScoreAndPlayer_light);
+            scorePlayerTwo.setTextColor(getResources().getColor(R.color.colorText_light));
+            scorePlayerOneTitle.setTextColor(getResources().getColor(R.color.colorText_light));;
+            scorePlayerTwoTitle.setTextColor(getResources().getColor(R.color.colorText_light));;
+            playerIdle = R.color.colorScoreAndPlayer_light;
+            playerPlaying = R.color.colorEntireBackground_light;
+            gameRound.setBackgroundResource(R.color.colorGameAndRound_light);
+            gameRound.setTextColor(getResources().getColor(R.color.colorText_light));
+            gameresult.setTextColor(getResources().getColor(R.color.colorText_light));
+        }
+        else if(mThemeChoice.equals("green")){
+            parentLayoutBackground.setBackgroundColor(ContextCompat.getColor(MainActivity.this, R.color.colorEntireBackground_light));
+            scorePlayerOne.setBackgroundResource(R.color.colorScoreAndPlayer_light);
+            scorePlayerOne.setTextColor(getResources().getColor(R.color.colorText_light));
+            scorePlayerTwo.setBackgroundResource(R.color.colorScoreAndPlayer_light);
+            scorePlayerTwo.setTextColor(getResources().getColor(R.color.colorText_light));
+            scorePlayerOneTitle.setTextColor(getResources().getColor(R.color.colorText_light));;
+            scorePlayerTwoTitle.setTextColor(getResources().getColor(R.color.colorText_light));;
+            playerIdle = R.color.colorScoreAndPlayer_light;
+            playerPlaying = R.color.colorEntireBackground_light;
+            gameRound.setBackgroundResource(R.color.colorGameAndRound_light);
+            gameRound.setTextColor(getResources().getColor(R.color.colorText_light));
+            gameresult.setTextColor(getResources().getColor(R.color.colorText_light));
+        }
     }
 
 }

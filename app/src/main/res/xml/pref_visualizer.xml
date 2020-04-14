@@ -2,7 +2,7 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <PreferenceCategory android:title="Music">
+    <PreferenceCategory android:title="Music" app:allowDividerAbove="true" app:allowDividerBelow="true">
         <CheckBoxPreference
             android:defaultValue="true"
             android:key="music"
@@ -20,7 +20,7 @@
             android:icon="@drawable/ic_applause_up"/>
     </PreferenceCategory>
 
-    <PreferenceCategory android:title="Notification">
+    <PreferenceCategory android:title="Notification" app:allowDividerBelow="true" app:allowDividerAbove="true">
         <CheckBoxPreference
             android:defaultValue="true"
             android:key="notification"
@@ -44,6 +44,21 @@
             android:summaryOff="Notification sound turned Off"
             android:title="Sound"
             android:icon="@drawable/ic_notification_sound"/>
+
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="Palate"
+        android:summary="NOTE: Re-launch the app to set the desired Theme!"
+        app:allowDividerAbove="true"
+        app:allowDividerBelow="true">
+
+        <ListPreference
+            android:defaultValue="default"
+            android:entries="@array/prefer_color_option_lables"
+            android:entryValues="@array/prefer_color_option_values"
+            android:key="theme"
+            android:title="Theme"
+            android:summary="Customize game theme!"/>
 
     </PreferenceCategory>
 

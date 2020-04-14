@@ -14,7 +14,7 @@
     <color name="colorEntireBackground_light">#FFCC80</color> //entire background
     <color name="colorScoreAndPlayer_light">#FF9800</color> //score annd player board
     <color name="colorGameAndRound_light">#FF6D00</color> //game and round board
-    <color name="colorButtonStart_light">#B71C1C</color> //button start
+    <color name="colorButtonStart_light">#FF9800</color> //button start
     <color name="colorButtons_light">#FAFAFA</color> //other buttons
     <color name="colorText_light">#B71C1C</color> //text
 </resources>

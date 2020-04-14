@@ -9,4 +9,20 @@ to provide users a choice of numbers of rounds tey want to play
         <item>"3"</item>
         <item>"4"</item>
     </string-array>
+
+    <array name="prefer_color_option_lables">
+        <item>"Default"</item>
+        <item>"Lime"</item>
+        <item>"Red"</item>
+        <item>"Green"</item>
+        <item>"Blue"</item>
+    </array>
+
+    <array name="prefer_color_option_values">
+        <item>"default"</item>
+        <item>"lime"</item>
+        <item>"red"</item>
+        <item>"green"</item>
+        <item>"blue"</item>
+    </array>
 </resources>
