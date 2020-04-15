@@ -93,7 +93,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
 
     private boolean isSettingsScreenOpened;
     private boolean isMusicAllowed;
-    private boolean isApplauseAllowewd;
+    private boolean isApplauseAllowed;
     private boolean isNotificationAllowed;
     public static boolean isNotificationSoundAllowed;
     public static boolean isNotificationVibrationAllowed;
@@ -281,7 +281,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
     private void setupSharedPreferences(){
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         isMusicAllowed = sharedPreferences.getBoolean("music",true);
-        isApplauseAllowewd = sharedPreferences.getBoolean("applause",true);
+        isApplauseAllowed = sharedPreferences.getBoolean("applause",true);
         isNotificationAllowed = sharedPreferences.getBoolean("notification",true);
         isNotificationSoundAllowed = sharedPreferences.getBoolean("sound",true);
         isNotificationVibrationAllowed = sharedPreferences.getBoolean("vibration",true);
@@ -300,7 +300,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         if(s.equals("music")){
             isMusicAllowed = sharedPreferences.getBoolean("music",true);
         }else if(s.equals("applause")){
-            isApplauseAllowewd = sharedPreferences.getBoolean("applause",true);
+            isApplauseAllowed = sharedPreferences.getBoolean("applause",true);
         }else if(s.equals("notification")){
             isNotificationAllowed = sharedPreferences.getBoolean("notification",true);
         }else if(s.equals("sound")){
@@ -334,6 +334,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         cell20 = findViewById(R.id.cell20);
         cell21 = findViewById(R.id.cell21);
         cell22 = findViewById(R.id.cell22);
+
     }
 
     /*
@@ -661,6 +662,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         refreshTheCellsForNextRound();
 
         textViewPlayer1.setBackgroundResource(playerPlaying);// SET TO INITIAL COLOR DENOTING 1's TURN AT THE BEGINNING OF GAME
+        scorePlayerOne.setBackgroundResource(scorePlayer_playing);
 
         mChoiceList.setEnabled(false);
 
@@ -832,7 +834,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
                 AudioManager.STREAM_MUSIC, AudioManager.AUDIOFOCUS_GAIN);
 
         if(result == AudioManager.AUDIOFOCUS_REQUEST_GRANTED){
-            if(isApplauseAllowewd){
+            if(isApplauseAllowed){
             if(mScorePlayer1!=mScorePlayer2)
             {
                 mMediaPlayer = MediaPlayer.create(MainActivity.this,R.raw.drum_roll_audio_clip);
@@ -890,6 +892,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
     * */
     private void playAudioBeforeMatchStart(){
 
+        if(isMusicAllowed){
         releaseMediaPlayer();
 
         int result = mAudioManager.requestAudioFocus(mOnAudioFocusChangeListener,
@@ -897,7 +900,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
 
         if (result == AudioManager.AUDIOFOCUS_REQUEST_GRANTED) {
 
-            if(isMusicAllowed){
+
             mMediaPlayer = MediaPlayer.create(MainActivity.this,R.raw.before_start);
             mMediaPlayer.setLooping(true);
             mMediaPlayer.start();}
@@ -909,6 +912,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
     * To play separate audio at every individual rounds
     * */
     private void playAudioAfterMatchStart(){
+        if(isMusicAllowed){
         releaseMediaPlayer();
 
         int result = mAudioManager.requestAudioFocus(mOnAudioFocusChangeListener,
@@ -916,7 +920,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
 
         if (result == AudioManager.AUDIOFOCUS_REQUEST_GRANTED) {
 
-            if(isMusicAllowed){
+
             int caseValue = mRound - mCurrentRound -1;
             //Toast.makeText(MainActivity.this, "mRound:"+mRound+" mCurrentR:"+mCurrentRound, Toast.LENGTH_SHORT).show();
             switch (caseValue){
@@ -950,6 +954,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
      * (i am to lazy to think more XD)
      * */
     private void playAudioAfterMatchStart(int mCurrentRound){
+        if(isMusicAllowed){
         releaseMediaPlayer();
 
         int result = mAudioManager.requestAudioFocus(mOnAudioFocusChangeListener,
@@ -957,7 +962,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
 
         if (result == AudioManager.AUDIOFOCUS_REQUEST_GRANTED) {
 
-            if(isMusicAllowed){
+
             int caseValue = mRound - mCurrentRound -1;
             //Toast.makeText(MainActivity.this, "mRound:"+mRound+" mCurrentR:"+mCurrentRound, Toast.LENGTH_SHORT).show();
             switch (caseValue){
@@ -996,6 +1001,13 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         }
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Toast.makeText(MainActivity.this,"onStart()",Toast.LENGTH_SHORT).show();
+
+    }
+
     /*
     * called onStop to release resources when app is closed
     * */
@@ -1008,7 +1020,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
 
         mAudioManager.abandonAudioFocus(mOnAudioFocusChangeListener);
 
-        //Toast.makeText(MainActivity.this,"onStop()",Toast.LENGTH_SHORT).show();
+        Toast.makeText(MainActivity.this,"onStop()",Toast.LENGTH_SHORT).show();
     }
 
     /*
@@ -1037,7 +1049,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
             }
         }
 
-        //Toast.makeText(MainActivity.this,"onResume()",Toast.LENGTH_SHORT).show();
+        Toast.makeText(MainActivity.this,"onResume()",Toast.LENGTH_SHORT).show();
 
 
         NotificationUtils.clearAllNotifications(MainActivity.this);
@@ -1046,7 +1058,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
     @Override
     protected void onRestart() {
         super.onRestart();
-        //Toast.makeText(MainActivity.this,"onPause()",Toast.LENGTH_SHORT).show();
+        Toast.makeText(MainActivity.this,"onRestart()",Toast.LENGTH_SHORT).show();
     }
 
     /*
@@ -1059,7 +1071,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         if(mIsMatchInProgress && isNotificationAllowed && !isSettingsScreenOpened){
         NotificationUtils.remindUserOfTheOnGoingMatch(MainActivity.this);}
 
-        //Toast.makeText(MainActivity.this,"onPause()",Toast.LENGTH_SHORT).show();
+        Toast.makeText(MainActivity.this,"onPause()",Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -1070,7 +1082,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
 
         NotificationUtils.clearAllNotifications(MainActivity.this);
 
-       //Toast.makeText(MainActivity.this,"onDestroy()",Toast.LENGTH_SHORT).show();
+       Toast.makeText(MainActivity.this,"onDestroy()",Toast.LENGTH_SHORT).show();
     }
 
     public void didTapButton(View view) {
@@ -1166,6 +1178,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
     }
 
     public void setCustomCellColor(int colorId){
+
         cell00.setBackgroundColor(ContextCompat.getColor(MainActivity.this, colorId));
         cell01.setBackgroundColor(ContextCompat.getColor(MainActivity.this, colorId));
         cell02.setBackgroundColor(ContextCompat.getColor(MainActivity.this, colorId));
