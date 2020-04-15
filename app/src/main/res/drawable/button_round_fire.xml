@@ -4,16 +4,21 @@
 
     <stroke
         android:drawable="@android:color/transparent"
-        android:width="2dp"
-        android:color="@color/colorButtonStart_fire" >
+        android:width="0dp"
+        android:color="@android:color/transparent" >
     </stroke>
 
-    <solid android:color="@color/colorButtonStart_fire" />
+    <!--<solid android:color="@color/colorButtonStart_fire" />-->
 
     <corners
         android:bottomLeftRadius="0dp"
         android:bottomRightRadius="0dp"
         android:topLeftRadius="100dp"
         android:topRightRadius="100dp" />
+
+    <gradient
+        android:endColor="@color/colorScoreAndPlayer_fire"
+        android:startColor="@color/colorGameAndRound_fire"
+        android:angle="90"/>
 
 </shape>

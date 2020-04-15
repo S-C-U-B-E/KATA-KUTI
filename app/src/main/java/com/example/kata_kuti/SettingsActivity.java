@@ -17,15 +17,12 @@ public class SettingsActivity extends AppCompatActivity {
 
         if(mThemeChoice.equals("fire")){
             setTheme(R.style.SettingAppTheme_fire);
-        }else if(mThemeChoice.equals("red")){
-            setTheme(R.style.AppTheme_fire);
-        }else if(mThemeChoice.equals("lime")){
-            setTheme(R.style.AppTheme_fire);
         }else if(mThemeChoice.equals("earth")){
             setTheme(R.style.SettingAppTheme_earth);
         }else if(mThemeChoice.equals("water")){
             setTheme(R.style.SettingAppTheme_water);
         }
+
         setContentView(R.layout.activity_settings);
         Toast.makeText(SettingsActivity.this,"stngs onCreate()",Toast.LENGTH_SHORT).show();
     }

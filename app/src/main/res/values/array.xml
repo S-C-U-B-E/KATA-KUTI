@@ -12,16 +12,12 @@ to provide users a choice of numbers of rounds tey want to play
 
     <array name="prefer_color_option_lables">
         <item>"Fire"</item>
-        <item>"Lime"</item>
-        <item>"Red"</item>
         <item>"Earth"</item>
         <item>"Water"</item>
     </array>
 
     <array name="prefer_color_option_values">
         <item>"fire"</item>
-        <item>"lime"</item>
-        <item>"red"</item>
         <item>"earth"</item>
         <item>"water"</item>
     </array>

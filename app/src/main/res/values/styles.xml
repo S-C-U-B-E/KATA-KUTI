@@ -15,7 +15,7 @@
     <style name="AppTheme_fire" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary_fire</item>
-        <item name="colorPrimaryDark">@color/colorAccent_fire</item>
+        <item name="colorPrimaryDark">@color/colorPrimary_fire</item>
         <item name="colorAccent">@color/colorAccent_fire</item>
         <item name="colorControlNormal">@color/colorPrimaryDark_fire</item>
         <item name="android:textColorPrimary">@color/colorPrimaryDark_fire</item>
@@ -41,7 +41,7 @@
     <style name="AppTheme_water" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary_water</item>
-        <item name="colorPrimaryDark">@color/colorAccent_water</item>
+        <item name="colorPrimaryDark">@color/colorGameAndRound_water</item>
         <item name="colorAccent">@color/colorAccent_water</item>
         <item name="colorControlNormal">@color/colorPrimaryDark_water</item>
         <item name="android:textColorPrimary">@color/colorPrimaryDark_water</item>
@@ -66,7 +66,7 @@
     <style name="AppTheme_earth" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary_earth</item>
-        <item name="colorPrimaryDark">@color/colorAccent_earth</item>
+        <item name="colorPrimaryDark">@color/colorGameAndRound_earth</item>
         <item name="colorAccent">@color/colorAccent_earth</item>
         <item name="colorControlNormal">@color/colorPrimaryDark_earth</item>
         <item name="android:textColorPrimary">@color/colorPrimaryDark_earth</item>
@@ -75,7 +75,7 @@
 
     <style name="SettingAppTheme_earth" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary_earth</item>
+        <item name="colorPrimary">@color/colorSettingAccent_earth</item>
         <item name="colorPrimaryDark">@color/colorSettingPrimaryDark_earth</item>
         <item name="colorAccent">@color/colorSettingAccent_earth</item> //Prefernce catagory names, widgets Ture state
         <item name="android:textColor">@color/colorSettingPreferenceTitles_earth</item> //Preference Titles
@@ -84,6 +84,5 @@
         <item name="android:tint">@color/colorPrimary_earth</item>
         <item name="preferenceTheme">@style/PreferenceThemeOverlay</item>
     </style>
-
 
 </resources>
