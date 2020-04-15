@@ -44,21 +44,21 @@
 
 <!--<<<<<<<<<<< EARTH STARTS HERE >>>>>>>>>>>>>>>>>-->
 
-    <!--<color name="colorPrimary_water">#FF6D00</color>
-    <color name="colorPrimaryDark_water">#B71C1C</color>
-    <color name="colorAccent_water">#FFCC80</color>
+    <color name="colorPrimary_earth">#37474F</color>
+    <color name="colorPrimaryDark_earth">#3E2723</color>
+    <color name="colorAccent_earth">#BCAAA4</color>
 
-    <color name="colorSettingPrimary_water">#FF6D00</color>
-    <color name="colorSettingPrimaryDark_water">#B71C1C</color>
-    <color name="colorSettingAccent_water">#FF6D00</color>
-    <color name="colorSettingPreferenceTitlesv_water">#FF9800</color>
-    <color name="colorSettingPreferenceSummary_water">#FFCC80</color>
-    <color name="colorSettingPreferenceRipple_water">#FFCC80</color>
+    <color name="colorSettingPrimary_earth">#607D8B</color>
+    <color name="colorSettingPrimaryDark_earth">#3E2723</color>
+    <color name="colorSettingAccent_earth">#607D8B</color>
+    <color name="colorSettingPreferenceTitles_earth">#795548</color>
+    <color name="colorSettingPreferenceSummary_earth">#BCAAA4</color>
+    <color name="colorSettingPreferenceRipple_earth">#BCAAA4</color>
 
-    <color name="colorEntireBackground_water">#FFCC80</color> //entire background
-    <color name="colorScoreAndPlayer_water">#FF9800</color> //score annd player board
-    <color name="colorGameAndRound_water">#FF6D00</color> //game and round board
-    <color name="colorButtonStart_water">#FF9800</color> //button start
-    <color name="colorButtons_water">#FAFAFA</color> //other buttons
-    <color name="colorText_water">#B71C1C</color> //text    -->
+    <color name="colorEntireBackground_earth">#BCAAA4</color> //entire background
+    <color name="colorScoreAndPlayer_earth">#795548</color> //score annd player board
+    <color name="colorGameAndRound_earth">#607D8B</color> //game and round board
+    <color name="colorButtonStart_earth">#795548</color> //button start
+    <color name="colorButtons_earth">#FAFAFA</color> //other buttons
+    <color name="colorText_earth">#3E2723</color> //text
 </resources>

@@ -14,7 +14,7 @@ to provide users a choice of numbers of rounds tey want to play
         <item>"Fire"</item>
         <item>"Lime"</item>
         <item>"Red"</item>
-        <item>"Green"</item>
+        <item>"Earth"</item>
         <item>"Water"</item>
     </array>
 
@@ -22,7 +22,7 @@ to provide users a choice of numbers of rounds tey want to play
         <item>"fire"</item>
         <item>"lime"</item>
         <item>"red"</item>
-        <item>"green"</item>
+        <item>"earth"</item>
         <item>"water"</item>
     </array>
 </resources>

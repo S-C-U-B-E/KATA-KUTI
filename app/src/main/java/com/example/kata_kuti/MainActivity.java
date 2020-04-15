@@ -155,8 +155,8 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
             setTheme(R.style.AppTheme_fire);
         }else if(mThemeChoice.equals("lime")){
             setTheme(R.style.AppTheme_fire);
-        }else if(mThemeChoice.equals("green")){
-            setTheme(R.style.AppTheme_fire);
+        }else if(mThemeChoice.equals("earth")){
+            setTheme(R.style.AppTheme_earth);
         }else if(mThemeChoice.equals("water")){
             setTheme(R.style.AppTheme_water);
         }
@@ -193,7 +193,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         }else if(mThemeChoice.equals("lime")){
             //setTheme(R.style.OverlayThemeLime);
             setCustomColor(mThemeChoice);
-        }else if(mThemeChoice.equals("green")){
+        }else if(mThemeChoice.equals("earth")){
             //setTheme(R.style.OverlayThemeGreen);
             setCustomColor(mThemeChoice);
         }else if(mThemeChoice.equals("water")){
@@ -1175,26 +1175,26 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
             setCustomCellColor(R.color.colorGameAndRound_fire);
 
         }
-        else if(theme.equals("green")){
-            parentLayoutBackground.setBackgroundColor(ContextCompat.getColor(MainActivity.this, R.color.colorEntireBackground_fire));
-            scorePlayerOne.setBackgroundResource(R.color.colorScoreAndPlayer_fire);
-            scorePlayerOne.setTextColor(getResources().getColor(R.color.colorText_fire));
-            scorePlayerTwo.setBackgroundResource(R.color.colorScoreAndPlayer_fire);
-            scorePlayerTwo.setTextColor(getResources().getColor(R.color.colorText_fire));
-            scorePlayerOneTitle.setTextColor(getResources().getColor(R.color.colorText_fire));;
-            scorePlayerTwoTitle.setTextColor(getResources().getColor(R.color.colorText_fire));;
-            playerIdle = R.color.colorScoreAndPlayer_fire;
-            playerPlaying = R.color.colorEntireBackground_fire;
-            gameRound.setBackgroundResource(R.color.colorGameAndRound_fire);
-            gameRound.setTextColor(getResources().getColor(R.color.colorText_fire));
-            gameresult.setTextColor(getResources().getColor(R.color.colorText_fire));
-            setupSpinner(R.layout.spinner_item_fire);
-            spinner.setBackgroundResource(R.color.colorScoreAndPlayer_fire);
-            settingsButton.setImageResource(R.drawable.ic_settings_fire);
-            restart.setImageResource(R.drawable.restart_game_fire);
-            next.setImageResource(R.drawable.next_round_fire);
-            start.setBackgroundResource(R.drawable.button_round_fire);
-            setCustomCellColor(R.color.colorGameAndRound_fire);
+        else if(theme.equals("earth")){
+            parentLayoutBackground.setBackgroundColor(ContextCompat.getColor(MainActivity.this, R.color.colorEntireBackground_earth));
+            scorePlayerOne.setBackgroundResource(R.color.colorScoreAndPlayer_earth);
+            scorePlayerOne.setTextColor(getResources().getColor(R.color.colorText_earth));
+            scorePlayerTwo.setBackgroundResource(R.color.colorScoreAndPlayer_earth);
+            scorePlayerTwo.setTextColor(getResources().getColor(R.color.colorText_earth));
+            scorePlayerOneTitle.setTextColor(getResources().getColor(R.color.colorText_earth));;
+            scorePlayerTwoTitle.setTextColor(getResources().getColor(R.color.colorText_earth));;
+            playerIdle = R.color.colorScoreAndPlayer_earth;
+            playerPlaying = R.color.colorEntireBackground_earth;
+            gameRound.setBackgroundResource(R.color.colorGameAndRound_earth);
+            gameRound.setTextColor(getResources().getColor(R.color.colorText_earth));
+            gameresult.setTextColor(getResources().getColor(R.color.colorText_earth));
+            setupSpinner(R.layout.spinner_item_earth);
+            spinner.setBackgroundResource(R.color.colorScoreAndPlayer_earth);
+            settingsButton.setImageResource(R.drawable.ic_settings_earth);
+            restart.setImageResource(R.drawable.restart_game_earth);
+            next.setImageResource(R.drawable.next_round_earth);
+            start.setBackgroundResource(R.drawable.button_round_earth);
+            setCustomCellColor(R.color.colorGameAndRound_earth);
 
         }
     }
