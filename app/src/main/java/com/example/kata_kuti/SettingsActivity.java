@@ -5,12 +5,27 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.preference.CheckBoxPreference;
+
+import static com.example.kata_kuti.MainActivity.mThemeChoice;
 
 public class SettingsActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        if(mThemeChoice.equals("fire")){
+            setTheme(R.style.SettingAppTheme_fire);
+        }else if(mThemeChoice.equals("red")){
+            setTheme(R.style.AppTheme_fire);
+        }else if(mThemeChoice.equals("lime")){
+            setTheme(R.style.AppTheme_fire);
+        }else if(mThemeChoice.equals("green")){
+            setTheme(R.style.AppTheme_fire);
+        }else if(mThemeChoice.equals("water")){
+            setTheme(R.style.SettingAppTheme_water);
+        }
         setContentView(R.layout.activity_settings);
         Toast.makeText(SettingsActivity.this,"stngs onCreate()",Toast.LENGTH_SHORT).show();
     }

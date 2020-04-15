@@ -9,7 +9,7 @@
             android:summaryOff="Tap to turn on music"
             android:summaryOn="Tap to turn off music"
             android:title="Background Music"
-            android:icon="@drawable/ic_volume_up" />
+            android:icon="@drawable/ic_settings_volume_up" />
 
         <CheckBoxPreference
             android:defaultValue="true"
@@ -17,7 +17,7 @@
             android:summaryOff="Tap to get applause"
             android:summaryOn="Everyone loves an applause.. tap if you don't"
             android:title="Applause"
-            android:icon="@drawable/ic_applause_up"/>
+            android:icon="@drawable/ic_settings_applause_up"/>
     </PreferenceCategory>
 
     <PreferenceCategory android:title="Notification" app:allowDividerBelow="true" app:allowDividerAbove="true">
@@ -27,7 +27,7 @@
             android:summaryOff="Notification turned Off"
             android:summaryOn="Notification turned On"
             android:title="Match In Progress"
-            android:icon="@drawable/ic_notifications_active"/>
+            android:icon="@drawable/ic_settings_notifications_active"/>
 
         <SwitchPreference
             android:defaultValue="true"
@@ -35,7 +35,7 @@
             android:summaryOn="Vibration turned On"
             android:summaryOff="Vibration turned Off"
             android:title="Vibration"
-            android:icon="@drawable/ic_notification_vibration"/>
+            android:icon="@drawable/ic_settings_notification_vibration"/>
 
         <SwitchPreference
             android:defaultValue="true"
@@ -43,22 +43,24 @@
             android:summaryOn="Notification sound turned On"
             android:summaryOff="Notification sound turned Off"
             android:title="Sound"
-            android:icon="@drawable/ic_notification_sound"/>
+            android:icon="@drawable/ic_settings_notification_sound"/>
 
     </PreferenceCategory>
 
-    <PreferenceCategory android:title="Palate"
-        android:summary="NOTE: Re-launch the app to set the desired Theme!"
+    <PreferenceCategory android:title="Palatte"
+        android:summary="NOTE: Re-launch the app to apply!!"
         app:allowDividerAbove="true"
         app:allowDividerBelow="true">
 
         <ListPreference
-            android:defaultValue="default"
+            android:defaultValue="water"
             android:entries="@array/prefer_color_option_lables"
             android:entryValues="@array/prefer_color_option_values"
             android:key="theme"
             android:title="Theme"
-            android:summary="Customize game theme!"/>
+            android:summary="Customize game theme!"
+            android:icon="@drawable/ic_settings_palette"
+            />
 
     </PreferenceCategory>
 

@@ -1,6 +1,17 @@
 <resources>
 
-    <!-- Base application theme. -->
+<!--<<<<<<<<<<<<<<<<  BASIC STYLE FOR ALL THE CELLS >>>>>>>>>>>>>>>-->
+
+    <style name="GameField">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_height">match_parent</item>
+    </style>
+
+
+<!--<<<<<<<<<<<<<<<<<<< FIRE STYLE >>>>>>>>>>>>>>>>>>>-->
+
+
     <style name="AppTheme_fire" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary_fire</item>
@@ -19,13 +30,59 @@
         <item name="android:textColor">@color/colorSettingPreferenceTitles_fire</item> //Preference Titles
         <item name="android:textColorSecondary">@color/colorSettingPreferenceSummary_fire</item>// Preference Summary Text color
         <item name="colorControlHighlight">@color/colorSettingPreferenceRipple_fire</item>
+        <item name="android:tint">@color/colorPrimaryDark_fire</item>
         <item name="preferenceTheme">@style/PreferenceThemeOverlay</item>
     </style>
-    
-    <style name="GameField">
-        <item name="android:layout_width">0dp</item>
-        <item name="android:layout_weight">1</item>
-        <item name="android:layout_height">match_parent</item>
+
+
+<!--<<<<<<<<<<<<<<<<<<< WATER STYLE >>>>>>>>>>>>>>>>>>>-->
+
+
+    <style name="AppTheme_water" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary_water</item>
+        <item name="colorPrimaryDark">@color/colorAccent_water</item>
+        <item name="colorAccent">@color/colorAccent_water</item>
+        <item name="colorControlNormal">@color/colorPrimaryDark_water</item>
+        <item name="android:textColorPrimary">@color/colorPrimaryDark_water</item>
+        <item name="preferenceTheme">@style/PreferenceThemeOverlay</item>
     </style>
+
+    <style name="SettingAppTheme_water" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorSettingPrimary_water</item>
+        <item name="colorPrimaryDark">@color/colorSettingPrimaryDark_water</item>
+        <item name="colorAccent">@color/colorSettingAccent_water</item> //Prefernce catagory names, widgets Ture state
+        <item name="android:textColor">@color/colorSettingPreferenceTitles_water</item> //Preference Titles
+        <item name="android:textColorSecondary">@color/colorSettingPreferenceSummary_water</item>// Preference Summary Text color
+        <item name="colorControlHighlight">@color/colorSettingPreferenceRipple_water</item>
+        <item name="android:tint">@color/colorSettingPrimaryDark_water</item>
+        <item name="preferenceTheme">@style/PreferenceThemeOverlay</item>
+    </style>
+
+<!--<<<<<<<<<<<<<<<<<<< EARTH STYLE >>>>>>>>>>>>>>>>>>>-->
+
+
+    <style name="AppTheme_earth" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary_fire</item>
+        <item name="colorPrimaryDark">@color/colorAccent_fire</item>
+        <item name="colorAccent">@color/colorAccent_fire</item>
+        <item name="colorControlNormal">@color/colorPrimaryDark_fire</item>
+        <item name="android:textColorPrimary">@color/colorPrimaryDark_fire</item>
+        <item name="preferenceTheme">@style/PreferenceThemeOverlay</item>
+    </style>
+
+    <style name="SettingAppTheme_earth" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorSettingPrimary_fire</item>
+        <item name="colorPrimaryDark">@color/colorSettingPrimaryDark_fire</item>
+        <item name="colorAccent">@color/colorSettingAccent_fire</item> //Prefernce catagory names, widgets Ture state
+        <item name="android:textColor">@color/colorSettingPreferenceTitles_fire</item> //Preference Titles
+        <item name="android:textColorSecondary">@color/colorSettingPreferenceSummary_fire</item>// Preference Summary Text color
+        <item name="colorControlHighlight">@color/colorSettingPreferenceRipple_fire</item>
+        <item name="preferenceTheme">@style/PreferenceThemeOverlay</item>
+    </style>
+
 
 </resources>
