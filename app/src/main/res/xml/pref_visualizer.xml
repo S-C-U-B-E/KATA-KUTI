@@ -2,6 +2,17 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <PreferenceCategory android:title="Game Mode" app:allowDividerBelow="true">
+
+        <SwitchPreference
+            android:defaultValue="true"
+            android:key="gamemode"
+            android:summaryOn="Two-Player Mode"
+            android:summaryOff="One-Player Mode"
+            android:title="Mode"/>
+
+    </PreferenceCategory>
+
     <PreferenceCategory android:title="Music" app:allowDividerAbove="true" app:allowDividerBelow="true">
         <CheckBoxPreference
             android:defaultValue="true"

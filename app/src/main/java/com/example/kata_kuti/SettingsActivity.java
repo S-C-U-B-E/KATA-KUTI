@@ -24,10 +24,10 @@ public class SettingsActivity extends AppCompatActivity {
         }
 
         setContentView(R.layout.activity_settings);
-        Toast.makeText(SettingsActivity.this,"stngs onCreate()",Toast.LENGTH_SHORT).show();
+        //Toast.makeText(SettingsActivity.this,"stngs onCreate()",Toast.LENGTH_SHORT).show();
     }
 
-    @Override
+  /*  @Override
     protected void onPause() {
         super.onPause();
         Toast.makeText(SettingsActivity.this,"stngs onPause()",Toast.LENGTH_SHORT).show();
@@ -64,5 +64,5 @@ public class SettingsActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         Toast.makeText(SettingsActivity.this,"stngs onResume()",Toast.LENGTH_SHORT).show();
-    }
+    }*/
 }

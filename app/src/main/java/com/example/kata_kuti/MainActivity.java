@@ -97,6 +97,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
     private boolean isNotificationAllowed;
     public static boolean isNotificationSoundAllowed;
     public static boolean isNotificationVibrationAllowed;
+    public static boolean isTwoPlayerModeAllowed;
 
 
     /*
@@ -285,6 +286,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         isNotificationAllowed = sharedPreferences.getBoolean("notification",true);
         isNotificationSoundAllowed = sharedPreferences.getBoolean("sound",true);
         isNotificationVibrationAllowed = sharedPreferences.getBoolean("vibration",true);
+        isTwoPlayerModeAllowed = sharedPreferences.getBoolean("gamemode",true);
 
         loadColorFromPreferences(sharedPreferences);
 
@@ -309,6 +311,8 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
             isNotificationVibrationAllowed = sharedPreferences.getBoolean("vibration",true);
         }else if(s.equals("theme")){
             loadColorFromPreferences(sharedPreferences);
+        }else if(s.equals("gamemode")){
+            isTwoPlayerModeAllowed = sharedPreferences.getBoolean("gamemode",true);
         }
     }
 
@@ -422,28 +426,36 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
     * */
     private void setupOnClickListeners(){
 
-        /*
+        if(isTwoPlayerModeAllowed){
+        setupTwoPlayerClickListeners();
+        }else{
+        setupOnePlayerClickListeners();}
+
+    }
+
+    private void setupTwoPlayerClickListeners(){
+         /*
           Click Listeners for the first row Cells
          */
         cell00.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 didTapButton(view);
-                gamePlay(view);
+                twoPlayerGamePlay(view);
             }
         });
         cell01.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 didTapButton(view);
-                gamePlay(view);
+                twoPlayerGamePlay(view);
             }
         });
         cell02.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 didTapButton(view);
-                gamePlay(view);
+                twoPlayerGamePlay(view);
             }
         });
 
@@ -455,21 +467,21 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
             @Override
             public void onClick(View view) {
                 didTapButton(view);
-                gamePlay(view);
+                twoPlayerGamePlay(view);
             }
         });
         cell11.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 didTapButton(view);
-                gamePlay(view);
+                twoPlayerGamePlay(view);
             }
         });
         cell12.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 didTapButton(view);
-                gamePlay(view);
+                twoPlayerGamePlay(view);
             }
         });
 
@@ -480,21 +492,99 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
             @Override
             public void onClick(View view) {
                 didTapButton(view);
-                gamePlay(view);
+                twoPlayerGamePlay(view);
             }
         });
         cell21.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 didTapButton(view);
-                gamePlay(view);
+                twoPlayerGamePlay(view);
             }
         });
         cell22.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 didTapButton(view);
-                gamePlay(view);
+                twoPlayerGamePlay(view);
+            }
+        });
+    }
+
+    private void setupOnePlayerClickListeners(){
+         /*
+          Click Listeners for the first row Cells
+         */
+        cell00.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                didTapButton(view);
+                onePlayerGamePlay(view);
+            }
+        });
+        cell01.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                didTapButton(view);
+                onePlayerGamePlay(view);
+            }
+        });
+        cell02.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                didTapButton(view);
+                onePlayerGamePlay(view);
+            }
+        });
+
+
+        /*
+          Click Listeners for the middle row Cells
+         */
+        cell10.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                didTapButton(view);
+                onePlayerGamePlay(view);
+            }
+        });
+        cell11.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                didTapButton(view);
+                onePlayerGamePlay(view);
+            }
+        });
+        cell12.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                didTapButton(view);
+                onePlayerGamePlay(view);
+            }
+        });
+
+        /*
+         Click Listeners for the last row Cells
+         */
+        cell20.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                didTapButton(view);
+                onePlayerGamePlay(view);
+            }
+        });
+        cell21.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                didTapButton(view);
+                onePlayerGamePlay(view);
+            }
+        });
+        cell22.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                didTapButton(view);
+                onePlayerGamePlay(view);
             }
         });
     }
@@ -563,7 +653,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
     /*
     * The Main Game Logic is in here ... Take a look :D
     * */
-    private void gamePlay(View view){
+    private void twoPlayerGamePlay(View view){
 
         ImageView imageView = findViewById(view.getId());
 
@@ -655,6 +745,102 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
     }
 
     /*
+     * The Main Game Logic is in here ... Take a look :D
+     * */
+    private void onePlayerGamePlay(View view){
+
+        Toast.makeText(MainActivity.this,"Response from One PlayerMode",Toast.LENGTH_SHORT).show();
+
+        ImageView imageView = findViewById(view.getId());
+
+        if( !listOfCellsAlreadySet.contains(view.getId()) && !foundWinner){ // To check if the cell has been clicked already or not.
+            clickCount++;
+            /*
+             * clickCount will decide player 1 OR 2 based on odd-even logic
+             * */
+            if(clickCount%2 == 0){
+                Player2.add(cellMap.get(view.getId()));
+                imageView.setImageResource(R.drawable.kuti);
+                textViewPlayer2.setBackgroundResource(playerIdle); // SET TO scorerowfield color DENOTING 2 HAS GIVEN ITS CHOICE
+                textViewPlayer1.setBackgroundResource(playerPlaying);/*SET TO gameplayfield color DENOTING 1's TURN NEXT*/
+                scorePlayerOne.setBackgroundResource(scorePlayer_playing);
+                scorePlayerTwo.setBackgroundResource(scorePlayer_idle);
+            }
+            else{
+                Player1.add(cellMap.get(view.getId()));
+                imageView.setImageResource(R.drawable.kata);
+                textViewPlayer1.setBackgroundResource(playerIdle);// SET TO scorerowfield color DENOTING 1 HAS GIVEN ITS CHOICE
+                textViewPlayer2.setBackgroundResource(playerPlaying);/*SET TO gameplayfield color DENOTING 2's TURN NEXT*/
+                scorePlayerOne.setBackgroundResource(scorePlayer_idle);
+                scorePlayerTwo.setBackgroundResource(scorePlayer_playing);
+            }
+
+            listOfCellsAlreadySet.add(view.getId()); // Once Clicked the value of the cell can't be changed
+
+            if(clickCount > 3)foundWinner = theWinner(clickCount);
+            if(foundWinner){ //Logics after a winner is found
+                if(clickCount%2 == 0)
+                {
+                    mScorePlayer2++;
+                    gameResultMessageBox.setText("PLAYER 2 WON");
+                    textViewPlayer2.setBackgroundResource(playerIdle);
+                    textViewPlayer1.setBackgroundResource(playerIdle);
+                    scorePlayerOne.setBackgroundResource(scorePlayer_idle);
+                    scorePlayerTwo.setBackgroundResource(scorePlayer_idle);
+                }else {
+                    mScorePlayer1++;
+                    gameResultMessageBox.setText("PLAYER 1 WON");
+                    textViewPlayer2.setBackgroundResource(playerIdle);
+                    textViewPlayer1.setBackgroundResource(playerIdle);
+                    scorePlayerOne.setBackgroundResource(scorePlayer_idle);
+                    scorePlayerTwo.setBackgroundResource(scorePlayer_idle);
+                }
+                if(mCurrentRound<mRound){
+                    mButtonNext.setVisibility(View.VISIBLE);
+                }else{
+                    mButtonRestart.setVisibility(View.VISIBLE);
+                    mIsMatchInProgress = false;
+                    displayFinalWinner();
+                }
+
+                /*
+                 * To display the scores in the Score Display Box
+                 * */
+                displayScores();
+
+            }else if(clickCount == 9){ // What if no winner is found AND all cells are set.. Boom It's a TIE
+                /*All cells have been set but winner is still not found
+                 *Logic for handling Tie
+                 * */
+                //Toast.makeText(MainActivity.this,"It's a Tie",Toast.LENGTH_SHORT).show();
+                gameResultMessageBox.setText("IT'S A TIE");
+                textViewPlayer2.setBackgroundResource(playerIdle);textViewPlayer1.setBackgroundResource(playerIdle);
+                scorePlayerOne.setBackgroundResource(scorePlayer_idle);
+                scorePlayerTwo.setBackgroundResource(scorePlayer_idle);
+                mScorePlayer2+=0;//No increment of score on tie
+                mScorePlayer1+=0;//No increment of score on tie
+                if(mCurrentRound<mRound){
+                    mButtonNext.setVisibility(View.VISIBLE);
+                }else{
+                    mButtonRestart.setVisibility(View.VISIBLE);
+                    mIsMatchInProgress = false;
+                    displayFinalWinner();
+                }
+
+                /*
+                 * To display the scores in the Score Display Box
+                 * */
+                displayScores();
+            }
+
+        }
+
+        /*if(mCurrentRound == mRound){
+            displayFinalWinner();
+        }*/
+    }
+
+    /*
      * Function name is self-explanatory of it's purpose
      * */
     private void startGame(){
@@ -696,6 +882,12 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
     * Function name is self-explanatory of it's purpose
     * */
     private void restartGame(){
+
+        if(!isTwoPlayerModeAllowed){
+            Toast.makeText(MainActivity.this,"One Player mode active",Toast.LENGTH_SHORT).show();
+        }else {
+            Toast.makeText(MainActivity.this,"Two Player mode active",Toast.LENGTH_SHORT).show();
+        }
 
         textViewPlayer2.setBackgroundResource(playerIdle);
         textViewPlayer1.setBackgroundResource(playerIdle);
@@ -829,12 +1021,13 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         // for the positive and negative response buttons on the dialog.
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
+        if(isApplauseAllowed){
         releaseMediaPlayer();
         int result = mAudioManager.requestAudioFocus(mOnAudioFocusChangeListener,
                 AudioManager.STREAM_MUSIC, AudioManager.AUDIOFOCUS_GAIN);
 
         if(result == AudioManager.AUDIOFOCUS_REQUEST_GRANTED){
-            if(isApplauseAllowed){
+
             if(mScorePlayer1!=mScorePlayer2)
             {
                 mMediaPlayer = MediaPlayer.create(MainActivity.this,R.raw.drum_roll_audio_clip);
@@ -1193,5 +1386,6 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         cell21.setBackgroundColor(ContextCompat.getColor(MainActivity.this, colorId));
         cell22.setBackgroundColor(ContextCompat.getColor(MainActivity.this, colorId));
     }
+
 
 }
