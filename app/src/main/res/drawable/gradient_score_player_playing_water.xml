@@ -3,6 +3,7 @@
 
     <gradient
         android:endColor="@color/colorGameAndRound_water"
+        android:centerColor="@color/colorScoreAndPlayer_water"
         android:startColor="@color/colorEntireBackground_water"
-        android:angle="90"/>
+        android:angle="45"/>
 </shape>

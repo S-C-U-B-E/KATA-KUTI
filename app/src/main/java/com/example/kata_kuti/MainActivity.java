@@ -31,6 +31,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 
 import static com.example.kata_kuti.WinningLogic.theWinner;
 
@@ -42,6 +43,8 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
 
     //To mark the cells already clicked
      private static ArrayList<Integer> listOfCellsAlreadySet ;
+   //To mark the empty cells for One-Player mode.
+     private static  ArrayList<Integer> cellChoiceListForAi = new ArrayList<>();
 
     //To determine if there is any valid winner after every move
      private static boolean foundWinner;
@@ -51,7 +54,8 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
      public static List<Integer> Player2 ;
 
     //New Thing learnt (to use instead of HashMap) for an easy use of the CellIds
-     public static SparseIntArray cellMap;
+     public static SparseIntArray cellMap; //ease  the use of cellIds by replacing them with single digits
+     public static SparseIntArray reverseCellMap; //sometimes the Id is required from respective single digit (e.g. One-Player mode)
 
     //To store all the possible sets of cells required to Win
      static ArrayList<List<Integer>> winningSet;
@@ -113,6 +117,8 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
     int scorePlayer_playing, scorePlayer_idle;
 
 
+
+
     TextView gameResultMessageBox,gameRoundMessageBox,gameScorePlayer1,gameScorePlayer2,textViewPlayer1,textViewPlayer2;
      public ImageView cell00,cell01,cell02,cell10,cell11,cell12,cell20,cell21,cell22;
 
@@ -149,6 +155,8 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        initializeCellChoiceListForAi();
 
         setupSharedPreferences();
         if(mThemeChoice.equals("fire")){
@@ -197,6 +205,13 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
 
         textViewPlayer2 = findViewById(R.id.textviewplayer2);
         textViewPlayer1 = findViewById(R.id.textviewplayer1);
+        if(isTwoPlayerModeAllowed){
+            textViewPlayer1.setText("PLAYER 1");
+            textViewPlayer2.setText("PLAYER 2");
+        }else{
+            textViewPlayer1.setText("PLAYER 1");
+            textViewPlayer2.setText("S.A.I");
+        }
 
         textViewPlayer1.setBackgroundResource(playerIdle);// SET TO INITIAL COLOR DENOTING 1's TURN AT THE BEGINNING OF GAME
         textViewPlayer2.setBackgroundResource(playerIdle);// SET TO INITIAL COLOR DENOTING 1's TURN AT THE BEGINNING OF GAME
@@ -217,6 +232,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
 
 
         cellMap = new SparseIntArray();
+        reverseCellMap = new SparseIntArray();
         winningSet = new ArrayList<>();
 
         initialSetupBeforeEveryMatch(); // Clearing The scores rounds and text values i.e. setting the game field fresh
@@ -239,6 +255,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
          * */
          setupCellMap();
 
+         setupReverseCellMap();
 
 
         /*
@@ -277,6 +294,22 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         });
 
         Toast.makeText(MainActivity.this,"onCreate()",Toast.LENGTH_SHORT).show();
+    }
+
+    private void initializeCellChoiceListForAi() {
+        cellChoiceListForAi.add(1);
+        cellChoiceListForAi.add(2);
+        cellChoiceListForAi.add(3);
+
+
+        cellChoiceListForAi.add(4);
+        cellChoiceListForAi.add(5);
+        cellChoiceListForAi.add(6);
+
+
+        cellChoiceListForAi.add(7);
+        cellChoiceListForAi.add(8);
+        cellChoiceListForAi.add(9);
     }
 
     private void setupSharedPreferences(){
@@ -374,6 +407,23 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         cellMap.put(R.id.cell20,7);
         cellMap.put(R.id.cell21,8);
         cellMap.put(R.id.cell22,9);
+    }
+
+
+    private void setupReverseCellMap(){
+        reverseCellMap.put(1,R.id.cell00);
+        reverseCellMap.put(2,R.id.cell01);
+        reverseCellMap.put(3,R.id.cell02);
+
+
+        reverseCellMap.put(4,R.id.cell10);
+        reverseCellMap.put(5,R.id.cell11);
+        reverseCellMap.put(6,R.id.cell12);
+
+
+        reverseCellMap.put(7,R.id.cell20);
+        reverseCellMap.put(8,R.id.cell21);
+        reverseCellMap.put(9,R.id.cell22);
     }
 
     /*
@@ -749,40 +799,33 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
      * */
     private void onePlayerGamePlay(View view){
 
-        Toast.makeText(MainActivity.this,"Response from One PlayerMode",Toast.LENGTH_SHORT).show();
+        //Toast.makeText(MainActivity.this,"Response from One PlayerMode",Toast.LENGTH_SHORT).show();
 
         ImageView imageView = findViewById(view.getId());
 
         if( !listOfCellsAlreadySet.contains(view.getId()) && !foundWinner){ // To check if the cell has been clicked already or not.
+
+
+            Player1.add(cellMap.get(view.getId()));
+            imageView.setImageResource(R.drawable.kata);
+            textViewPlayer1.setBackgroundResource(playerIdle);// SET TO scorerowfield color DENOTING 1 HAS GIVEN ITS CHOICE
+            textViewPlayer2.setBackgroundResource(playerPlaying);/*SET TO gameplayfield color DENOTING 2's TURN NEXT*/
+            scorePlayerOne.setBackgroundResource(scorePlayer_idle);
+            scorePlayerTwo.setBackgroundResource(scorePlayer_playing);
             clickCount++;
-            /*
-             * clickCount will decide player 1 OR 2 based on odd-even logic
-             * */
-            if(clickCount%2 == 0){
-                Player2.add(cellMap.get(view.getId()));
-                imageView.setImageResource(R.drawable.kuti);
-                textViewPlayer2.setBackgroundResource(playerIdle); // SET TO scorerowfield color DENOTING 2 HAS GIVEN ITS CHOICE
-                textViewPlayer1.setBackgroundResource(playerPlaying);/*SET TO gameplayfield color DENOTING 1's TURN NEXT*/
-                scorePlayerOne.setBackgroundResource(scorePlayer_playing);
-                scorePlayerTwo.setBackgroundResource(scorePlayer_idle);
-            }
-            else{
-                Player1.add(cellMap.get(view.getId()));
-                imageView.setImageResource(R.drawable.kata);
-                textViewPlayer1.setBackgroundResource(playerIdle);// SET TO scorerowfield color DENOTING 1 HAS GIVEN ITS CHOICE
-                textViewPlayer2.setBackgroundResource(playerPlaying);/*SET TO gameplayfield color DENOTING 2's TURN NEXT*/
-                scorePlayerOne.setBackgroundResource(scorePlayer_idle);
-                scorePlayerTwo.setBackgroundResource(scorePlayer_playing);
-            }
-
             listOfCellsAlreadySet.add(view.getId()); // Once Clicked the value of the cell can't be changed
+            cellChoiceListForAi.remove((Integer)cellMap.get(view.getId())); // nedded to type-cast it ; otherwise the param was taken as an index (hence, arrayIndexOutOfBoundExcep. XD)
+            //Toast.makeText(MainActivity.this,"removed: "+cellMap.get(view.getId()),Toast.LENGTH_SHORT).show();
+            //StringBuilder temp = new StringBuilder();
+            //for(int i: cellChoiceListForAi)temp.append(i);
+            //gameResultMessageBox.setText(temp);
 
-            if(clickCount > 3)foundWinner = theWinner(clickCount);
+            foundWinner = theWinner(clickCount);
             if(foundWinner){ //Logics after a winner is found
                 if(clickCount%2 == 0)
                 {
                     mScorePlayer2++;
-                    gameResultMessageBox.setText("PLAYER 2 WON");
+                    gameResultMessageBox.setText("S.A.I WON");
                     textViewPlayer2.setBackgroundResource(playerIdle);
                     textViewPlayer1.setBackgroundResource(playerIdle);
                     scorePlayerOne.setBackgroundResource(scorePlayer_idle);
@@ -808,7 +851,8 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
                  * */
                 displayScores();
 
-            }else if(clickCount == 9){ // What if no winner is found AND all cells are set.. Boom It's a TIE
+            }
+            else if(clickCount == 9){ // What if no winner is found AND all cells are set.. Boom It's a TIE
                 /*All cells have been set but winner is still not found
                  *Logic for handling Tie
                  * */
@@ -831,6 +875,74 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
                  * To display the scores in the Score Display Box
                  * */
                 displayScores();
+            }
+                                                              //Android korte korte basic java bhule gechilam XD.
+
+            if(!foundWinner && clickCount<9){ /* Since Easy Mode: Player 1 will start first and end last;
+                                                 Now if there happens to be a tie, foundWinner:false this would have lead into this code block and would result
+                                                 into a 2nd dialog box showing same "it's a Tie,Oops!!" msg.
+                                                 To prevent this situation clickCount<9 check was important (Pardon my English XD)
+                                                */
+
+                onePlayerAiLogic_Easy(); //Easy Mode S.A.I Logic
+
+
+                foundWinner = theWinner(clickCount);
+                if(foundWinner){ //Logics after a winner is found
+                    if(clickCount%2 == 0)
+                    {
+                        mScorePlayer2++;
+                        gameResultMessageBox.setText("S.A.I WON");
+                        textViewPlayer2.setBackgroundResource(playerIdle);
+                        textViewPlayer1.setBackgroundResource(playerIdle);
+                        scorePlayerOne.setBackgroundResource(scorePlayer_idle);
+                        scorePlayerTwo.setBackgroundResource(scorePlayer_idle);
+                    }else {
+                        mScorePlayer1++;
+                        gameResultMessageBox.setText("PLAYER 1 WON");
+                        textViewPlayer2.setBackgroundResource(playerIdle);
+                        textViewPlayer1.setBackgroundResource(playerIdle);
+                        scorePlayerOne.setBackgroundResource(scorePlayer_idle);
+                        scorePlayerTwo.setBackgroundResource(scorePlayer_idle);
+                    }
+                    if(mCurrentRound<mRound){
+                        mButtonNext.setVisibility(View.VISIBLE);
+                    }else{
+                        mButtonRestart.setVisibility(View.VISIBLE);
+                        mIsMatchInProgress = false;
+                        displayFinalWinner();
+                    }
+
+                    /*
+                     * To display the scores in the Score Display Box
+                     * */
+                    displayScores();
+
+                }
+                else if(clickCount == 9){ // What if no winner is found AND all cells are set.. Boom It's a TIE
+                    /*All cells have been set but winner is still not found
+                     *Logic for handling Tie
+                     * */
+                    //Toast.makeText(MainActivity.this,"It's a Tie",Toast.LENGTH_SHORT).show();
+                    gameResultMessageBox.setText("IT'S A TIE");
+                    textViewPlayer2.setBackgroundResource(playerIdle);textViewPlayer1.setBackgroundResource(playerIdle);
+                    scorePlayerOne.setBackgroundResource(scorePlayer_idle);
+                    scorePlayerTwo.setBackgroundResource(scorePlayer_idle);
+                    mScorePlayer2+=0;//No increment of score on tie
+                    mScorePlayer1+=0;//No increment of score on tie
+                    if(mCurrentRound<mRound){
+                        mButtonNext.setVisibility(View.VISIBLE);
+                    }else{
+                        mButtonRestart.setVisibility(View.VISIBLE);
+                        mIsMatchInProgress = false;
+                        displayFinalWinner();
+                    }
+
+                    /*
+                     * To display the scores in the Score Display Box
+                     * */
+                    displayScores();
+                }
             }
 
         }
@@ -884,9 +996,13 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
     private void restartGame(){
 
         if(!isTwoPlayerModeAllowed){
-            Toast.makeText(MainActivity.this,"One Player mode active",Toast.LENGTH_SHORT).show();
+            cellChoiceListForAi = new ArrayList<>();
+            initializeCellChoiceListForAi();
+            textViewPlayer1.setText("PLAYER 1");
+            textViewPlayer2.setText("S.A.I");
+            Toast.makeText(MainActivity.this,"One-Player mode active",Toast.LENGTH_SHORT).show();
         }else {
-            Toast.makeText(MainActivity.this,"Two Player mode active",Toast.LENGTH_SHORT).show();
+            Toast.makeText(MainActivity.this,"Two-Player mode active",Toast.LENGTH_SHORT).show();
         }
 
         textViewPlayer2.setBackgroundResource(playerIdle);
@@ -1057,7 +1173,8 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         if(mScorePlayer1>mScorePlayer2){
             builder.setMessage("Player 1 WON This Match");
         }else if(mScorePlayer2>mScorePlayer1){
-            builder.setMessage("Player 2 WON This Match");
+            if( ( (textViewPlayer2.getText()).toString() ).equals("PLAYER 2")){ //match er majhe giye one-player mode e chng kore asleo .. winning msg e kichu bodlabe na
+            builder.setMessage("Player 2 WON This Match");}else{builder.setMessage("S.A.I WON This Match!!"+"\nHuman Race Is Doomed!!");}
         }else{
             builder.setMessage("It's a TIE, Oops!");
         }
@@ -1251,6 +1368,16 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
     @Override
     protected void onRestart() {
         super.onRestart();
+
+        if(!mIsMatchInProgress) {
+            if (isTwoPlayerModeAllowed) {
+                textViewPlayer1.setText("PLAYER 1");
+                textViewPlayer2.setText("PLAYER 2");
+            } else {
+                textViewPlayer1.setText("PLAYER 1");
+                textViewPlayer2.setText("S.A.I");
+            }
+        }
         Toast.makeText(MainActivity.this,"onRestart()",Toast.LENGTH_SHORT).show();
     }
 
@@ -1385,6 +1512,43 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         cell20.setBackgroundColor(ContextCompat.getColor(MainActivity.this, colorId));
         cell21.setBackgroundColor(ContextCompat.getColor(MainActivity.this, colorId));
         cell22.setBackgroundColor(ContextCompat.getColor(MainActivity.this, colorId));
+    }
+
+
+    /*
+    *
+    * One-Player mode:
+    * Logic of opponent a.k.a JARVIS XD; ("And I am... Iron Man <3")
+    * The logic is : any random empty spot is chosen (since it is easy mode)
+    * */
+    public void onePlayerAiLogic_Easy(){
+        /*
+        * In easy mode AI will choose a position at random
+        * */
+
+        disableOnClickListeners(); // such that no input is taken from user while AI's turn
+        Random rand = new Random();
+        int numRandom = rand.nextInt(cellChoiceListForAi.size()); //Choose a random index from a list of empty spots.
+        int cellChoice  = cellChoiceListForAi.get(numRandom);     //Take the cell value
+        int cellIdChoice = reverseCellMap.get(cellChoice);        //Take the cell id for that particular value by reverse-mapping to it's ID
+
+
+        ImageView imageview = findViewById(cellIdChoice);// select the image view
+        Player2.add(cellMap.get(cellIdChoice));           // add it to the list of Player 2 choosen cells (since winning-logic is same)
+
+        imageview.setImageResource(R.drawable.kuti);
+        textViewPlayer2.setBackgroundResource(playerIdle); // SET TO scorerowfield color DENOTING 2 HAS GIVEN ITS CHOICE
+        textViewPlayer1.setBackgroundResource(playerPlaying);/*SET TO gameplayfield color DENOTING 1's TURN NEXT*/
+        scorePlayerOne.setBackgroundResource(scorePlayer_playing);
+        scorePlayerTwo.setBackgroundResource(scorePlayer_idle);
+        clickCount++;
+        listOfCellsAlreadySet.add(cellIdChoice); // Once Clicked the value of the cell can't be changed
+        cellChoiceListForAi.remove(numRandom); //Remove the already clicked cell by index
+
+        setupOnePlayerClickListeners(); //for safety purpose temporarily the listeners were disabeled.. but i think it's not that important
+                                        //moreover ..this may cause performance issue.. none that i've seen .. but still...
+        //(ETTO ENGLISH E COMMENT KORTE BHALO LAGCHENA MY GOOOOOOOOD!!..BUT KORTE HOBEI NAHOLE BUJHBONA PORE XD!!)
+
     }
 
 
