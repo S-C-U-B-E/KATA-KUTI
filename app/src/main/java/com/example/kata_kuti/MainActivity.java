@@ -1208,8 +1208,10 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
                 textViewPlayer2.setText("S.A.I");
             }
 
-
         }else {
+
+            textViewPlayer1.setText("PLAYER 1");
+            textViewPlayer2.setText("PLAYER 2");
             Toast.makeText(MainActivity.this,"Two-Player mode active",Toast.LENGTH_SHORT).show();
         }
 
