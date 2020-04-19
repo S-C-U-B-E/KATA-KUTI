@@ -80,7 +80,6 @@
             android:entryValues="@array/prefer_color_option_values"
             android:key="theme"
             android:title="Theme"
-            android:summary="Customize game theme!"
             android:icon="@drawable/ic_settings_palette"
             />
 

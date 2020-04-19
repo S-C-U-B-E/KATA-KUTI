@@ -303,7 +303,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
             }
         });
 
-        Toast.makeText(MainActivity.this,"onCreate()",Toast.LENGTH_SHORT).show();
+        //Toast.makeText(MainActivity.this,"onCreate()",Toast.LENGTH_SHORT).show();
     }
 
     private void initializeCornerEdgeCenterList(){
@@ -1004,10 +1004,10 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
                         listOfCellsAlreadySet.add(view.getId()); // Once Clicked the value of the cell can't be changed
                         cellChoiceListForAi.remove((Integer) cellMap.get(view.getId())); // nedded to type-cast it ; otherwise the param was taken as an index (hence, arrayIndexOutOfBoundExcep. XD)
                         //Toast.makeText(MainActivity.this, "removed: " + cellMap.get(view.getId()), Toast.LENGTH_SHORT).show();
-                        StringBuilder temp = new StringBuilder();
+                        /*StringBuilder temp = new StringBuilder();
                         for (int i : cellChoiceListForAi) temp.append(i);
                         gameRoundMessageBox.setText(temp);
-                        Toast.makeText(MainActivity.this, "Length: " + cellChoiceListForAi.size(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity.this, "Length: " + cellChoiceListForAi.size(), Toast.LENGTH_SHORT).show();*/
 
                         foundWinner = theWinner(clickCount);
                         if (foundWinner) { //Logics after a winner is found
@@ -1529,7 +1529,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
     @Override
     protected void onStart() {
         super.onStart();
-        Toast.makeText(MainActivity.this,"onStart()",Toast.LENGTH_SHORT).show();
+        //Toast.makeText(MainActivity.this,"onStart()",Toast.LENGTH_SHORT).show();
 
     }
 
@@ -1545,7 +1545,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
 
         mAudioManager.abandonAudioFocus(mOnAudioFocusChangeListener);
 
-        Toast.makeText(MainActivity.this,"onStop()",Toast.LENGTH_SHORT).show();
+       // Toast.makeText(MainActivity.this,"onStop()",Toast.LENGTH_SHORT).show();
     }
 
     /*
@@ -1574,7 +1574,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
             }
         }
 
-        Toast.makeText(MainActivity.this,"onResume()",Toast.LENGTH_SHORT).show();
+        //Toast.makeText(MainActivity.this,"onResume()",Toast.LENGTH_SHORT).show();
 
 
         NotificationUtils.clearAllNotifications(MainActivity.this);
@@ -1600,7 +1600,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
 
             }
         }
-        Toast.makeText(MainActivity.this,"onRestart()",Toast.LENGTH_SHORT).show();
+        //Toast.makeText(MainActivity.this,"onRestart()",Toast.LENGTH_SHORT).show();
     }
 
     /*
@@ -1613,7 +1613,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         if(mIsMatchInProgress && isNotificationAllowed && !isSettingsScreenOpened){
         NotificationUtils.remindUserOfTheOnGoingMatch(MainActivity.this);}
 
-        Toast.makeText(MainActivity.this,"onPause()",Toast.LENGTH_SHORT).show();
+        //Toast.makeText(MainActivity.this,"onPause()",Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -1624,13 +1624,13 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
 
         NotificationUtils.clearAllNotifications(MainActivity.this);
 
-       Toast.makeText(MainActivity.this,"onDestroy()",Toast.LENGTH_SHORT).show();
+       //Toast.makeText(MainActivity.this,"onDestroy()",Toast.LENGTH_SHORT).show();
     }
 
     public void didTapButton(View view) {
         final Animation myAnim = AnimationUtils.loadAnimation(this, R.anim.bounce);
 
-        // Use bounce interpolator with amplitude 0.2 and frequency 20
+        // Used bounce interpolator with amplitude 0.2 and frequency 20
         MyBounceInterpolator interpolator = new MyBounceInterpolator(0.2, 20);
         myAnim.setInterpolator(interpolator);
 
@@ -1767,11 +1767,6 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         listOfCellsAlreadySet.add(cellIdChoice); // Once Clicked the value of the cell can't be changed
         cellChoiceListForAi.remove(numRandomIndex); //Remove the already clicked cell by index
 
-        /*Toast.makeText(MainActivity.this,"removed: "+cellChoice,Toast.LENGTH_SHORT).show();
-        StringBuilder temp = new StringBuilder();
-        for(int i: cellChoiceListForAi)temp.append(i);
-        gameRoundMessageBox.setText(temp);
-        Toast.makeText(MainActivity.this, "Length: "+cellChoiceListForAi.size(), Toast.LENGTH_SHORT).show();*/
 
         setupOnePlayerClickListeners(); //for safety purpose temporarily the listeners were disabeled.. but i think it's not that important
                                         //moreover ..this may cause performance issue.. none that i've seen .. but still...
@@ -1783,7 +1778,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         /*
          * In hard mode AI will choose a position that if kept empty player 1 will win.
          * */
-        Toast.makeText(MainActivity.this, "Hard Mode", Toast.LENGTH_SHORT).show();
+        // akeText(MainActivity.this, "Hard Mode", Toast.LENGTH_SHORT).show();
         int numRandomIndex=-1, cellIdChoice=-1, cellChoice=-1;
 
         disableOnClickListeners(); // such that no input is taken from user while AI's turn
@@ -1804,7 +1799,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
 
                         if( l.size()==1 && cellChoiceListForAi.contains(l.get(0)) ){
 
-                            //Toast.makeText(MainActivity.this, "Found In Loop: "+l.get(0), Toast.LENGTH_SHORT).show();
+
                             cellChoice = l.get(0);
                             foundPerfectCell = true;
                             break outermostloop;
@@ -1817,31 +1812,16 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
 
             cellIdChoice = reverseCellMap.get(cellChoice);
 
-            /*Toast.makeText(MainActivity.this, "Loop", Toast.LENGTH_SHORT).show();
-            String temp = "L"+cellChoice+" ";
-            gameRoundMessageBox.setText(temp);*/
-
 
         }
         if(!foundPerfectCell){
 
             Random rand = new Random();
-            Toast.makeText(MainActivity.this, "SIZE: "+cellChoiceListForAi.size(), Toast.LENGTH_SHORT).show();
-
-
-            /*StringBuilder st = new StringBuilder();
-            for(int i:cellChoiceListForAi)st.append(i).append(" ");
-            gameResultMessageBox.setText(st);*/
 
             numRandomIndex = rand.nextInt(cellChoiceListForAi.size()); //Choose a random index from a list of empty spots.
             cellChoice  = cellChoiceListForAi.get(numRandomIndex);     //Take the cell value
 
             cellIdChoice = reverseCellMap.get(cellChoice);        //Take the cell id for that particular value by reverse-mapping to it's ID
-
-            //Toast.makeText(MainActivity.this, "If block", Toast.LENGTH_SHORT).show();
-
-            /*String temp = "I"+cellChoice+" ";
-            gameRoundMessageBox.setText(temp);*/
 
         }
 
@@ -1866,12 +1846,21 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
 
     private void onePlayerAiLogic_Insane(){
 
+        /*
+        * In Insane logic there is no chance of opponent winning XD.. and i don't know if people will this or not XD
+        * Opponent(of SAI) maximum can make a Tie or Lose the game
+        *
+        * In the quest of building this logic i myself became a "almost" TIC-TAC-TOE champ LOL...
+        *
+        * S.A.I will always go first in this mode!!! ;)
+        * */
+
         boolean blockedOpponent = false;
         boolean movedForward = false;
 
         int cellChoice = -1;
 
-        //FIRST IF ANY CHANCE OF WINNING FROM PREVIOUS BLOCKS
+        //FIRST IF ANY CHANCE OF WINNING FROM PREVIOUS DESCISIONS MADE(IF ANY)
         outermostloop:
         for (int i = 0; i < Player1.size() - 1; i++) {
             for (int j = i + 1; j < Player1.size(); j++) {
@@ -1885,12 +1874,10 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
                     if (l.size() == 1 && !Player2.contains(l.get(0)) ) {
                         movedForward = true;
                         cellChoice = l.get(0);
-                        //System.out.println("1ST: "+l.get(0));
+
                         Player1.add(l.get(0));
                         cellChoiceListForAi.remove((Integer)l.get(0));
-                        //foundWinner = true;
-                        //System.out.println("cellChoice: "+cellChoice);
-                        //System.out.println("---------------------");
+
                         break outermostloop;
                     }
 
@@ -1930,7 +1917,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
 
         Random rand;
         if (!blockedOpponent && !movedForward) {
-            if (clickCount == 1) {
+            if (clickCount == 1) {              //IN S.A.I FIRST TURN IT TAKES A RANDOM CORNER...
                 rand = new Random();
                 int chosenCorner = corner.get(rand.nextInt(corner.size()));
 
@@ -1941,10 +1928,10 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
                 corner.remove(corner.indexOf(chosenCorner));
 
 
-            } else if (clickCount == 3) {
+            } else if (clickCount == 3) {/* FROM HERE ON S.A.I's TURN WILL DEPEND ON OPPONENT*/ //S.A.I's 3rd TURN
 
                 //any corner
-                if (corner.contains(Player2.get(0))) {
+                if (corner.contains(Player2.get(0))) {  // IF OPPONENT TAKES ANY CORNER... SO WILL S.A.I
                     rand = new Random();
                     int chosenCorner = corner.get(rand.nextInt(corner.size()));
 
@@ -1954,9 +1941,11 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
 
                     corner.remove(corner.indexOf(chosenCorner));
 
-                } //edge cell next to 1st X
+                } //edge cell next to 1st X  IF OPPONENT TAKES ANY EDGE TOUCHED TO THE 'X' OF S.A.I
                 else if (Math.abs(Player1.get(0) - Player2.get(0)) == 1 || Math.abs(Player1.get(0) - Player2.get(0)) == 3) {
-
+                                /*
+                                * ALL SUCH EDGES AND 'X' PLACES HAVE A DIFFERENCE OF 1 OR 3 (ABSOLUTE VALUE).. THEN S.A.I WILL GO FOR THE CENTER..
+                                * */
 
                     cellChoiceListForAi.remove((Integer)center.get(0));
                     Player1.add(center.get(0));
@@ -1964,9 +1953,11 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
 
                     center.remove(0);
 
-                } //center
+                } //center IF OPPONENT TAKES THE CENTER
                 else if (Player2.get(0) == 5) {
-
+                        /*
+                        * THEN S.A.I WILL TRY TO MAKE A 'X O X' DIAGONALLY...
+                        * */
 
                     cellChoiceListForAi.remove((Integer) (10 - Player1.get(0)));
                     Player1.add(10 - Player1.get(0));
@@ -1974,7 +1965,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
 
                     corner.remove((Integer) (10 - Player1.get(0)));
 
-                } //any other edge cell
+                } //any other edge cell  IF OPPONENT TAKES ANY EDGE... S.A.I WILL GO FOR ANY RANDOM CORNER...
                 else {
                     rand = new Random();
                     int chosenCorner = corner.get(rand.nextInt(corner.size()));
@@ -1987,7 +1978,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
                 }
 
             }
-            else if (clickCount == 5) {
+            else if (clickCount == 5) { //S.A.I 5th TURN
                 rand = new Random();
                 int chosenCorner = corner.get(rand.nextInt(corner.size()));
 
@@ -1998,7 +1989,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
                 corner.remove(corner.indexOf(chosenCorner));
             }
             else{
-                rand = new Random();
+                rand = new Random(); // FOR ANY OTHER TURN .. S.A.I WILL TAKE ANY RANDOM CORNER ... AGAIN!!!!!!! B)
                 int randomChoice = cellChoiceListForAi.get(rand.nextInt(cellChoiceListForAi.size()));
 
                 cellChoiceListForAi.remove((Integer)randomChoice);
@@ -2007,6 +1998,9 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
             }
         }
 
+        /*
+        * THIS NEXT PART OF ASSIGNUNG SYMBOL IS SAME AS HARD OR EASY MODE...
+        * */
         int cellIdChoice = reverseCellMap.get(cellChoice);        //Take the cell id for that particular value by reverse-mapping to it's ID
 
 
@@ -2021,10 +2015,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
 
         listOfCellsAlreadySet.add(cellIdChoice); // Once Clicked the value of the cell can't be changed
 
-        Toast.makeText(MainActivity.this, "AI chose: "+cellChoice, Toast.LENGTH_SHORT).show();
-        StringBuilder test = new StringBuilder();
-        for(int i:cellChoiceListForAi)test.append(i).append(" ");
-        gameResultMessageBox.setText(test);
+
 
     }
 
