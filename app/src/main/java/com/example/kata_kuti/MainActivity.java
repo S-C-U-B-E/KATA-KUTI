@@ -9,6 +9,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.drawable.AnimationDrawable;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -1666,9 +1667,9 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         }
         else if(theme.equals("water")) {
             parentLayoutBackground.setBackgroundColor(ContextCompat.getColor(MainActivity.this, R.color.colorEntireBackground_water));
-            //scorePlayerOne.setBackgroundResource(R.color.colorScoreAndPlayer_water);
+
             scorePlayerOne.setTextColor(getResources().getColor(R.color.colorText_water));
-            //scorePlayerTwo.setBackgroundResource(R.color.colorScoreAndPlayer_water);
+
             scorePlayerTwo.setTextColor(getResources().getColor(R.color.colorText_water));
             scorePlayerOneTitle.setTextColor(getResources().getColor(R.color.colorText_water));
 
@@ -1688,6 +1689,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
             restart.setImageResource(R.drawable.restart_game_water);
             next.setImageResource(R.drawable.next_round_water);
             start.setBackgroundResource(R.drawable.button_round_water);
+            start.setTextColor(getResources().getColor(R.color.colorText_water));
             setCustomCellColor(R.color.colorGameAndRound_water);
 
         }

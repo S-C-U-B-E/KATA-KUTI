@@ -41,7 +41,7 @@
     <style name="AppTheme_water" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary_water</item>
-        <item name="colorPrimaryDark">@color/colorGameAndRound_water</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark_water</item>
         <item name="colorAccent">@color/colorAccent_water</item>
         <item name="colorControlNormal">@color/colorPrimaryDark_water</item>
         <item name="android:textColorPrimary">@color/colorPrimaryDark_water</item>

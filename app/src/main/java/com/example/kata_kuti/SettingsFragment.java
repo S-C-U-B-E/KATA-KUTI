@@ -19,22 +19,23 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Shared
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
             addPreferencesFromResource(R.xml.pref_visualizer);
 
-            String summary;
+            String difficulty_summary,theme_summary;
         difficultyPreference = findPreference("difficulty");
         themePreference = findPreference("theme");
 
         if(MainActivity.mIsMatchInProgress){
-            summary = difficultyPreference.getSharedPreferences().getString("difficulty","easy");
-            difficultyPreference.setSummary(summary+"\n(Disabled, Match is in progress!!)");
+            difficulty_summary = difficultyPreference.getSharedPreferences().getString("difficulty","easy");
+            difficultyPreference.setSummary(difficulty_summary+"\n(Disabled, Match is in progress!!)");
             difficultyPreference.setEnabled(false);
 
         }else{
             difficultyPreference.setEnabled(true);
-            summary = difficultyPreference.getSharedPreferences().getString("difficulty","easy");
-            difficultyPreference.setSummary(summary);
+            difficulty_summary = difficultyPreference.getSharedPreferences().getString("difficulty","easy");
+            difficultyPreference.setSummary(difficulty_summary);
         }
 
-
+            theme_summary = themePreference.getSharedPreferences().getString("theme","water");
+            themePreference.setSummary(theme_summary);
     }
 
     @Override

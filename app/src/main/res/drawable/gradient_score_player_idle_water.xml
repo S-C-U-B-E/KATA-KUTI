@@ -2,7 +2,7 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
 
     <gradient
-        android:endColor="@color/colorGameAndRound_water"
+        android:endColor="@color/colorPrimaryDark_water"
         android:startColor="@color/colorScoreAndPlayer_water"
         android:angle="90"/>
 </shape>

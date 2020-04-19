@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <PreferenceCategory android:title="Game Mode" app:allowDividerBelow="true" android:key="mode"
-        android:summary="NOTE: Difficulty applicable for One-Player mode!">
+        android:summary="(Difficulty applicable for One-Player mode!)">
 
         <SwitchPreference
             android:defaultValue="true"

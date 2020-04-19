@@ -24,7 +24,7 @@
 <!--<<<<<<<<<<< WATER STARTS HERE >>>>>>>>>>>>>>>>>-->
 
     <color name="colorPrimary_water">#2196F3</color>
-    <color name="colorPrimaryDark_water">#1A237E</color>
+    <color name="colorPrimaryDark_water">#00BFA5</color>
     <color name="colorAccent_water">#BBDEFB</color>
 
     <color name="colorSettingPrimary_water">#0097A7</color>
@@ -34,9 +34,9 @@
     <color name="colorSettingPreferenceSummary_water">#64B5F6</color>
     <color name="colorSettingPreferenceRipple_water">#64B5F6</color>
 
-    <color name="colorEntireBackground_water">#BBDEFB</color> //entire background
+    <color name="colorEntireBackground_water">#81D4FA</color> //entire background
     <color name="colorScoreAndPlayer_water">#2196F3</color> //score annd player board
-    <color name="colorGameAndRound_water">#6200EA</color> //game and round board
+    <color name="colorGameAndRound_water">#336200EA</color> //game and round board
     <color name="colorButtonStart_water">#0097A7</color> //button start
     <color name="colorButtons_water">#1A237E</color> //other buttons
     <color name="colorText_water">#1A237E</color> //text
