@@ -21,4 +21,16 @@ to provide users a choice of numbers of rounds tey want to play
         <item>"earth"</item>
         <item>"water"</item>
     </array>
+
+    <array name="prefer_difficulty_option_lables">
+        <item>"Easy"</item>
+        <item>"Hard"</item>
+        <item>"Insane"</item>
+    </array>
+
+    <array name="prefer_difficulty_option_values">
+        <item>"easy"</item>
+        <item>"hard"</item>
+        <item>"insane"</item>
+    </array>
 </resources>

@@ -2,14 +2,25 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <PreferenceCategory android:title="Game Mode" app:allowDividerBelow="true">
+    <PreferenceCategory android:title="Game Mode" app:allowDividerBelow="true" android:key="mode"
+        android:summary="NOTE: Difficulty applicable for One-Player mode!">
 
         <SwitchPreference
             android:defaultValue="true"
             android:key="gamemode"
             android:summaryOn="Two-Player Mode"
             android:summaryOff="One-Player Mode"
-            android:title="Mode"/>
+            android:title="Mode"
+            android:icon="@drawable/ic_settings_videogame"/>
+
+        <ListPreference
+            android:defaultValue="easy"
+            android:entries="@array/prefer_difficulty_option_lables"
+            android:entryValues="@array/prefer_difficulty_option_values"
+            android:key="difficulty"
+            android:title="Difficulty"
+            android:icon="@drawable/ic_settings_difficulty"
+            />
 
     </PreferenceCategory>
 
