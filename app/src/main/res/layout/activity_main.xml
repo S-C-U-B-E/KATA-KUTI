@@ -35,20 +35,33 @@
                                 android:layout_weight="0.7"
                                 android:weightSum="1">
 
-                                <TextView
-                                    android:id="@+id/textviewscore1"
+                                <RelativeLayout
+                                    android:id="@+id/textviewscore1_parent"
                                     android:layout_width="0dp"
                                     android:layout_weight="0.5"
                                     android:layout_height="match_parent"
-                                    android:gravity="center"
                                     android:layout_marginRight="4dp"
-                                    android:layout_marginEnd="4dp"/>
-                                <TextView
-                                    android:id="@+id/textviewscore2"
+                                    android:layout_marginEnd="4dp">
+                                    <TextView
+                                        android:id="@+id/textviewscore1"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_centerInParent="true"
+                                        />
+                                </RelativeLayout>
+
+                                <RelativeLayout
+                                    android:id="@+id/textviewscore2_parent"
                                     android:layout_width="0dp"
                                     android:layout_weight="0.5"
-                                    android:layout_height="match_parent"
-                                    android:gravity="center"/>
+                                    android:layout_height="match_parent">
+                                    <TextView
+                                        android:id="@+id/textviewscore2"
+                                        android:layout_height="wrap_content"
+                                        android:layout_width="wrap_content"
+                                        android:layout_centerInParent="true"/>
+                                </RelativeLayout>
+
                             </TableRow>
 
                             <!--Player Info Row-->

@@ -24,6 +24,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TableLayout;
 import android.widget.TextView;
@@ -117,6 +118,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
     static String mThemeChoice;
     static String mDifficultyChoice;
     TableLayout parentLayoutBackground;
+    RelativeLayout scorePlayerOneParent,scorePlayerTwoParent;
     TextView scorePlayerOne,scorePlayerTwo,scorePlayerOneTitle,scorePlayerTwoTitle,gameRound,gameresult;
     Spinner spinner;
     ImageButton settingsButton,restart,next;
@@ -182,6 +184,8 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         parentLayoutBackground = findViewById(R.id.parentlayout);
         scorePlayerOne = findViewById(R.id.textviewscore1);
         scorePlayerTwo = findViewById(R.id.textviewscore2);
+        scorePlayerOneParent = findViewById(R.id.textviewscore1_parent);
+        scorePlayerTwoParent = findViewById(R.id.textviewscore2_parent);
         scorePlayerOneTitle = findViewById(R.id.textviewplayer1);
         scorePlayerTwoTitle = findViewById(R.id.textviewplayer2);
         spinner = findViewById(R.id.rounds);
@@ -230,8 +234,8 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
 
         textViewPlayer1.setBackgroundResource(playerIdle);// SET TO INITIAL COLOR DENOTING 1's TURN AT THE BEGINNING OF GAME
         textViewPlayer2.setBackgroundResource(playerIdle);// SET TO INITIAL COLOR DENOTING 1's TURN AT THE BEGINNING OF GAME
-        scorePlayerOne.setBackgroundResource(scorePlayer_idle);
-        scorePlayerTwo.setBackgroundResource(scorePlayer_idle);
+        scorePlayerOneParent.setBackgroundResource(scorePlayer_idle);
+        scorePlayerTwoParent.setBackgroundResource(scorePlayer_idle);
 
         gameResultMessageBox = findViewById(R.id.textviewgameresultmessage);
         gameRoundMessageBox = findViewById(R.id.textviewgameroundmessage);
@@ -774,16 +778,16 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
                 imageView.setImageResource(Player2_symbol);
                 textViewPlayer2.setBackgroundResource(playerIdle); // SET TO scorerowfield color DENOTING 2 HAS GIVEN ITS CHOICE
                 textViewPlayer1.setBackgroundResource(playerPlaying);/*SET TO gameplayfield color DENOTING 1's TURN NEXT*/
-                scorePlayerOne.setBackgroundResource(scorePlayer_playing);
-                scorePlayerTwo.setBackgroundResource(scorePlayer_idle);
+                scorePlayerOneParent.setBackgroundResource(scorePlayer_playing);
+                scorePlayerTwoParent.setBackgroundResource(scorePlayer_idle);
             }
             else{
                 Player1.add(cellMap.get(view.getId()));
                 imageView.setImageResource(Player1_symbol);
                 textViewPlayer1.setBackgroundResource(playerIdle);// SET TO scorerowfield color DENOTING 1 HAS GIVEN ITS CHOICE
                 textViewPlayer2.setBackgroundResource(playerPlaying);/*SET TO gameplayfield color DENOTING 2's TURN NEXT*/
-                scorePlayerOne.setBackgroundResource(scorePlayer_idle);
-                scorePlayerTwo.setBackgroundResource(scorePlayer_playing);
+                scorePlayerOneParent.setBackgroundResource(scorePlayer_idle);
+                scorePlayerTwoParent.setBackgroundResource(scorePlayer_playing);
             }
 
             listOfCellsAlreadySet.add(view.getId()); // Once Clicked the value of the cell can't be changed
@@ -796,15 +800,15 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
                     gameResultMessageBox.setText("PLAYER 2 WON");
                     textViewPlayer2.setBackgroundResource(playerIdle);
                     textViewPlayer1.setBackgroundResource(playerIdle);
-                    scorePlayerOne.setBackgroundResource(scorePlayer_idle);
-                    scorePlayerTwo.setBackgroundResource(scorePlayer_idle);
+                    scorePlayerOneParent.setBackgroundResource(scorePlayer_idle);
+                    scorePlayerTwoParent.setBackgroundResource(scorePlayer_idle);
                 }else {
                     mScorePlayer1++;
                     gameResultMessageBox.setText("PLAYER 1 WON");
                     textViewPlayer2.setBackgroundResource(playerIdle);
                     textViewPlayer1.setBackgroundResource(playerIdle);
-                    scorePlayerOne.setBackgroundResource(scorePlayer_idle);
-                    scorePlayerTwo.setBackgroundResource(scorePlayer_idle);
+                    scorePlayerOneParent.setBackgroundResource(scorePlayer_idle);
+                    scorePlayerTwoParent.setBackgroundResource(scorePlayer_idle);
                     }
                 if(mCurrentRound<mRound){
                     mButtonNext.setVisibility(View.VISIBLE);
@@ -874,8 +878,8 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
                 imageview.setImageResource(Player2_symbol);
                 textViewPlayer2.setBackgroundResource(playerIdle); // SET TO scorerowfield color DENOTING 2 HAS GIVEN ITS CHOICE
                 textViewPlayer1.setBackgroundResource(playerPlaying);/*SET TO gameplayfield color DENOTING 1's TURN NEXT*/
-                scorePlayerOne.setBackgroundResource(scorePlayer_playing);
-                scorePlayerTwo.setBackgroundResource(scorePlayer_idle);
+                scorePlayerOneParent.setBackgroundResource(scorePlayer_playing);
+                scorePlayerTwoParent.setBackgroundResource(scorePlayer_idle);
                 //clickCount++;
                 listOfCellsAlreadySet.add(view.getId()); // Once Clicked the value of the cell can't be changed
                 cellChoiceListForAi.remove((Integer)cellMap.get(view.getId())); //Remove the already clicked cell by index
@@ -896,15 +900,15 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
                         gameResultMessageBox.setText("PLAYER 2 WON");
                         textViewPlayer2.setBackgroundResource(playerIdle);
                         textViewPlayer1.setBackgroundResource(playerIdle);
-                        scorePlayerOne.setBackgroundResource(scorePlayer_idle);
-                        scorePlayerTwo.setBackgroundResource(scorePlayer_idle);
+                        scorePlayerOneParent.setBackgroundResource(scorePlayer_idle);
+                        scorePlayerTwoParent.setBackgroundResource(scorePlayer_idle);
                     } else {
                         mScorePlayer1++;
                         gameResultMessageBox.setText("S.A.I WON");
                         textViewPlayer2.setBackgroundResource(playerIdle);
                         textViewPlayer1.setBackgroundResource(playerIdle);
-                        scorePlayerOne.setBackgroundResource(scorePlayer_idle);
-                        scorePlayerTwo.setBackgroundResource(scorePlayer_idle);
+                        scorePlayerOneParent.setBackgroundResource(scorePlayer_idle);
+                        scorePlayerTwoParent.setBackgroundResource(scorePlayer_idle);
                     }
                     if (mCurrentRound < mRound) {
                         mButtonNext.setVisibility(View.VISIBLE);
@@ -929,8 +933,8 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
                     gameResultMessageBox.setText("IT'S A TIE");
                     textViewPlayer2.setBackgroundResource(playerIdle);
                     textViewPlayer1.setBackgroundResource(playerIdle);
-                    scorePlayerOne.setBackgroundResource(scorePlayer_idle);
-                    scorePlayerTwo.setBackgroundResource(scorePlayer_idle);
+                    scorePlayerOneParent.setBackgroundResource(scorePlayer_idle);
+                    scorePlayerTwoParent.setBackgroundResource(scorePlayer_idle);
                     mScorePlayer2 += 0;//No increment of score on tie
                     mScorePlayer1 += 0;//No increment of score on tie
                     if (mCurrentRound < mRound) {
@@ -959,15 +963,15 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
                     gameResultMessageBox.setText("PLAYER 2 WON");
                     textViewPlayer2.setBackgroundResource(playerIdle);
                     textViewPlayer1.setBackgroundResource(playerIdle);
-                    scorePlayerOne.setBackgroundResource(scorePlayer_idle);
-                    scorePlayerTwo.setBackgroundResource(scorePlayer_idle);
+                    scorePlayerOneParent.setBackgroundResource(scorePlayer_idle);
+                    scorePlayerTwoParent.setBackgroundResource(scorePlayer_idle);
                 } else {
                     mScorePlayer1++;
                     gameResultMessageBox.setText("S.A.I WON");
                     textViewPlayer2.setBackgroundResource(playerIdle);
                     textViewPlayer1.setBackgroundResource(playerIdle);
-                    scorePlayerOne.setBackgroundResource(scorePlayer_idle);
-                    scorePlayerTwo.setBackgroundResource(scorePlayer_idle);
+                    scorePlayerOneParent.setBackgroundResource(scorePlayer_idle);
+                    scorePlayerTwoParent.setBackgroundResource(scorePlayer_idle);
                 }
                 if (mCurrentRound < mRound) {
                     mButtonNext.setVisibility(View.VISIBLE);
@@ -991,8 +995,8 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
                 gameResultMessageBox.setText("IT'S A TIE");
                 textViewPlayer2.setBackgroundResource(playerIdle);
                 textViewPlayer1.setBackgroundResource(playerIdle);
-                scorePlayerOne.setBackgroundResource(scorePlayer_idle);
-                scorePlayerTwo.setBackgroundResource(scorePlayer_idle);
+                scorePlayerOneParent.setBackgroundResource(scorePlayer_idle);
+                scorePlayerTwoParent.setBackgroundResource(scorePlayer_idle);
                 mScorePlayer2 += 0;//No increment of score on tie
                 mScorePlayer1 += 0;//No increment of score on tie
                 if (mCurrentRound < mRound) {
@@ -1018,8 +1022,8 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
                         imageView.setImageResource(Player1_symbol);
                         textViewPlayer1.setBackgroundResource(playerIdle);// SET TO scorerowfield color DENOTING 1 HAS GIVEN ITS CHOICE
                         textViewPlayer2.setBackgroundResource(playerPlaying);/*SET TO gameplayfield color DENOTING 2's TURN NEXT*/
-                        scorePlayerOne.setBackgroundResource(scorePlayer_idle);
-                        scorePlayerTwo.setBackgroundResource(scorePlayer_playing);
+                        scorePlayerOneParent.setBackgroundResource(scorePlayer_idle);
+                        scorePlayerTwoParent.setBackgroundResource(scorePlayer_playing);
                         clickCount++;
                         listOfCellsAlreadySet.add(view.getId()); // Once Clicked the value of the cell can't be changed
                         cellChoiceListForAi.remove((Integer) cellMap.get(view.getId())); // nedded to type-cast it ; otherwise the param was taken as an index (hence, arrayIndexOutOfBoundExcep. XD)
@@ -1036,15 +1040,15 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
                                 gameResultMessageBox.setText("S.A.I WON");
                                 textViewPlayer2.setBackgroundResource(playerIdle);
                                 textViewPlayer1.setBackgroundResource(playerIdle);
-                                scorePlayerOne.setBackgroundResource(scorePlayer_idle);
-                                scorePlayerTwo.setBackgroundResource(scorePlayer_idle);
+                                scorePlayerOneParent.setBackgroundResource(scorePlayer_idle);
+                                scorePlayerTwoParent.setBackgroundResource(scorePlayer_idle);
                             } else {
                                 mScorePlayer1++;
                                 gameResultMessageBox.setText("PLAYER 1 WON");
                                 textViewPlayer2.setBackgroundResource(playerIdle);
                                 textViewPlayer1.setBackgroundResource(playerIdle);
-                                scorePlayerOne.setBackgroundResource(scorePlayer_idle);
-                                scorePlayerTwo.setBackgroundResource(scorePlayer_idle);
+                                scorePlayerOneParent.setBackgroundResource(scorePlayer_idle);
+                                scorePlayerTwoParent.setBackgroundResource(scorePlayer_idle);
                             }
                             if (mCurrentRound < mRound) {
                                 mButtonNext.setVisibility(View.VISIBLE);
@@ -1068,8 +1072,8 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
                             gameResultMessageBox.setText("IT'S A TIE");
                             textViewPlayer2.setBackgroundResource(playerIdle);
                             textViewPlayer1.setBackgroundResource(playerIdle);
-                            scorePlayerOne.setBackgroundResource(scorePlayer_idle);
-                            scorePlayerTwo.setBackgroundResource(scorePlayer_idle);
+                            scorePlayerOneParent.setBackgroundResource(scorePlayer_idle);
+                            scorePlayerTwoParent.setBackgroundResource(scorePlayer_idle);
                             mScorePlayer2 += 0;//No increment of score on tie
                             mScorePlayer1 += 0;//No increment of score on tie
                             if (mCurrentRound < mRound) {
@@ -1109,15 +1113,15 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
                                     gameResultMessageBox.setText("S.A.I WON");
                                     textViewPlayer2.setBackgroundResource(playerIdle);
                                     textViewPlayer1.setBackgroundResource(playerIdle);
-                                    scorePlayerOne.setBackgroundResource(scorePlayer_idle);
-                                    scorePlayerTwo.setBackgroundResource(scorePlayer_idle);
+                                    scorePlayerOneParent.setBackgroundResource(scorePlayer_idle);
+                                    scorePlayerTwoParent.setBackgroundResource(scorePlayer_idle);
                                 } else {
                                     mScorePlayer1++;
                                     gameResultMessageBox.setText("PLAYER 1 WON");
                                     textViewPlayer2.setBackgroundResource(playerIdle);
                                     textViewPlayer1.setBackgroundResource(playerIdle);
-                                    scorePlayerOne.setBackgroundResource(scorePlayer_idle);
-                                    scorePlayerTwo.setBackgroundResource(scorePlayer_idle);
+                                    scorePlayerOneParent.setBackgroundResource(scorePlayer_idle);
+                                    scorePlayerTwoParent.setBackgroundResource(scorePlayer_idle);
                                 }
                                 if (mCurrentRound < mRound) {
                                     mButtonNext.setVisibility(View.VISIBLE);
@@ -1140,8 +1144,8 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
                                 gameResultMessageBox.setText("IT'S A TIE");
                                 textViewPlayer2.setBackgroundResource(playerIdle);
                                 textViewPlayer1.setBackgroundResource(playerIdle);
-                                scorePlayerOne.setBackgroundResource(scorePlayer_idle);
-                                scorePlayerTwo.setBackgroundResource(scorePlayer_idle);
+                                scorePlayerOneParent.setBackgroundResource(scorePlayer_idle);
+                                scorePlayerTwoParent.setBackgroundResource(scorePlayer_idle);
                                 mScorePlayer2 += 0;//No increment of score on tie
                                 mScorePlayer1 += 0;//No increment of score on tie
                                 if (mCurrentRound < mRound) {
@@ -1178,7 +1182,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         initializeCellChoiceListForAi();
 
         textViewPlayer1.setBackgroundResource(playerPlaying);// SET TO INITIAL COLOR DENOTING 1's TURN AT THE BEGINNING OF GAME
-        scorePlayerOne.setBackgroundResource(scorePlayer_playing);
+        scorePlayerOneParent.setBackgroundResource(scorePlayer_playing);
 
         mChoiceList.setEnabled(false);
 
@@ -1241,8 +1245,8 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
 
         textViewPlayer2.setBackgroundResource(playerIdle);
         textViewPlayer1.setBackgroundResource(playerIdle);
-        scorePlayerOne.setBackgroundResource(scorePlayer_idle);
-        scorePlayerTwo.setBackgroundResource(scorePlayer_idle);
+        scorePlayerOneParent.setBackgroundResource(scorePlayer_idle);
+        scorePlayerTwoParent.setBackgroundResource(scorePlayer_idle);
 
         initialSetupBeforeEveryMatch();
         refreshTheCellsForNextRound();
@@ -1786,8 +1790,8 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         imageview.setImageResource(Player2_symbol);
         textViewPlayer2.setBackgroundResource(playerIdle); // SET TO scorerowfield color DENOTING 2 HAS GIVEN ITS CHOICE
         textViewPlayer1.setBackgroundResource(playerPlaying);/*SET TO gameplayfield color DENOTING 1's TURN NEXT*/
-        scorePlayerOne.setBackgroundResource(scorePlayer_playing);
-        scorePlayerTwo.setBackgroundResource(scorePlayer_idle);
+        scorePlayerOneParent.setBackgroundResource(scorePlayer_playing);
+        scorePlayerTwoParent.setBackgroundResource(scorePlayer_idle);
         clickCount++;
         listOfCellsAlreadySet.add(cellIdChoice); // Once Clicked the value of the cell can't be changed
         cellChoiceListForAi.remove(numRandomIndex); //Remove the already clicked cell by index
@@ -1857,8 +1861,8 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         imageview.setImageResource(Player2_symbol);
         textViewPlayer2.setBackgroundResource(playerIdle); // SET TO scorerowfield color DENOTING 2 HAS GIVEN ITS CHOICE
         textViewPlayer1.setBackgroundResource(playerPlaying);/*SET TO gameplayfield color DENOTING 1's TURN NEXT*/
-        scorePlayerOne.setBackgroundResource(scorePlayer_playing);
-        scorePlayerTwo.setBackgroundResource(scorePlayer_idle);
+        scorePlayerOneParent.setBackgroundResource(scorePlayer_playing);
+        scorePlayerTwoParent.setBackgroundResource(scorePlayer_idle);
         clickCount++;
         listOfCellsAlreadySet.add(cellIdChoice); // Once Clicked the value of the cell can't be changed
         cellChoiceListForAi.remove(cellChoiceListForAi.indexOf(cellChoice)); //Remove the already clicked cell by index
@@ -2035,8 +2039,8 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         imageview.setImageResource(Player1_symbol);
         textViewPlayer1.setBackgroundResource(playerIdle); // SET TO scorerowfield color DENOTING 2 HAS GIVEN ITS CHOICE
         textViewPlayer2.setBackgroundResource(playerPlaying);/*SET TO gameplayfield color DENOTING 1's TURN NEXT*/
-        scorePlayerTwo.setBackgroundResource(scorePlayer_playing);
-        scorePlayerOne.setBackgroundResource(scorePlayer_idle);
+        scorePlayerTwoParent.setBackgroundResource(scorePlayer_playing);
+        scorePlayerOneParent.setBackgroundResource(scorePlayer_idle);
 
         listOfCellsAlreadySet.add(cellIdChoice); // Once Clicked the value of the cell can't be changed
 
