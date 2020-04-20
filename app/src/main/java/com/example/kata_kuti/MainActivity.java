@@ -111,6 +111,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
     public static boolean isSymbolTurnedTrue;
 
     int Player1_symbol,Player2_symbol;
+    ImageView Player1_symbol_image,Player2_symbol_image;
 
     /*
     * Variables specially declared and set only for THEME CHANGE purpose
@@ -186,6 +187,8 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         scorePlayerTwo = findViewById(R.id.textviewscore2);
         scorePlayerOneParent = findViewById(R.id.textviewscore1_parent);
         scorePlayerTwoParent = findViewById(R.id.textviewscore2_parent);
+        Player1_symbol_image = findViewById(R.id.imageviewplayer1_symbol);
+        Player2_symbol_image = findViewById(R.id.imageviewplayer2_symbol);
         scorePlayerOneTitle = findViewById(R.id.textviewplayer1);
         scorePlayerTwoTitle = findViewById(R.id.textviewplayer2);
         spinner = findViewById(R.id.rounds);
@@ -719,10 +722,45 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
 
     }
 
+    /*
+    * THE PLAYERS MUST KNOW THEIR CURRENT CHOSEN SYMBOLS
+    * SOB POSSIBLE CASES ER TOH DHYAN RAKHTE E HOBE ..TAI NA?
+    *
+    * */
+    private void maintainSymbolImage(){
+        if(mThemeChoice.equals("fire")){
+            maintainSymbol(R.drawable.kata_fire,R.drawable.kuti_fire);
+
+        }else if(mThemeChoice.equals("water")){
+            maintainSymbol(R.drawable.kata_water,R.drawable.kuti_water);
+
+        }else if(mThemeChoice.equals("earth")){
+            maintainSymbol(R.drawable.kata_earth,R.drawable.kuti_earth);
+        }
+    }
+
+    private void maintainSymbol(int vkata, int vkuti){
+        if(isSymbolTurnedTrue){
+            Player1_symbol_image.setImageResource(vkata);
+            Player2_symbol_image.setImageResource(vkuti);
+
+        }else{
+            Player1_symbol_image.setImageResource(vkuti);
+            Player2_symbol_image.setImageResource(vkata);
+        }
+    }
+
+    /*
+    *
+    * Depending on choice of user, User may opt for any one of the symbols (Kata/Kuti)
+    * BUT THEY CAN'T CHANGE IT IN MIDDLE OF A MATCH GOING ON.. BUT CAN CHANGE IN BETWEEN ROUNDS OR GAMES
+    * SCORES WILL REMAIN UNAFFECTED (I MEAN ..THATS IS THE POINT RIGHT!!! XD)
+    * */
     private void maintainSymbol(){
         if(isSymbolTurnedTrue){
             Player1_symbol = R.drawable.kata;
             Player2_symbol = R.drawable.kuti;
+
         }else{
             Player1_symbol = R.drawable.kuti;
             Player2_symbol = R.drawable.kata;
@@ -745,6 +783,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         gameScorePlayer1.setTextSize(TypedValue.COMPLEX_UNIT_SP,72);
 
         maintainSymbol();
+        maintainSymbolImage();
 
         mStringScorePlayer1  = mScorePlayer1+"";
         mStringScorePlayer2 = mScorePlayer2+"";
@@ -1200,6 +1239,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         * */
 
             maintainSymbol();
+            maintainSymbolImage();
             mIsMatchInProgress = true;
             clickCount = 0;
             foundWinner = false;
@@ -1242,6 +1282,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         }
 
         maintainSymbol();
+        maintainSymbolImage();
 
         textViewPlayer2.setBackgroundResource(playerIdle);
         textViewPlayer1.setBackgroundResource(playerIdle);
@@ -1612,7 +1653,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
     protected void onRestart() {
         super.onRestart();
 
-        if(!mIsMatchInProgress) {
+        if(!mIsMatchInProgress) { // ONLY APPLY THESE CHANGES AFTER COMING FROM SETTINGS SCREEN IF A MATCH IS NOT IN PROGRESS
             if (isTwoPlayerModeAllowed) {
                 textViewPlayer1.setText("PLAYER 1");
                 textViewPlayer2.setText("PLAYER 2");
@@ -1627,8 +1668,11 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
                 }
 
             }
+
+            maintainSymbolImage();
         }
         //Toast.makeText(MainActivity.this,"onRestart()",Toast.LENGTH_SHORT).show();
+
     }
 
     /*
