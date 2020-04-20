@@ -107,7 +107,9 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
     public static boolean isNotificationSoundAllowed;
     public static boolean isNotificationVibrationAllowed;
     public static boolean isTwoPlayerModeAllowed;
+    public static boolean isSymbolTurnedTrue;
 
+    int Player1_symbol,Player2_symbol;
 
     /*
     * Variables specially declared and set only for THEME CHANGE purpose
@@ -121,6 +123,8 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
     Button start;
     int playerPlaying,playerIdle;
     int scorePlayer_playing, scorePlayer_idle;
+
+
 
 
 
@@ -339,6 +343,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         isNotificationSoundAllowed = sharedPreferences.getBoolean("sound",true);
         isNotificationVibrationAllowed = sharedPreferences.getBoolean("vibration",true);
         isTwoPlayerModeAllowed = sharedPreferences.getBoolean("gamemode",true);
+        isSymbolTurnedTrue = sharedPreferences.getBoolean("symbol",true);
 
         loadColorFromPreferences(sharedPreferences);
 
@@ -374,6 +379,8 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
             isTwoPlayerModeAllowed = sharedPreferences.getBoolean("gamemode",true);
         }else if(s.equals("difficulty")){
             loadDifficultyFromPreferences(sharedPreferences);
+        }else if(s.equals("symbol")){
+            isSymbolTurnedTrue = sharedPreferences.getBoolean("symbol",true);
         }
     }
 
@@ -708,6 +715,16 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
 
     }
 
+    private void maintainSymbol(){
+        if(isSymbolTurnedTrue){
+            Player1_symbol = R.drawable.kata;
+            Player2_symbol = R.drawable.kuti;
+        }else{
+            Player1_symbol = R.drawable.kuti;
+            Player2_symbol = R.drawable.kata;
+        }
+    }
+
     /*
      * Function name is self-explanatory of it's purpose
      * */
@@ -722,6 +739,8 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
 
         gameScorePlayer2.setTextSize(TypedValue.COMPLEX_UNIT_SP,72);
         gameScorePlayer1.setTextSize(TypedValue.COMPLEX_UNIT_SP,72);
+
+        maintainSymbol();
 
         mStringScorePlayer1  = mScorePlayer1+"";
         mStringScorePlayer2 = mScorePlayer2+"";
@@ -752,7 +771,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
             * */
             if(clickCount%2 == 0){
                 Player2.add(cellMap.get(view.getId()));
-                imageView.setImageResource(R.drawable.kuti);
+                imageView.setImageResource(Player2_symbol);
                 textViewPlayer2.setBackgroundResource(playerIdle); // SET TO scorerowfield color DENOTING 2 HAS GIVEN ITS CHOICE
                 textViewPlayer1.setBackgroundResource(playerPlaying);/*SET TO gameplayfield color DENOTING 1's TURN NEXT*/
                 scorePlayerOne.setBackgroundResource(scorePlayer_playing);
@@ -760,7 +779,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
             }
             else{
                 Player1.add(cellMap.get(view.getId()));
-                imageView.setImageResource(R.drawable.kata);
+                imageView.setImageResource(Player1_symbol);
                 textViewPlayer1.setBackgroundResource(playerIdle);// SET TO scorerowfield color DENOTING 1 HAS GIVEN ITS CHOICE
                 textViewPlayer2.setBackgroundResource(playerPlaying);/*SET TO gameplayfield color DENOTING 2's TURN NEXT*/
                 scorePlayerOne.setBackgroundResource(scorePlayer_idle);
@@ -852,7 +871,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
                 ImageView imageview = findViewById(view.getId()); // select the image view
                 Player2.add(cellMap.get(view.getId()));           // add it to the list of Player 2 choosen cells (since winning-logic is same)
 
-                imageview.setImageResource(R.drawable.kuti);
+                imageview.setImageResource(Player2_symbol);
                 textViewPlayer2.setBackgroundResource(playerIdle); // SET TO scorerowfield color DENOTING 2 HAS GIVEN ITS CHOICE
                 textViewPlayer1.setBackgroundResource(playerPlaying);/*SET TO gameplayfield color DENOTING 1's TURN NEXT*/
                 scorePlayerOne.setBackgroundResource(scorePlayer_playing);
@@ -996,7 +1015,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
             } else  /*FROM HERE THE LOGIC IS ONLY FOR HARD AND EASY MODE OF AI.. SINCE THE USER'S TURN WILL BE FIRST.*/
                     {
                         Player1.add(cellMap.get(view.getId()));
-                        imageView.setImageResource(R.drawable.kata);
+                        imageView.setImageResource(Player1_symbol);
                         textViewPlayer1.setBackgroundResource(playerIdle);// SET TO scorerowfield color DENOTING 1 HAS GIVEN ITS CHOICE
                         textViewPlayer2.setBackgroundResource(playerPlaying);/*SET TO gameplayfield color DENOTING 2's TURN NEXT*/
                         scorePlayerOne.setBackgroundResource(scorePlayer_idle);
@@ -1175,6 +1194,8 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         * Initialize all the variables to their initials
         * for individual Rounds
         * */
+
+            maintainSymbol();
             mIsMatchInProgress = true;
             clickCount = 0;
             foundWinner = false;
@@ -1215,6 +1236,8 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
             textViewPlayer2.setText("PLAYER 2");
             Toast.makeText(MainActivity.this,"Two-Player mode active",Toast.LENGTH_SHORT).show();
         }
+
+        maintainSymbol();
 
         textViewPlayer2.setBackgroundResource(playerIdle);
         textViewPlayer1.setBackgroundResource(playerIdle);
@@ -1760,7 +1783,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         ImageView imageview = findViewById(cellIdChoice);// select the image view
         Player2.add(cellMap.get(cellIdChoice));           // add it to the list of Player 2 choosen cells (since winning-logic is same)
 
-        imageview.setImageResource(R.drawable.kuti);
+        imageview.setImageResource(Player2_symbol);
         textViewPlayer2.setBackgroundResource(playerIdle); // SET TO scorerowfield color DENOTING 2 HAS GIVEN ITS CHOICE
         textViewPlayer1.setBackgroundResource(playerPlaying);/*SET TO gameplayfield color DENOTING 1's TURN NEXT*/
         scorePlayerOne.setBackgroundResource(scorePlayer_playing);
@@ -1831,7 +1854,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         ImageView imageview = findViewById(cellIdChoice);// select the image view
         Player2.add(cellMap.get(cellIdChoice));           // add it to the list of Player 2 choosen cells (since winning-logic is same)
 
-        imageview.setImageResource(R.drawable.kuti);
+        imageview.setImageResource(Player2_symbol);
         textViewPlayer2.setBackgroundResource(playerIdle); // SET TO scorerowfield color DENOTING 2 HAS GIVEN ITS CHOICE
         textViewPlayer1.setBackgroundResource(playerPlaying);/*SET TO gameplayfield color DENOTING 1's TURN NEXT*/
         scorePlayerOne.setBackgroundResource(scorePlayer_playing);
@@ -2009,7 +2032,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         ImageView imageview = findViewById(cellIdChoice);// select the image view
         Player1.add(cellMap.get(cellIdChoice));           // add it to the list of Player 2 choosen cells (since winning-logic is same)
 
-        imageview.setImageResource(R.drawable.kata);
+        imageview.setImageResource(Player1_symbol);
         textViewPlayer1.setBackgroundResource(playerIdle); // SET TO scorerowfield color DENOTING 2 HAS GIVEN ITS CHOICE
         textViewPlayer2.setBackgroundResource(playerPlaying);/*SET TO gameplayfield color DENOTING 1's TURN NEXT*/
         scorePlayerTwo.setBackgroundResource(scorePlayer_playing);

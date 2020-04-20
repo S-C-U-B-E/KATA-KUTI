@@ -2,6 +2,16 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <PreferenceCategory android:title="Kata/Kuti" >
+        <SwitchPreference
+            android:defaultValue="true"
+            android:key="symbol"
+            android:summaryOn="PLAYER 1- 'X'\nPLAYER 2- 'O'"
+            android:summaryOff="PLAYER 1- 'O'\nPLAYER 2- 'X'"
+            android:title="Symbol"
+            android:icon="@drawable/ic_settings_katakuti" />
+    </PreferenceCategory>
+
     <PreferenceCategory android:title="Game Mode" app:allowDividerBelow="true" android:key="mode"
         android:summary="(Difficulty applicable for One-Player mode!)">
 
