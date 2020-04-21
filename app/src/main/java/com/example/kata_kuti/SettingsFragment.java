@@ -96,21 +96,20 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Shared
     {
         String key = preference.getKey();
 
-        if(key.equals("feedback")){
+        if(key.equals("feedback"))
+        {
 
             openGoogleForm(googleFormFeedback);
 
             return true;
-        }
-
-        if(key.equals("about_me")){
+        }else if(key.equals("about_me"))
+        {
 
             aboutMePressed();
 
             return true;
-        }
-
-        if(key.equals("about_game")){
+        }else if(key.equals("about_game"))
+        {
 
             aboutGamePressed();
 
@@ -202,40 +201,3 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Shared
 
 
 }
-
-
-/*
-* public void onClickShareTextButton(View v) {
-        String shareQuery = query.getText().toString();
-
-        if (!shareQuery.isEmpty()) {
-
-                String mimeType = "text/plain";
-                String title = "Learn How To Share!";
-                String text = shareQuery;
-
-                shareText(mimeType,title,text);
-
-        } else {
-            Toast.makeText(this, "Enter a text to send!!!", Toast.LENGTH_SHORT).show();
-        }
-    }
-*
-* */
-
-/*
-* private void shareText(String mimeType, String title, String text){
-
-       Intent intent = ShareCompat.IntentBuilder.from(this).setChooserTitle(title).setType(mimeType).setText(text).getIntent();
-
-        if(null != intent.resolveActivity(getPackageManager())){
-
-            startActivity(intent);
-
-        }else {
-            Toast.makeText(this, "No such App found!!", Toast.LENGTH_SHORT).show();
-        }
-
-    }
-*
-* */
