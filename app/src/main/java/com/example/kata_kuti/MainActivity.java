@@ -110,7 +110,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
     public static boolean isTwoPlayerModeAllowed;
     public static boolean isSymbolTurnedTrue;
 
-
+    public static boolean isUserInSettingsScreen;
 
     int Player1_symbol,Player2_symbol;
     ImageView Player1_symbol_image,Player2_symbol_image;
@@ -211,6 +211,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
 
         setCustomColor(mThemeChoice);
 
+        isUserInSettingsScreen = false;
         isSettingsScreenOpened = false;
         mWasOnStopCalled = false;
         mRound = 1;
@@ -1653,6 +1654,8 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
     @Override
     protected void onRestart() {
         super.onRestart();
+
+        isUserInSettingsScreen = false;
 
         if(!mIsMatchInProgress) { // ONLY APPLY THESE CHANGES AFTER COMING FROM SETTINGS SCREEN IF A MATCH IS NOT IN PROGRESS
             if (isTwoPlayerModeAllowed) {

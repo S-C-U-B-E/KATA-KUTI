@@ -13,6 +13,7 @@ import androidx.preference.CheckBoxPreference;
 
 import static com.example.kata_kuti.MainActivity.isNotificationAllowed;
 import static com.example.kata_kuti.MainActivity.isSettingsScreenOpened;
+import static com.example.kata_kuti.MainActivity.isUserInSettingsScreen;
 import static com.example.kata_kuti.MainActivity.mIsMatchInProgress;
 import static com.example.kata_kuti.MainActivity.mThemeChoice;
 
@@ -23,6 +24,8 @@ public class SettingsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        isUserInSettingsScreen = true;
 
         if(mThemeChoice.equals("fire")){
             setTheme(R.style.SettingAppTheme_fire);
@@ -76,9 +79,6 @@ public class SettingsActivity extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
 
-        if(mIsMatchInProgress && isNotificationAllowed && !isSettingsScreenOpened ){
-            NotificationUtils.remindUserOfTheOnGoingMatchFromSettings(SettingsActivity.this);}
-
         Toast.makeText(SettingsActivity.this,"stngs onPause()",Toast.LENGTH_SHORT).show();
 
     }
@@ -86,6 +86,7 @@ public class SettingsActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+
         Toast.makeText(SettingsActivity.this,"stngs onStart()",Toast.LENGTH_SHORT).show();
 
     }
@@ -100,6 +101,11 @@ public class SettingsActivity extends AppCompatActivity {
     @Override
     protected void onStop() {
         super.onStop();
+
+        if(mIsMatchInProgress && isNotificationAllowed && isUserInSettingsScreen ){
+            NotificationUtils.remindUserOfTheOnGoingMatchFromSettings(SettingsActivity.this);}
+
+
         Toast.makeText(SettingsActivity.this,"stngs onStop()",Toast.LENGTH_SHORT).show();
     }
 
