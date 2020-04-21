@@ -41,7 +41,7 @@ public class NotificationUtils {
         {
             NotificationChannel mChannel = new NotificationChannel(
                     MATCH_IN_PROGRESS_NOTIFICATION_CHANNEL_ID,
-                    "MATCH IN PROGRESS CHANNEL",
+                    "MATCH IN PROGRESS",
                     NotificationManager.IMPORTANCE_HIGH);
 
             notificationManager.createNotificationChannel(mChannel);
@@ -86,6 +86,66 @@ public class NotificationUtils {
 
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN
             && Build.VERSION.SDK_INT < Build.VERSION_CODES.O){
+            notificationBuilder.setPriority(NotificationCompat.PRIORITY_HIGH); // FOR VERSIONS ABOVE JELLY_BEAN AND BELOW OREO
+        }
+
+        notificationManager.notify(MATCH_IN_PROGRESS_NOTIFICATION_ID, notificationBuilder.build());
+    }
+
+    public static void remindUserOfTheOnGoingMatchFromSettings(Context context){
+
+        NotificationManager notificationManager = (NotificationManager)
+                context.getSystemService(Context.NOTIFICATION_SERVICE);  //Getting Notification Service
+
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) // Since this is not available below Oreo and stuff (I will provide links!!!)
+        {
+            NotificationChannel mChannel = new NotificationChannel(
+                    MATCH_IN_PROGRESS_NOTIFICATION_CHANNEL_ID,
+                    "MATCH IN PROGRESS FROM NOTIFICATION",
+                    NotificationManager.IMPORTANCE_HIGH);
+
+            notificationManager.createNotificationChannel(mChannel);
+        }
+
+        /*
+         * This next 4 lines of code is the golden egg for me... i have to study those more ..
+         * ACTION: TO RESUME THE GAME WHERE LEFT
+         * */
+        Intent resultIntent = new Intent(context, SettingsActivity.class);
+        resultIntent.setAction(Intent.ACTION_MAIN);
+        resultIntent.addCategory(Intent.CATEGORY_LAUNCHER);
+
+        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0,
+                resultIntent, 0);
+
+        /*
+         * ACTION: FOR THE "IGNORE" ACTION BUTTON TO TASK
+         * */
+        Intent broadCastIntent = new Intent(context,NotificationReceiver.class);
+        PendingIntent actionIntent = PendingIntent.getBroadcast(context,0,broadCastIntent,PendingIntent.FLAG_UPDATE_CURRENT);
+
+        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(context, MATCH_IN_PROGRESS_NOTIFICATION_CHANNEL_ID)
+                .setColor(ContextCompat.getColor(context, R.color.colorPrimary_fire))
+                .setSmallIcon(R.drawable.ic_launcher_background)
+                .setContentTitle("Kata Kuti")
+                .setContentText("Match in Progress..")
+                .setStyle(new NotificationCompat.BigTextStyle().bigText("Current match is in progress... Tap here to resume!!"))
+                .setContentIntent(pendingIntent)
+                .setOnlyAlertOnce(true)
+                .addAction(R.drawable.ic_notification_action,"IGNORE",actionIntent)
+                .setAutoCancel(true);
+
+        if(MainActivity.isNotificationVibrationAllowed){
+            notificationBuilder.setVibrate(new long[] { 0, 200, 300, 200, 300 });
+        }
+
+        if(MainActivity.isNotificationSoundAllowed){
+            notificationBuilder.setDefaults(Notification.DEFAULT_SOUND);
+        }
+
+
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN
+                && Build.VERSION.SDK_INT < Build.VERSION_CODES.O){
             notificationBuilder.setPriority(NotificationCompat.PRIORITY_HIGH); // FOR VERSIONS ABOVE JELLY_BEAN AND BELOW OREO
         }
 

@@ -21,7 +21,9 @@
         <activity
             android:name=".SettingsActivity"
             android:theme="@style/SettingAppTheme_water"
+            android:screenOrientation="portrait"
             android:label="Settings"
+            android:launchMode="singleInstance"
             android:parentActivityName=".MainActivity">
                 <meta-data
                     android:name="android.support.PARENT_ACTIVITY"

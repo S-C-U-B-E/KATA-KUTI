@@ -11,6 +11,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ShareCompat;
 import androidx.preference.CheckBoxPreference;
 
+import static com.example.kata_kuti.MainActivity.isNotificationAllowed;
+import static com.example.kata_kuti.MainActivity.isSettingsScreenOpened;
+import static com.example.kata_kuti.MainActivity.mIsMatchInProgress;
 import static com.example.kata_kuti.MainActivity.mThemeChoice;
 
 public class SettingsActivity extends AppCompatActivity {
@@ -72,6 +75,10 @@ public class SettingsActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
+
+        if(mIsMatchInProgress && isNotificationAllowed && !isSettingsScreenOpened ){
+            NotificationUtils.remindUserOfTheOnGoingMatchFromSettings(SettingsActivity.this);}
+
         Toast.makeText(SettingsActivity.this,"stngs onPause()",Toast.LENGTH_SHORT).show();
 
     }
@@ -99,12 +106,18 @@ public class SettingsActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+
+        NotificationUtils.clearAllNotifications(SettingsActivity.this);
+
         Toast.makeText(SettingsActivity.this,"stngs onDestroy()",Toast.LENGTH_SHORT).show();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
+
+        NotificationUtils.clearAllNotifications(SettingsActivity.this);
+
         Toast.makeText(SettingsActivity.this,"stngs onResume()",Toast.LENGTH_SHORT).show();
     }
 }

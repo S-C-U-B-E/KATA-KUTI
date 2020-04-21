@@ -101,14 +101,16 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
     /** Handles audio focus when playing a sound file */
     private AudioManager mAudioManager;
 
-    private boolean isSettingsScreenOpened;
+    static public boolean isSettingsScreenOpened;
     private boolean isMusicAllowed;
     private boolean isApplauseAllowed;
-    private boolean isNotificationAllowed;
+    public static boolean isNotificationAllowed;
     public static boolean isNotificationSoundAllowed;
     public static boolean isNotificationVibrationAllowed;
     public static boolean isTwoPlayerModeAllowed;
     public static boolean isSymbolTurnedTrue;
+
+
 
     int Player1_symbol,Player2_symbol;
     ImageView Player1_symbol_image,Player2_symbol_image;
