@@ -1,7 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<fragment xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/activity_settings"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:name="com.example.kata_kuti.SettingsFragment"
-    />
+    android:orientation="vertical"
+    android:weightSum="2">
+
+    <fragment
+        android:id="@+id/activity_settings"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1.8"
+        android:name="com.example.kata_kuti.SettingsFragment"
+        />
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.2"
+        android:text="Share your happiness!!"
+        android:textStyle="italic"/>
+</LinearLayout>
