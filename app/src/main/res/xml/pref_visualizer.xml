@@ -115,58 +115,37 @@
 
     </PreferenceCategory>
 
+
     <PreferenceCategory
         android:title="About"
         app:iconSpaceReserved="false"
         android:iconSpaceReserved="false"
-        app:allowDividerBelow="true">
+        android:selectable="false"
+        android:persistent="false"/>
 
-        <Preference
-            android:iconSpaceReserved="false"
-            app:iconSpaceReserved="false"
-            android:selectable="false"
-            android:persistent="false"
-            android:summary="Version  2.0.0\n\n
-The game Kata-Kuti is the most famous game among students,\n
-now you can also play it on your android device, consists of two modes\n
-1. You v/s Your Friend (can be a cat too !!)\n
-2. You v/s Scube Artificial Intelligence ( aka S.A.I );\n\n
 
-S.A.I is pretty good in this game and at times he can even play better.\n
-The rules are the same, but here you can play a match with multiple rounds.\n\n"/>
+    <Preference
+        android:key="about_game"
+        android:title="Version 2.0.0"
+        android:iconSpaceReserved="false"
+        app:iconSpaceReserved="false"
+        android:persistent="false" />
 
-    </PreferenceCategory>
 
-    <PreferenceCategory
+    <Preference
+        android:key="about_me"
         android:title="About Me"
         app:iconSpaceReserved="false"
         android:iconSpaceReserved="false"
-        app:allowDividerBelow="true">
+        android:persistent="false"/>
 
-        <Preference
-            android:iconSpaceReserved="false"
-            app:iconSpaceReserved="false"
-            android:selectable="false"
-            android:persistent="false"
-            android:summary="Hi, I am Shankha Shubhra\n
-i've been learning Android for a year now, this is my first fully working app.\n
-You can overcome your boredom playing the game with your siblings or parents\n
-or,you can also try to beat S.A.I !!\n
-Explore the app, play and enjoy!! hope you like i.\n
-Please don't forget to give a feedback below\n
-Thank You.\n\n"/>
-
-    </PreferenceCategory>
 
     <Preference
+        android:key="feedback"
         android:title="Feedback Form"
-        app:allowDividerBelow="true"
         app:iconSpaceReserved="false"
         android:iconSpaceReserved="false"
         android:summary="Tap to give a feedback!\n(You will be taken to a Google Form!)\nThis will take just a few moments!"
-        android:key="feedback"
-        android:persistent="false">
-
-    </Preference>
+        android:persistent="false"/>
 
 </PreferenceScreen>

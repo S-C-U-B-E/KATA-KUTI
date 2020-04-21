@@ -17,6 +17,9 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.2"
-        android:text="Share your happiness!!"
+        android:text="Sharing is caring!!"
+        android:alpha="66"
+        android:elevation="16dp"
+        android:background="@drawable/button_share_round_water"
         android:textStyle="italic"/>
 </LinearLayout>

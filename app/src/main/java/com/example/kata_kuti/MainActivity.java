@@ -1370,8 +1370,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
      * Show a dialog that warns the user there are unfinished match that will be lost
      * if they continue leaving the editor.
      */
-    private void showUnsavedChangesDialog(
-            DialogInterface.OnClickListener discardButtonClickListener) {
+    private void showUnsavedChangesDialog(DialogInterface.OnClickListener discardButtonClickListener) {
         // Create an AlertDialog.Builder and set the message, and click listeners
         // for the positive and negative response buttons on the dialog.
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
