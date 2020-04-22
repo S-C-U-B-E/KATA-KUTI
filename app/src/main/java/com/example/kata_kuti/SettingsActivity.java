@@ -11,6 +11,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ShareCompat;
 import androidx.preference.CheckBoxPreference;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import static com.example.kata_kuti.MainActivity.isNotificationAllowed;
 import static com.example.kata_kuti.MainActivity.isSettingsScreenOpened;
 import static com.example.kata_kuti.MainActivity.isUserInSettingsScreen;
@@ -37,13 +39,15 @@ public class SettingsActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_settings);
 
-        shareButton = findViewById(R.id.share_button);
-        shareButton.setOnClickListener(new View.OnClickListener() {
+        // Setup FAB to share my app
+        FloatingActionButton share = (FloatingActionButton) findViewById(R.id.share_button);
+        share.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 shareMyApp();
             }
         });
+
 
         Toast.makeText(SettingsActivity.this,"stngs onCreate()",Toast.LENGTH_SHORT).show();
     }

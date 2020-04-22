@@ -1,10 +1,12 @@
 package com.example.kata_kuti;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static com.example.kata_kuti.MainActivity.Player1;
 import static com.example.kata_kuti.MainActivity.Player2;
+import static com.example.kata_kuti.MainActivity.markWonCells;
 import static com.example.kata_kuti.MainActivity.winningSet;
 
 public class WinningLogic {
@@ -25,6 +27,7 @@ public class WinningLogic {
      for(List<Integer> i: winningSet){
          if(Player.containsAll(i)){
              anyWinnigSetFoundAmongTheCellsSetByAPlayer = true;
+             markWonCells = new ArrayList<>(i);
              break;
          }
      }

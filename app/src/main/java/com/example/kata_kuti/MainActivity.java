@@ -12,6 +12,7 @@ import android.content.SharedPreferences;
 import android.graphics.drawable.AnimationDrawable;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.SparseIntArray;
@@ -65,6 +66,8 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
 
     //To store all the possible sets of cells required to Win
      static ArrayList<List<Integer>> winningSet;
+
+     static ArrayList<Integer> markWonCells;
 
     //Stores the choice of the number of rounds the players wanted to play
     //Strores the current Round Number
@@ -1713,106 +1716,6 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         view.startAnimation(myAnim);
     }
 
-    public void setCustomColor(String theme){
-        if(theme.equals("fire")){
-            parentLayoutBackground.setBackgroundColor(ContextCompat.getColor(MainActivity.this, R.color.colorEntireBackground_fire));
-            //scorePlayerOne.setBackgroundResource(R.color.colorScoreAndPlayer_fire);
-            scorePlayerOne.setTextColor(getResources().getColor(R.color.colorText_fire));
-            //scorePlayerTwo.setBackgroundResource(R.color.colorScoreAndPlayer_fire);
-            scorePlayerTwo.setTextColor(getResources().getColor(R.color.colorText_fire));
-            scorePlayerOneTitle.setTextColor(getResources().getColor(R.color.colorText_fire));
-            scorePlayerTwoTitle.setTextColor(getResources().getColor(R.color.colorText_fire));
-
-            scorePlayer_idle = R.drawable.gradient_score_player_idle_fire;
-            scorePlayer_playing = R.drawable.gradient_score_player_playing_fire;
-            playerIdle = R.color.colorScoreAndPlayer_fire;
-            playerPlaying = R.color.colorEntireBackground_fire;
-
-            gameRound.setBackgroundResource(R.color.colorGameAndRound_fire);
-            gameRound.setTextColor(getResources().getColor(R.color.colorText_fire));
-            gameresult.setTextColor(getResources().getColor(R.color.colorText_fire));
-            setupSpinner(R.layout.spinner_item_fire);
-            spinner.setBackgroundResource(R.color.colorScoreAndPlayer_fire);
-            settingsButton.setImageResource(R.drawable.ic_settings_fire);
-            restart.setImageResource(R.drawable.restart_game_fire);
-            next.setImageResource(R.drawable.next_round_fire);
-            start.setBackgroundResource(R.drawable.button_round_fire);
-            setCustomCellColor(R.color.colorGameAndRound_fire);
-
-        }
-        else if(theme.equals("water")) {
-            parentLayoutBackground.setBackgroundColor(ContextCompat.getColor(MainActivity.this, R.color.colorEntireBackground_water));
-
-            scorePlayerOne.setTextColor(getResources().getColor(R.color.colorText_water));
-
-            scorePlayerTwo.setTextColor(getResources().getColor(R.color.colorText_water));
-            scorePlayerOneTitle.setTextColor(getResources().getColor(R.color.colorText_water));
-
-            scorePlayerTwoTitle.setTextColor(getResources().getColor(R.color.colorText_water));
-
-            scorePlayer_idle = R.drawable.gradient_score_player_idle_water;
-            scorePlayer_playing = R.drawable.gradient_score_player_playing_water;
-            playerIdle = R.color.colorScoreAndPlayer_water;
-            playerPlaying = R.color.colorEntireBackground_water;
-
-            gameRound.setBackgroundResource(R.color.colorGameAndRound_water);
-            gameRound.setTextColor(getResources().getColor(R.color.colorText_water));
-            gameresult.setTextColor(getResources().getColor(R.color.colorText_water));
-            setupSpinner(R.layout.spinner_item_water);
-            spinner.setBackgroundResource(R.color.colorScoreAndPlayer_water);
-            settingsButton.setImageResource(R.drawable.ic_settings_water);
-            restart.setImageResource(R.drawable.restart_game_water);
-            next.setImageResource(R.drawable.next_round_water);
-            start.setBackgroundResource(R.drawable.button_round_water);
-            start.setTextColor(getResources().getColor(R.color.colorText_water));
-            setCustomCellColor(R.color.colorGameAndRound_water);
-
-        }
-        else if(theme.equals("earth")){
-            parentLayoutBackground.setBackgroundColor(ContextCompat.getColor(MainActivity.this, R.color.colorEntireBackground_earth));
-            //scorePlayerOne.setBackgroundResource(R.color.colorScoreAndPlayer_earth);
-            scorePlayerOne.setTextColor(getResources().getColor(R.color.colorText_earth));
-            //scorePlayerTwo.setBackgroundResource(R.color.colorScoreAndPlayer_earth);
-            scorePlayerTwo.setTextColor(getResources().getColor(R.color.colorText_earth));
-            scorePlayerOneTitle.setTextColor(getResources().getColor(R.color.colorText_earth));
-            scorePlayerTwoTitle.setTextColor(getResources().getColor(R.color.colorText_earth));
-
-            scorePlayer_idle = R.drawable.gradient_score_player_idle_earth;
-            scorePlayer_playing = R.drawable.gradient_score_player_playing_earth;
-            playerIdle = R.color.colorScoreAndPlayer_earth;
-            playerPlaying = R.color.colorEntireBackground_earth;
-
-            gameRound.setBackgroundResource(R.color.colorGameAndRound_earth);
-            gameRound.setTextColor(getResources().getColor(R.color.colorText_earth));
-            gameresult.setTextColor(getResources().getColor(R.color.colorText_earth));
-            setupSpinner(R.layout.spinner_item_earth);
-            spinner.setBackgroundResource(R.color.colorScoreAndPlayer_earth);
-            settingsButton.setImageResource(R.drawable.ic_settings_earth);
-            restart.setImageResource(R.drawable.restart_game_earth);
-            next.setImageResource(R.drawable.next_round_earth);
-            start.setBackgroundResource(R.drawable.button_round_earth);
-            setCustomCellColor(R.color.colorGameAndRound_earth);
-
-        }
-    }
-
-    public void setCustomCellColor(int colorId){
-
-        cell00.setBackgroundColor(ContextCompat.getColor(MainActivity.this, colorId));
-        cell01.setBackgroundColor(ContextCompat.getColor(MainActivity.this, colorId));
-        cell02.setBackgroundColor(ContextCompat.getColor(MainActivity.this, colorId));
-
-
-        cell10.setBackgroundColor(ContextCompat.getColor(MainActivity.this, colorId));
-        cell11.setBackgroundColor(ContextCompat.getColor(MainActivity.this, colorId));
-        cell12.setBackgroundColor(ContextCompat.getColor(MainActivity.this, colorId));
-
-
-        cell20.setBackgroundColor(ContextCompat.getColor(MainActivity.this, colorId));
-        cell21.setBackgroundColor(ContextCompat.getColor(MainActivity.this, colorId));
-        cell22.setBackgroundColor(ContextCompat.getColor(MainActivity.this, colorId));
-    }
-
 
     /*
     *
@@ -2096,4 +1999,122 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
 
     }
 
+
+    public void setCustomColor(String theme){
+        if(theme.equals("fire")){
+            parentLayoutBackground.setBackgroundColor(ContextCompat.getColor(MainActivity.this, R.color.colorEntireBackground_fire));
+            //scorePlayerOne.setBackgroundResource(R.color.colorScoreAndPlayer_fire);
+            scorePlayerOne.setTextColor(getResources().getColor(R.color.colorText_fire));
+            //scorePlayerTwo.setBackgroundResource(R.color.colorScoreAndPlayer_fire);
+            scorePlayerTwo.setTextColor(getResources().getColor(R.color.colorText_fire));
+            scorePlayerOneTitle.setTextColor(getResources().getColor(R.color.colorText_fire));
+            scorePlayerTwoTitle.setTextColor(getResources().getColor(R.color.colorText_fire));
+
+            scorePlayer_idle = R.drawable.gradient_score_player_idle_fire;
+            scorePlayer_playing = R.drawable.gradient_score_player_playing_fire;
+            playerIdle = R.color.colorScoreAndPlayer_fire;
+            playerPlaying = R.color.colorEntireBackground_fire;
+
+            gameRound.setBackgroundResource(R.color.colorGameAndRound_fire);
+            gameRound.setTextColor(getResources().getColor(R.color.colorText_fire));
+            gameresult.setTextColor(getResources().getColor(R.color.colorText_fire));
+            setupSpinner(R.layout.spinner_item_fire);
+            spinner.setBackgroundResource(R.color.colorScoreAndPlayer_fire);
+            settingsButton.setImageResource(R.drawable.ic_settings_fire);
+            restart.setImageResource(R.drawable.restart_game_fire);
+            next.setImageResource(R.drawable.next_round_fire);
+            start.setBackgroundResource(R.drawable.button_round_fire);
+            setCustomCellColor(R.color.colorGameAndRound_fire);
+
+        }
+        else if(theme.equals("water")) {
+            parentLayoutBackground.setBackgroundColor(ContextCompat.getColor(MainActivity.this, R.color.colorEntireBackground_water));
+
+            scorePlayerOne.setTextColor(getResources().getColor(R.color.colorText_water));
+
+            scorePlayerTwo.setTextColor(getResources().getColor(R.color.colorText_water));
+            scorePlayerOneTitle.setTextColor(getResources().getColor(R.color.colorText_water));
+
+            scorePlayerTwoTitle.setTextColor(getResources().getColor(R.color.colorText_water));
+
+            scorePlayer_idle = R.drawable.gradient_score_player_idle_water;
+            scorePlayer_playing = R.drawable.gradient_score_player_playing_water;
+            playerIdle = R.color.colorScoreAndPlayer_water;
+            playerPlaying = R.color.colorEntireBackground_water;
+
+            gameRound.setBackgroundResource(R.color.colorGameAndRound_water);
+            gameRound.setTextColor(getResources().getColor(R.color.colorText_water));
+            gameresult.setTextColor(getResources().getColor(R.color.colorText_water));
+            setupSpinner(R.layout.spinner_item_water);
+            spinner.setBackgroundResource(R.color.colorScoreAndPlayer_water);
+            settingsButton.setImageResource(R.drawable.ic_settings_water);
+            restart.setImageResource(R.drawable.restart_game_water);
+            next.setImageResource(R.drawable.next_round_water);
+            start.setBackgroundResource(R.drawable.button_round_water);
+            start.setTextColor(getResources().getColor(R.color.colorText_water));
+            setCustomCellColor(R.color.colorGameAndRound_water);
+
+        }
+        else if(theme.equals("earth")){
+            parentLayoutBackground.setBackgroundColor(ContextCompat.getColor(MainActivity.this, R.color.colorEntireBackground_earth));
+            //scorePlayerOne.setBackgroundResource(R.color.colorScoreAndPlayer_earth);
+            scorePlayerOne.setTextColor(getResources().getColor(R.color.colorText_earth));
+            //scorePlayerTwo.setBackgroundResource(R.color.colorScoreAndPlayer_earth);
+            scorePlayerTwo.setTextColor(getResources().getColor(R.color.colorText_earth));
+            scorePlayerOneTitle.setTextColor(getResources().getColor(R.color.colorText_earth));
+            scorePlayerTwoTitle.setTextColor(getResources().getColor(R.color.colorText_earth));
+
+            scorePlayer_idle = R.drawable.gradient_score_player_idle_earth;
+            scorePlayer_playing = R.drawable.gradient_score_player_playing_earth;
+            playerIdle = R.color.colorScoreAndPlayer_earth;
+            playerPlaying = R.color.colorEntireBackground_earth;
+
+            gameRound.setBackgroundResource(R.color.colorGameAndRound_earth);
+            gameRound.setTextColor(getResources().getColor(R.color.colorText_earth));
+            gameresult.setTextColor(getResources().getColor(R.color.colorText_earth));
+            setupSpinner(R.layout.spinner_item_earth);
+            spinner.setBackgroundResource(R.color.colorScoreAndPlayer_earth);
+            settingsButton.setImageResource(R.drawable.ic_settings_earth);
+            restart.setImageResource(R.drawable.restart_game_earth);
+            next.setImageResource(R.drawable.next_round_earth);
+            start.setBackgroundResource(R.drawable.button_round_earth);
+            setCustomCellColor(R.color.colorGameAndRound_earth);
+
+        }
+    }
+
+    public void setCustomCellColor(int colorId){
+
+        cell00.setBackgroundColor(ContextCompat.getColor(MainActivity.this, colorId));
+        cell01.setBackgroundColor(ContextCompat.getColor(MainActivity.this, colorId));
+        cell02.setBackgroundColor(ContextCompat.getColor(MainActivity.this, colorId));
+
+
+        cell10.setBackgroundColor(ContextCompat.getColor(MainActivity.this, colorId));
+        cell11.setBackgroundColor(ContextCompat.getColor(MainActivity.this, colorId));
+        cell12.setBackgroundColor(ContextCompat.getColor(MainActivity.this, colorId));
+
+
+        cell20.setBackgroundColor(ContextCompat.getColor(MainActivity.this, colorId));
+        cell21.setBackgroundColor(ContextCompat.getColor(MainActivity.this, colorId));
+        cell22.setBackgroundColor(ContextCompat.getColor(MainActivity.this, colorId));
+
+
+    }
+
+    /*private void markWonCells(int playerNumberWon){
+        ImageView cell;
+        for(int i: markWonCells){
+            cell = findViewById(reverseCellMap.get(i));
+
+            if(mThemeChoice.equals("earth")){
+
+            }else if(mThemeChoice.equals("water")){
+
+            }else if(mThemeChoice.equals("fire")){
+
+            }
+            cell.setImageResource();
+        }
+    }*/
 }

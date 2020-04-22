@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:textSize="20sp"
     android:gravity="center"
-    android:textColor="@color/colorPrimaryDark_water"
+    android:textColor="@color/colorText_water"
     android:background="@color/colorScoreAndPlayer_water"
     android:padding="5dip"
     />
