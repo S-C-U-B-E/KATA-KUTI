@@ -27,7 +27,8 @@ public class WinningLogic {
      for(List<Integer> i: winningSet){
          if(Player.containsAll(i)){
              anyWinnigSetFoundAmongTheCellsSetByAPlayer = true;
-             markWonCells = new ArrayList<>(i);
+             markWonCells = new ArrayList<>();
+             markWonCells.addAll(i);
              break;
          }
      }

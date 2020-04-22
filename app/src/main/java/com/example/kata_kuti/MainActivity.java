@@ -847,6 +847,8 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
                     textViewPlayer1.setBackgroundResource(playerIdle);
                     scorePlayerOneParent.setBackgroundResource(scorePlayer_idle);
                     scorePlayerTwoParent.setBackgroundResource(scorePlayer_idle);
+
+                    markWonCells(2);
                 }else {
                     mScorePlayer1++;
                     gameResultMessageBox.setText("PLAYER 1 WON");
@@ -854,6 +856,8 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
                     textViewPlayer1.setBackgroundResource(playerIdle);
                     scorePlayerOneParent.setBackgroundResource(scorePlayer_idle);
                     scorePlayerTwoParent.setBackgroundResource(scorePlayer_idle);
+
+                    markWonCells(1);
                     }
                 if(mCurrentRound<mRound){
                     mButtonNext.setVisibility(View.VISIBLE);
@@ -947,6 +951,8 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
                         textViewPlayer1.setBackgroundResource(playerIdle);
                         scorePlayerOneParent.setBackgroundResource(scorePlayer_idle);
                         scorePlayerTwoParent.setBackgroundResource(scorePlayer_idle);
+
+                        markWonCells(2);
                     } else {
                         mScorePlayer1++;
                         gameResultMessageBox.setText("S.A.I WON");
@@ -954,6 +960,8 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
                         textViewPlayer1.setBackgroundResource(playerIdle);
                         scorePlayerOneParent.setBackgroundResource(scorePlayer_idle);
                         scorePlayerTwoParent.setBackgroundResource(scorePlayer_idle);
+
+                        markWonCells(1);
                     }
                     if (mCurrentRound < mRound) {
                         mButtonNext.setVisibility(View.VISIBLE);
@@ -1010,6 +1018,8 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
                     textViewPlayer1.setBackgroundResource(playerIdle);
                     scorePlayerOneParent.setBackgroundResource(scorePlayer_idle);
                     scorePlayerTwoParent.setBackgroundResource(scorePlayer_idle);
+
+                    markWonCells(2);
                 } else {
                     mScorePlayer1++;
                     gameResultMessageBox.setText("S.A.I WON");
@@ -1017,6 +1027,8 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
                     textViewPlayer1.setBackgroundResource(playerIdle);
                     scorePlayerOneParent.setBackgroundResource(scorePlayer_idle);
                     scorePlayerTwoParent.setBackgroundResource(scorePlayer_idle);
+
+                    markWonCells(1);
                 }
                 if (mCurrentRound < mRound) {
                     mButtonNext.setVisibility(View.VISIBLE);
@@ -1087,6 +1099,8 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
                                 textViewPlayer1.setBackgroundResource(playerIdle);
                                 scorePlayerOneParent.setBackgroundResource(scorePlayer_idle);
                                 scorePlayerTwoParent.setBackgroundResource(scorePlayer_idle);
+
+                                markWonCells(2);
                             } else {
                                 mScorePlayer1++;
                                 gameResultMessageBox.setText("PLAYER 1 WON");
@@ -1094,6 +1108,8 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
                                 textViewPlayer1.setBackgroundResource(playerIdle);
                                 scorePlayerOneParent.setBackgroundResource(scorePlayer_idle);
                                 scorePlayerTwoParent.setBackgroundResource(scorePlayer_idle);
+
+                                markWonCells(1);
                             }
                             if (mCurrentRound < mRound) {
                                 mButtonNext.setVisibility(View.VISIBLE);
@@ -1160,6 +1176,8 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
                                     textViewPlayer1.setBackgroundResource(playerIdle);
                                     scorePlayerOneParent.setBackgroundResource(scorePlayer_idle);
                                     scorePlayerTwoParent.setBackgroundResource(scorePlayer_idle);
+
+                                    markWonCells(2);
                                 } else {
                                     mScorePlayer1++;
                                     gameResultMessageBox.setText("PLAYER 1 WON");
@@ -1167,6 +1185,8 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
                                     textViewPlayer1.setBackgroundResource(playerIdle);
                                     scorePlayerOneParent.setBackgroundResource(scorePlayer_idle);
                                     scorePlayerTwoParent.setBackgroundResource(scorePlayer_idle);
+
+                                    markWonCells(1);
                                 }
                                 if (mCurrentRound < mRound) {
                                     mButtonNext.setVisibility(View.VISIBLE);
@@ -2102,19 +2122,62 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
 
     }
 
-    /*private void markWonCells(int playerNumberWon){
+    private void markWonCells(int playerNumberWon){
         ImageView cell;
+        String wonSymbol;
+        /*
+        *
+        * Four cases are possible:
+        * 1. Player 1 WON and Symbol is X #CASE 1
+        * 2. Player 1 WON and Symbol is O #CASE 2
+        *
+        * 3. Player 2 WON and Symbol is X #CASE 3
+        * 4. Player 2 WON and Symbol is O #CASE 4
+        * */
+        if(playerNumberWon == 1) {
+            if (isSymbolTurnedTrue) {
+                wonSymbol = "kata";   //Case 1
+            }else{
+                wonSymbol = "kuti";  //Case 2
+            }
+
+        }else{
+            if (isSymbolTurnedTrue) {
+                wonSymbol = "kuti";    //Case 3
+            }else{
+                wonSymbol = "kata";    //Case 4
+            }
+        }
+
         for(int i: markWonCells){
             cell = findViewById(reverseCellMap.get(i));
 
-            if(mThemeChoice.equals("earth")){
+            if(wonSymbol.equals("kata")){
+                if(mThemeChoice.equals("earth")){
+                    cell.setImageResource(R.drawable.kata_earth);
 
-            }else if(mThemeChoice.equals("water")){
+                }else if(mThemeChoice.equals("water")){
+                    cell.setImageResource(R.drawable.kata_water);
 
-            }else if(mThemeChoice.equals("fire")){
+                }else if(mThemeChoice.equals("fire")){
+                    cell.setImageResource(R.drawable.kata_fire);
 
+                }
             }
-            cell.setImageResource();
+
+            if(wonSymbol.equals("kuti")){
+                if(mThemeChoice.equals("earth")){
+                    cell.setImageResource(R.drawable.kuti_earth);
+
+                }else if(mThemeChoice.equals("water")){
+                    cell.setImageResource(R.drawable.kuti_water);
+
+                }else if(mThemeChoice.equals("fire")){
+                    cell.setImageResource(R.drawable.kuti_fire);
+
+                }
+            }
+
         }
-    }*/
+    }
 }
