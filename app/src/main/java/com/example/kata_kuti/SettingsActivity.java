@@ -17,6 +17,7 @@ import static com.example.kata_kuti.MainActivity.isNotificationAllowed;
 import static com.example.kata_kuti.MainActivity.isSettingsScreenOpened;
 import static com.example.kata_kuti.MainActivity.isUserInSettingsScreen;
 import static com.example.kata_kuti.MainActivity.mIsMatchInProgress;
+import static com.example.kata_kuti.MainActivity.mMainActivityCurrentThemeChoice;
 import static com.example.kata_kuti.MainActivity.mThemeChoice;
 
 public class SettingsActivity extends AppCompatActivity {
@@ -29,11 +30,13 @@ public class SettingsActivity extends AppCompatActivity {
 
         isUserInSettingsScreen = true;
 
-        if(mThemeChoice.equals("fire")){
+        if(mMainActivityCurrentThemeChoice.equals("fire")){
             setTheme(R.style.SettingAppTheme_fire);
-        }else if(mThemeChoice.equals("earth")){
+
+        }else if(mMainActivityCurrentThemeChoice.equals("earth")){
             setTheme(R.style.SettingAppTheme_earth);
-        }else if(mThemeChoice.equals("water")){
+
+        }else if(mMainActivityCurrentThemeChoice.equals("water")){
             setTheme(R.style.SettingAppTheme_water);
         }
 

@@ -122,6 +122,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
     * Variables specially declared and set only for THEME CHANGE purpose
     * */
     static String mThemeChoice;
+    static String mMainActivityCurrentThemeChoice;
     static String mDifficultyChoice;
     TableLayout parentLayoutBackground;
     RelativeLayout scorePlayerOneParent,scorePlayerTwoParent;
@@ -131,9 +132,6 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
     Button start;
     int playerPlaying,playerIdle;
     int scorePlayer_playing, scorePlayer_idle;
-
-
-
 
 
 
@@ -186,6 +184,8 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         }
 
         setContentView(R.layout.activity_main);
+
+        mMainActivityCurrentThemeChoice = mThemeChoice;
 
         parentLayoutBackground = findViewById(R.id.parentlayout);
         scorePlayerOne = findViewById(R.id.textviewscore1);
@@ -734,13 +734,13 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
     *
     * */
     private void maintainSymbolImage(){
-        if(mThemeChoice.equals("fire")){
+        if(mMainActivityCurrentThemeChoice.equals("fire")){
             maintainSymbol(R.drawable.kata_fire,R.drawable.kuti_fire);
 
-        }else if(mThemeChoice.equals("water")){
+        }else if(mMainActivityCurrentThemeChoice.equals("water")){
             maintainSymbol(R.drawable.kata_water,R.drawable.kuti_water);
 
-        }else if(mThemeChoice.equals("earth")){
+        }else if(mMainActivityCurrentThemeChoice.equals("earth")){
             maintainSymbol(R.drawable.kata_earth,R.drawable.kuti_earth);
         }
     }
@@ -2122,6 +2122,10 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
 
     }
 
+    /*
+    * To mark the cells that led to winning of a player
+    *
+    * */
     private void markWonCells(int playerNumberWon){
         ImageView cell;
         String wonSymbol;
@@ -2153,26 +2157,26 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
             cell = findViewById(reverseCellMap.get(i));
 
             if(wonSymbol.equals("kata")){
-                if(mThemeChoice.equals("earth")){
+                if(mMainActivityCurrentThemeChoice.equals("earth")){
                     cell.setImageResource(R.drawable.kata_earth);
 
-                }else if(mThemeChoice.equals("water")){
+                }else if(mMainActivityCurrentThemeChoice.equals("water")){
                     cell.setImageResource(R.drawable.kata_water);
 
-                }else if(mThemeChoice.equals("fire")){
+                }else if(mMainActivityCurrentThemeChoice.equals("fire")){
                     cell.setImageResource(R.drawable.kata_fire);
 
                 }
             }
 
             if(wonSymbol.equals("kuti")){
-                if(mThemeChoice.equals("earth")){
+                if(mMainActivityCurrentThemeChoice.equals("earth")){
                     cell.setImageResource(R.drawable.kuti_earth);
 
-                }else if(mThemeChoice.equals("water")){
+                }else if(mMainActivityCurrentThemeChoice.equals("water")){
                     cell.setImageResource(R.drawable.kuti_water);
 
-                }else if(mThemeChoice.equals("fire")){
+                }else if(mMainActivityCurrentThemeChoice.equals("fire")){
                     cell.setImageResource(R.drawable.kuti_fire);
 
                 }
