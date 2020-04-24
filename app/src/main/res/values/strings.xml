@@ -1,4 +1,11 @@
 <resources>
+<!--<<<<<<<<<<<<<< FOR SPLASH SCREEN DURATIONS >>>>>>>>>>>>-->
+
+    <integer name="first_time_individual_gradient_duration">1450</integer>
+    <integer name="other_time_individual_gradient_duration">2500</integer>
+
+<!--<<<<<<<<<<<<<< OTHER APP STRING RESOURCES >>>>>>>>>>>>>>-->
+
     <string name="app_name">Kata Kuti</string>
 
     <string name="game_result_player2won">PLAYER 2 WON</string>
@@ -25,4 +32,5 @@
     <string name="notification_content_big_text_part1">Current match is in progress</string>
     <string name="notification_content_big_text_part2">Tap here to resume!!</string>
     <string name="notification_content_action_button_ignore">IGNORE</string>
+
 </resources>
