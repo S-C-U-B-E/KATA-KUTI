@@ -52,7 +52,7 @@ public class SettingsActivity extends AppCompatActivity {
         });
 
 
-        Toast.makeText(SettingsActivity.this,"stngs onCreate()",Toast.LENGTH_SHORT).show();
+        //Toast.makeText(SettingsActivity.this,"stngs onCreate()",Toast.LENGTH_SHORT).show();
     }
 
     private void shareMyApp(){
@@ -82,28 +82,28 @@ public class SettingsActivity extends AppCompatActivity {
 
     }
 
-    @Override
+    /*@Override
     protected void onPause() {
         super.onPause();
 
         Toast.makeText(SettingsActivity.this,"stngs onPause()",Toast.LENGTH_SHORT).show();
 
-    }
+    }*/
 
-    @Override
+    /*@Override
     protected void onStart() {
         super.onStart();
 
         Toast.makeText(SettingsActivity.this,"stngs onStart()",Toast.LENGTH_SHORT).show();
 
     }
-
-    @Override
+*/
+    /*@Override
     protected void onRestart() {
         super.onRestart();
         Toast.makeText(SettingsActivity.this,"stngs onRestart()",Toast.LENGTH_SHORT).show();
 
-    }
+    }*/
 
     @Override
     protected void onStop() {
@@ -113,7 +113,7 @@ public class SettingsActivity extends AppCompatActivity {
             NotificationUtils.remindUserOfTheOnGoingMatchFromSettings(SettingsActivity.this);}
 
 
-        Toast.makeText(SettingsActivity.this,"stngs onStop()",Toast.LENGTH_SHORT).show();
+        //Toast.makeText(SettingsActivity.this,"stngs onStop()",Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -122,7 +122,7 @@ public class SettingsActivity extends AppCompatActivity {
 
         NotificationUtils.clearAllNotifications(SettingsActivity.this);
 
-        Toast.makeText(SettingsActivity.this,"stngs onDestroy()",Toast.LENGTH_SHORT).show();
+        //Toast.makeText(SettingsActivity.this,"stngs onDestroy()",Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -131,6 +131,6 @@ public class SettingsActivity extends AppCompatActivity {
 
         NotificationUtils.clearAllNotifications(SettingsActivity.this);
 
-        Toast.makeText(SettingsActivity.this,"stngs onResume()",Toast.LENGTH_SHORT).show();
+        //Toast.makeText(SettingsActivity.this,"stngs onResume()",Toast.LENGTH_SHORT).show();
     }
 }

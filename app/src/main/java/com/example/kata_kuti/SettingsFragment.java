@@ -156,7 +156,7 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Shared
     }
 
     private void showDetailsAboutGame(DialogInterface.OnClickListener discardButtonClickListener) {
-        // Create an AlertDialog.Builder and set the message, and click listeners
+        // Create an AlertDialog.Builder and set the splash_welcome_message, and click listeners
         // for the positive and negative response buttons on the dialog.
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         builder.setTitle("About Kata_Kuti");

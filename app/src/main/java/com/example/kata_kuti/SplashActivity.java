@@ -73,12 +73,12 @@ public class SplashActivity extends AppCompatActivity {
                     startActivity(intent);
                     finish();
                 }
-            }, 16000);
+            }, 18000);
 
         }else{
             parent.setBackgroundResource(R.drawable.other_time_gradient_animation_list);
             AnimationDrawable animationDrawable_1 = (AnimationDrawable) parent.getBackground();
-            Toast.makeText(this, "done",Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, "done",Toast.LENGTH_SHORT).show();
             animationDrawable_1.setEnterFadeDuration(1700);
             animationDrawable_1.setExitFadeDuration(1000);
 
@@ -92,7 +92,7 @@ public class SplashActivity extends AppCompatActivity {
                     startActivity(intent);
                     finish();
                 }
-            }, 7000);
+            }, 6000);
         }
 
 
