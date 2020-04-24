@@ -4,7 +4,7 @@
     <integer name="first_time_individual_gradient_duration">1450</integer>
     <integer name="other_time_individual_gradient_duration">2500</integer>
 
-<!--<<<<<<<<<<<<<< OTHER APP STRING RESOURCES >>>>>>>>>>>>>>-->
+<!--<<<<<<<<<<<<<< MAIN ACTIVITY >>>>>>>>>>>>>>-->
 
     <string name="app_name">Kata Kuti</string>
 
@@ -25,6 +25,8 @@
     <string name="match_exit_positive_button">Exit Match</string>
     <string name="match_exit_negative_button">Keep Playing</string>
 
+<!--<<<<<<<<<<<<<< NOTIFICATION UTILS >>>>>>>>>>>>>>-->
+
     <string name="match_in_progress_notification_channel_id">match_in_progress_notification_channel</string>
     <string name="match_in_progress_notification_channel_name">MATCH IN PROGRESS CHANNEL</string>
     <string name="notificaation_content_title">Kata Kuti</string>
@@ -32,5 +34,108 @@
     <string name="notification_content_big_text_part1">Current match is in progress</string>
     <string name="notification_content_big_text_part2">Tap here to resume!!</string>
     <string name="notification_content_action_button_ignore">IGNORE</string>
+
+<!--<<<<<<<<<<<<<< SPLASH ACTIVITY >>>>>>>>>>>>>>-->
+
+
+<!--<<<<<<<<<<<<<< SETTINGS ACTIVITY >>>>>>>>>>>>>>-->
+
+
+<!--<<<<<<<<<<<<<< XML MAIN ACTIVITY >>>>>>>>>>>>>>-->
+
+
+<!--<<<<<<<<<<<<<< XML SETTINGS ACTIVITY >>>>>>>>>>>>>>-->
+
+
+<!--<<<<<<<<<<<<<< XML SPLASH ACTIVITY >>>>>>>>>>>>>>-->
+
+
+<!--<<<<<<<<<<<<<< XML PREF VISUALIZER ACTIVITY >>>>>>>>>>>>>>-->
+
+    <string name="symbol_preference_category_title">Kata/Kuti</string>
+    <string name="symbol_switch_preference_key" translatable="false">symbol</string>
+    <string name="symbol_switch_preference_title">Symbol</string>
+    <string name="symbol_switch_preference_summary_On">PLAYER 1- \'X\'\nPLAYER 2- \'O\'</string>
+    <string name="symbol_switch_preference_summary_Off">PLAYER 1- \'O\'\nPLAYER 2- \'X\'</string>
+    <string name="symbol_switch_preference_defaultValue" translatable="false">true</string>
+
+
+    <!--  GAME MODE  -->
+    <string name="game_mode_preference_category_title">Game Mode</string>
+    <string name="game_mode_preference_category_key" translatable="false">mode</string>
+    <string name="game_mode_preference_category_summary">(Difficulty applicable for One-Player mode!)</string>
+
+    <string name="game_mode_switch_preference_title">Mode</string>
+    <string name="game_mode_switch_preference_defaultValue" translatable="false">true</string>
+    <string name="game_mode_switch_preference_key" translatable="false">gamemode</string>
+    <string name="game_mode_switch_preference_summaryOff">One-Player Mode</string>
+    <string name="game_mode_switch_preference_summaryOn">Two-Player Mode</string>
+
+    <string name="game_mode_list_preference_title">Difficulty</string>
+    <string name="game_mode_list_preference_defaultValue" translatable="false">easy</string>
+    <string name="game_mode_list_preference_key" translatable="false">difficulty</string>
+
+
+
+    <!--  MUSIC  -->
+    <string name="music_preference_category_title">Music</string>
+
+    <string name="music_checkBox_preference_backgroundMusic_title">Background Music</string>
+    <string name="music_checkBox_preference_backgroundMusic_defaultValue" translatable="false">true</string>
+    <string name="music_checkBox_preference_backgroundMusic_key" translatable="false">music</string>
+    <string name="music_checkBox_preference_backgroundMusic_summaryOff">Tap to turn on music</string>
+    <string name="music_checkBox_preference_backgroundMusic_summaryOn">Tap to turn off music</string>
+
+    <string name="music_checkBox_preference_applause_title">Applause</string>
+    <string name="music_checkBox_preference_applause_defaultValue" translatable="false">true</string>
+    <string name="music_checkBox_preference_applause_key" translatable="false">applause</string>
+    <string name="music_checkBox_preference_applause_summaryOff">Tap to get applause</string>
+    <string name="music_checkBox_preference_applause_summaryOn">Everyone loves an applause.. tap if you don\'t</string>
+
+
+
+    <!--  NOTIFICATION  -->
+    <string name="notification_preference_category_title">Notification</string>
+
+    <string name="notification_checkBox_preference_title">Match In Progress</string>
+    <string name="notification_checkBox_preference_defaultValue" translatable="false">true</string>
+    <string name="notification_checkBox_preference_key" translatable="false">notification</string>
+    <string name="notification_checkBox_preference_summaryOff">Notification turned Off</string>
+    <string name="notification_checkBox_preference_summaryOn">Notification turned On</string>
+
+    <string name="notification_switch_preference_vibration_title">Vibration</string>
+    <string name="notification_switch_preference_vibration_defaultValue" translatable="false">true</string>
+    <string name="notification_switch_preference_vibration_key" translatable="false">vibration</string>
+    <string name="notification_switch_preference_vibration_summaryOff">Vibration turned Off</string>
+    <string name="notification_switch_preference_vibration_summaryOn">Vibration turned On</string>
+
+    <string name="notification_switch_preference_sound_title">Sound</string>
+    <string name="notification_switch_preference_sound_defaultValue" translatable="false">true</string>
+    <string name="notification_switch_preference_sound_key" translatable="false">sound</string>
+    <string name="notification_switch_preference_sound_summaryOff">Notification sound turned Off</string>
+    <string name="notification_switch_preference_sound_summaryOn">Notification sound turned On</string>
+
+
+
+    <!--  PALATE  -->
+    <string name="palate_preference_category_title">Palate</string>
+    <string name="palate_preference_category_summary">NOTE: Re-launch the app to apply!!</string>
+
+
+    <string name="palate_list_preference_title">Theme</string>
+    <string name="palate_list_preference_key" translatable="false">theme</string>
+    <string name="palate_list_preference_defaultValue" translatable="false">water</string>
+
+    <!--   ABOUT   -->
+    <string name="about_preference_category_title">About</string>
+
+    <string name="about_preference_version_title">Version 2.0.0</string>
+    <string name="about_preference_version_key" translatable="false">about_game</string>
+
+    <string name="about_preference_about_me_title">About Me</string>
+    <string name="about_preference_about_me_key" translatable="false">about_me</string>
+
+    <string name="about_preference_feedback_title">Feedback Form</string>
+    <string name="about_preference_feedback_key" translatable="false">feedback</string>
 
 </resources>

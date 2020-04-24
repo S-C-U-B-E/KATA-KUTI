@@ -65,8 +65,7 @@ public class NotificationUtils {
         PendingIntent actionIntent = PendingIntent.getBroadcast(context,0,broadCastIntent,PendingIntent.FLAG_UPDATE_CURRENT);
 
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(context, MATCH_IN_PROGRESS_NOTIFICATION_CHANNEL_ID)
-                .setColor(ContextCompat.getColor(context, R.color.colorPrimary_fire))
-                .setSmallIcon(R.drawable.ic_launcher_background)
+                .setSmallIcon(R.mipmap.ic_launcher_foreground)
                 .setContentTitle("Kata Kuti")
                 .setContentText("Match in Progress..")
                 .setStyle(new NotificationCompat.BigTextStyle().bigText("Current match is in progress... Tap here to resume!!"))
@@ -74,6 +73,8 @@ public class NotificationUtils {
                 .setOnlyAlertOnce(true)
                 .addAction(R.drawable.ic_notification_action,"IGNORE",actionIntent)
                 .setAutoCancel(true);
+
+        /*.setColor(ContextCompat.getColor(context, R.color.))*/
 
         if(MainActivity.isNotificationVibrationAllowed){
             notificationBuilder.setVibrate(new long[] { 0, 200, 300, 200, 300 });
@@ -126,7 +127,7 @@ public class NotificationUtils {
 
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(context, MATCH_IN_PROGRESS_NOTIFICATION_CHANNEL_ID)
                 .setColor(ContextCompat.getColor(context, R.color.colorPrimary_fire))
-                .setSmallIcon(R.drawable.ic_launcher_background)
+                .setSmallIcon(R.drawable.ic_stat_name)
                 .setContentTitle("Kata Kuti")
                 .setContentText("Match in Progress..")
                 .setStyle(new NotificationCompat.BigTextStyle().bigText("Current match is in progress... Tap here to resume!!"))
