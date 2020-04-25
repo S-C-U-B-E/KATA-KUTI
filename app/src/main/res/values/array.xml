@@ -11,9 +11,9 @@ to provide users a choice of numbers of rounds tey want to play
     </string-array>
 
     <array name="prefer_color_option_lables">
-        <item>"Fire"</item>
-        <item>"Earth"</item>
-        <item>"Water"</item>
+        <item>"Sunset"</item>
+        <item>"Mountain"</item>
+        <item>"Ocean"</item>
     </array>
 
     <array name="prefer_color_option_values">

@@ -46,7 +46,21 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Shared
         }
 
             theme_summary = themePreference.getSharedPreferences().getString("theme","water");
-            themePreference.setSummary(theme_summary);
+
+        /*
+        * Suddenly i decided to rename the themes that's why i had to use this not so good coading
+        * for setting the theme summary
+        * */
+
+            if(theme_summary.equals("fire")){
+                themePreference.setSummary("sunset");
+            }else if(theme_summary.equals("water")){
+                themePreference.setSummary("ocean");
+            }else if(theme_summary.equals("earth")){
+                themePreference.setSummary("mountain");
+            }else{
+                themePreference.setSummary(theme_summary); //future summaries will have correct label-value pairs
+            }
     }
 
     @Override
@@ -75,8 +89,21 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Shared
         if(null != preference){
             if( !(preference instanceof CheckBoxPreference) && !(preference instanceof SwitchPreference) ){
                 String value = sharedPreferences.getString(preference.getKey(),"");
-                preference.setSummary(value);
 
+                /*
+                 * Suddenly i decided to rename the themes that's why i had to use this not so good coading
+                 * for setting the theme summary
+                 * */
+
+                if(value.equals("fire")){
+                    preference.setSummary("sunset");
+                }else if(value.equals("water")){
+                    preference.setSummary("ocean");
+                }else if(value.equals("earth")){
+                    preference.setSummary("mountain");
+                }else{
+                    preference.setSummary(value);  //future summaries will have correct label-value pairs
+                }
             }
 
         }
