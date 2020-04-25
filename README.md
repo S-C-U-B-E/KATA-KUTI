@@ -6,6 +6,9 @@ But I've tried to handle all use cases possible.Such as how the notifications wo
 several others like managing **Audio Services**.
 I am very happy to complete this app ,enjoy the code ! 
 
+So, overall this was a --**24days 90commits**-- full of fun and learning XD.. (and now a nice 4days sleep :P)
+
+
 [Download Kata Kuti](https://drive.google.com/open?id=1oE6eBm6eB_etAiLt2mXtSH27J7i0V9Hn)
 
 ## Getting Started
