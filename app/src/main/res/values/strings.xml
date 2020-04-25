@@ -41,13 +41,42 @@
 <!--<<<<<<<<<<<<<< SETTINGS ACTIVITY >>>>>>>>>>>>>>-->
 
 
-<!--<<<<<<<<<<<<<< XML MAIN ACTIVITY >>>>>>>>>>>>>>-->
+<!--<<<<<<<<<<<<<< SETTINGS FRAGMENT >>>>>>>>>>>>>>-->
 
+    <string name="about_me_title">About Me</string>
+    <string name="about_me_message">"Hi, I am Shankha Shubhra Sanyal,
+anime lover, painter and a coder too XD
+it's been a long time now i've been learning android but this is the first time i'm trying to build a complete app.
+This app took 2weeks and a couple of days to build from an empty screen to what you are seeing now.
+Explore the app,play and enjoy with your family and friends :D
 
-<!--<<<<<<<<<<<<<< XML SETTINGS ACTIVITY >>>>>>>>>>>>>>-->
+I have made the entire code open source :D
+Anyone who liked any feature and wants to implement into their app..
+you are always welcome to have a look.
 
+Please share this app if you liked it and
+don't forget to leave a feedback :D
+(Your feedback is very important for me!)
+----------------------------------------
+Github: S-C-U-B-E
+Mail: sssanyal10@gmail.com
+----------------------------------------
+Thank You."</string>
+    
+    <string name="about_game_title">About Kata-Kuti</string>
+    <string name="about_game_message">"The game Kata-Kuti is a classic and the most famous game among students,\n
+now you can also play it on your android device, consists of two modes\n
+1. You v/s Your Friend
+2. You v/s Scube Artificial Intelligence ( aka S.A.I );
 
-<!--<<<<<<<<<<<<<< XML SPLASH ACTIVITY >>>>>>>>>>>>>>-->
+S.A.I is pretty good in this game and at times he can even play better.The rules are the same, but here you can play a match with multiple rounds.You can even change the theme to what you want.\n
+In the middle of a match if you have to attain any important task don't worry, you can return to your game and resume from where u left.Or, you can even use the notification bar to do the same.\n
+------------------------------------------
+Announcement :-
+1.Online_Multiplayer version with leader board
+2.Several new themes
+Coming Soon!!
+-------------------------------------------"</string>
 
 
 <!--<<<<<<<<<<<<<< XML PREF VISUALIZER ACTIVITY >>>>>>>>>>>>>>-->
