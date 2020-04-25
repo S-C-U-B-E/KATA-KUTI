@@ -56,6 +56,8 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
     //To determine if there is any valid winner after every move
      private static boolean foundWinner;
 
+     private static boolean aiChoseCornerCellFirst;
+
     //To mark the choice of cells opted by individual players
      public static List<Integer> Player1 ;
      public static List<Integer> Player2 ;
@@ -332,6 +334,9 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
     }
 
     private void initializeCellChoiceListForAi() {
+
+        aiChoseCornerCellFirst = false;
+
         cellChoiceListForAi = new ArrayList<>();
         cellChoiceListForAi.add(1);
         cellChoiceListForAi.add(2);
@@ -1844,16 +1849,21 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
 
     }
 
+    /*
+    * A NEW VERSION OF INSANE LOGIC WHERE AI CAN TAKE A CENTER CELL FIRST
+    * BECAUSE THE PREVIOUS ONE WAS QUITE BORING , ONLY CORNERS DUH..
+    * THOUGH THE CODE IS A BIT MESSY..COMMENT KORE DIYECHI BHALO KORE... TRIED TO GIVE THORORUGH COMMENTS
+    * */
     private void onePlayerAiLogic_Insane(){
 
         /*
-        * In Insane logic there is no chance of opponent winning XD.. and i don't know if people will this or not XD
-        * Opponent(of SAI) maximum can make a Tie or Lose the game
-        *
-        * In the quest of building this logic i myself became a "almost" TIC-TAC-TOE champ LOL...
-        *
-        * S.A.I will always go first in this mode!!! ;)
-        * */
+         * In Insane logic there is no chance of opponent winning XD.. and i don't know if people will this or not XD
+         * Opponent(of SAI) maximum can make a Tie or Lose the game
+         *
+         * In the quest of building this logic i myself became a "almost" TIC-TAC-TOE champ LOL...
+         *
+         * S.A.I will always go first in this mode!!! ;)
+         * */
 
         boolean blockedOpponent = false;
         boolean movedForward = false;
@@ -1892,24 +1902,24 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
             for (int i = 0; i < Player2.size() - 1; i++) {
                 for (int j = i + 1; j < Player2.size(); j++) {
 
-                        for (List<Integer> al : winningSet) {
+                    for (List<Integer> al : winningSet) {
 
-                            ArrayList<Integer> l = new ArrayList<>(al);
-                            int temp = Player2.get(i);
-                            if (l.contains(temp)) l.remove((Integer) temp);
-                            temp = Player2.get(j);
-                            if (l.contains(temp)) l.remove((Integer) temp);
-                            if (l.size() == 1 && !Player1.contains(l.get(0))) {
-                                blockedOpponent = true;
-                                movedForward = true;
-                                cellChoice = l.get(0);
-                                //System.out.println(l.get(0));
-                                Player1.add(l.get(0));
-                                cellChoiceListForAi.remove((Integer)l.get(0));
+                        ArrayList<Integer> l = new ArrayList<>(al);
+                        int temp = Player2.get(i);
+                        if (l.contains(temp)) l.remove((Integer) temp);
+                        temp = Player2.get(j);
+                        if (l.contains(temp)) l.remove((Integer) temp);
+                        if (l.size() == 1 && !Player1.contains(l.get(0))) {
+                            blockedOpponent = true;
+                            movedForward = true;
+                            cellChoice = l.get(0);
+                            //System.out.println(l.get(0));
+                            Player1.add(l.get(0));
+                            cellChoiceListForAi.remove((Integer)l.get(0));
 
-                                break outermostloop;
-                            }
+                            break outermostloop;
                         }
+                    }
 
                 }
             }
@@ -1917,21 +1927,17 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
 
         Random rand;
         if (!blockedOpponent && !movedForward) {
-            if (clickCount == 1) {              //IN S.A.I FIRST TURN IT TAKES A RANDOM CORNER...
+            if (clickCount == 1) {              //IN S.A.I FIRST TURN IT TAKES A RANDOM CORNER OR THE CENTER (ONLY CORNER WAS MAKING THE GAME MONOTONOUS maane khuub booring)...
+
                 rand = new Random();
-                int chosenCorner = corner.get(rand.nextInt(corner.size()));
+                ArrayList<Integer> first_cell_pick = new ArrayList<>(Arrays.asList(1,3,7,9,5));
+                int chosenCell = first_cell_pick.get(rand.nextInt(first_cell_pick.size()));
 
-                cellChoiceListForAi.remove((Integer)chosenCorner);
-                Player1.add(chosenCorner);
-                cellChoice = chosenCorner;
+                if(corner.contains(chosenCell)){
+                    aiChoseCornerCellFirst = true;
+                }
 
-                corner.remove(corner.indexOf(chosenCorner));
-
-
-            } else if (clickCount == 3) {/* FROM HERE ON S.A.I's TURN WILL DEPEND ON OPPONENT*/ //S.A.I's 3rd TURN
-
-                //any corner
-                if (corner.contains(Player2.get(0))) {  // IF OPPONENT TAKES ANY CORNER... SO WILL S.A.I
+                if(aiChoseCornerCellFirst){
                     rand = new Random();
                     int chosenCorner = corner.get(rand.nextInt(corner.size()));
 
@@ -1941,32 +1947,91 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
 
                     corner.remove(corner.indexOf(chosenCorner));
 
-                } //edge cell next to 1st X  IF OPPONENT TAKES ANY EDGE TOUCHED TO THE 'X' OF S.A.I
-                else if (Math.abs(Player1.get(0) - Player2.get(0)) == 1 || Math.abs(Player1.get(0) - Player2.get(0)) == 3) {
-                                /*
-                                * ALL SUCH EDGES AND 'X' PLACES HAVE A DIFFERENCE OF 1 OR 3 (ABSOLUTE VALUE).. THEN S.A.I WILL GO FOR THE CENTER..
-                                * */
+                }
+                else{
 
-                    cellChoiceListForAi.remove((Integer)center.get(0));
-                    Player1.add(center.get(0));
-                    cellChoice = center.get(0);
+                    //AI CHOSE FOR CENTER FIRST
+                    chosenCell = 5;
+
+                    cellChoiceListForAi.remove((Integer)chosenCell);
+                    Player1.add(chosenCell);
+                    cellChoice = chosenCell;
 
                     center.remove(0);
+                }
 
-                } //center IF OPPONENT TAKES THE CENTER
-                else if (Player2.get(0) == 5) {
+            }
+            else if (clickCount == 3) {/* FROM HERE ON S.A.I's TURN WILL DEPEND ON OPPONENT*/
+
+                if(aiChoseCornerCellFirst){
+                    if (corner.contains(Player2.get(0))) {  // IF OPPONENT TAKES ANY CORNER... SO WILL S.A.I
+                        rand = new Random();
+                        int chosenCorner = corner.get(rand.nextInt(corner.size()));
+
+                        cellChoiceListForAi.remove((Integer)chosenCorner);
+                        Player1.add(chosenCorner);
+                        cellChoice = chosenCorner;
+
+                        corner.remove(corner.indexOf(chosenCorner));
+
+                    } //edge cell next to 1st X  IF OPPONENT TAKES ANY EDGE TOUCHED TO THE 'X' OF S.A.I
+                    else if (Math.abs(Player1.get(0) - Player2.get(0)) == 1 || Math.abs(Player1.get(0) - Player2.get(0)) == 3) {
                         /*
-                        * THEN S.A.I WILL TRY TO MAKE A 'X O X' DIAGONALLY...
-                        * */
+                         * ALL SUCH EDGES AND 'X' PLACES HAVE A DIFFERENCE OF 1 OR 3 (ABSOLUTE VALUE).. THEN S.A.I WILL GO FOR THE CENTER..
+                         * */
 
-                    cellChoiceListForAi.remove((Integer) (10 - Player1.get(0)));
-                    Player1.add(10 - Player1.get(0));
-                    cellChoice = (10 - Player1.get(0));
+                        cellChoiceListForAi.remove((Integer)center.get(0));
+                        Player1.add(center.get(0));
+                        cellChoice = center.get(0);
 
-                    corner.remove((Integer) (10 - Player1.get(0)));
+                        center.remove(0);
 
-                } //any other edge cell  IF OPPONENT TAKES ANY EDGE... S.A.I WILL GO FOR ANY RANDOM CORNER...
-                else {
+                    } //center IF OPPONENT TAKES THE CENTER
+                    else if (Player2.get(0) == 5) {
+                        /*
+                         * THEN S.A.I WILL TRY TO MAKE A 'X O X' DIAGONALLY...
+                         * */
+
+                        cellChoiceListForAi.remove((Integer) (10 - Player1.get(0)));
+                        Player1.add(10 - Player1.get(0));
+                        cellChoice = (10 - Player1.get(0));
+
+                        corner.remove((Integer) (10 - Player1.get(0)));
+
+                    } //any other edge cell  IF OPPONENT TAKES ANY EDGE... S.A.I WILL GO FOR ANY RANDOM CORNER...
+                    else {
+                        rand = new Random();
+                        int chosenCorner = corner.get(rand.nextInt(corner.size()));
+
+                        cellChoiceListForAi.remove((Integer)chosenCorner);
+                        Player1.add(chosenCorner);
+                        cellChoice = chosenCorner;
+
+                        corner.remove(corner.indexOf(chosenCorner));
+                    }
+                }
+                else{
+                    ArrayList<Integer> duplicateCellChoiceListForAi = new ArrayList<>(cellChoiceListForAi);
+                    duplicateCellChoiceListForAi.remove((Integer)(10-Player2.get(0)));
+
+                    rand = new Random();
+                    int chosenCell = duplicateCellChoiceListForAi.get(rand.nextInt(duplicateCellChoiceListForAi.size()));
+
+                    cellChoiceListForAi.remove((Integer)chosenCell);
+                    Player1.add(chosenCell);
+                    cellChoice = chosenCell;
+
+                    if(corner.contains(chosenCell)){
+                        corner.remove(corner.indexOf(chosenCell));
+                    }else if(edge.contains(chosenCell)){
+                        edge.remove((Integer)chosenCell);
+                    }
+                }
+
+            }
+            else if (clickCount == 5) { //S.A.I 5th TURN
+
+                if(aiChoseCornerCellFirst){
                     rand = new Random();
                     int chosenCorner = corner.get(rand.nextInt(corner.size()));
 
@@ -1976,17 +2041,21 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
 
                     corner.remove(corner.indexOf(chosenCorner));
                 }
+                else{
+                    rand = new Random();
+                    int randomChoice = cellChoiceListForAi.get(rand.nextInt(cellChoiceListForAi.size()));
 
-            }
-            else if (clickCount == 5) { //S.A.I 5th TURN
-                rand = new Random();
-                int chosenCorner = corner.get(rand.nextInt(corner.size()));
+                    cellChoiceListForAi.remove((Integer)randomChoice);
+                    Player1.add(randomChoice);
+                    cellChoice = randomChoice;
 
-                cellChoiceListForAi.remove((Integer)chosenCorner);
-                Player1.add(chosenCorner);
-                cellChoice = chosenCorner;
+                    if(corner.contains(cellChoice)){
+                        corner.remove(corner.indexOf(cellChoice));
+                    }else if(edge.contains(cellChoice)){
+                        edge.remove((Integer)cellChoice);
+                    }
+                }
 
-                corner.remove(corner.indexOf(chosenCorner));
             }
             else{
                 rand = new Random(); // FOR ANY OTHER TURN .. S.A.I WILL TAKE ANY RANDOM CORNER ... AGAIN!!!!!!! B)
@@ -1999,8 +2068,8 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         }
 
         /*
-        * THIS NEXT PART OF ASSIGNUNG SYMBOL IS SAME AS HARD OR EASY MODE...
-        * */
+         * THIS NEXT PART OF ASSIGNUNG SYMBOL IS SAME AS HARD OR EASY MODE...
+         * */
         int cellIdChoice = reverseCellMap.get(cellChoice);        //Take the cell id for that particular value by reverse-mapping to it's ID
 
 
@@ -2018,7 +2087,6 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
 
 
     }
-
 
     public void setCustomColor(String theme){
         if(theme.equals("fire")){
@@ -2184,4 +2252,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
 
         }
     }
+
+
+
 }
