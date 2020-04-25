@@ -47,7 +47,7 @@
     <string name="about_me_message">"Hi, I am Shankha Shubhra Sanyal,
 anime lover, painter and a coder too XD
 it's been a long time now i've been learning android but this is the first time i'm trying to build a complete app.
-This app took 2weeks and a couple of days to build from an empty screen to what you are seeing now.
+This app took 3weeks and a couple of days to build from an empty screen to what you are seeing now.
 Explore the app,play and enjoy with your family and friends :D
 
 I have made the entire code open source :D
@@ -158,7 +158,7 @@ Coming Soon!!
     <!--   ABOUT   -->
     <string name="about_preference_category_title">About</string>
 
-    <string name="about_preference_version_title">Version 2.0.0</string>
+    <string name="about_preference_version_title">Version 2.5.3</string>
     <string name="about_preference_version_key" translatable="false">about_game</string>
 
     <string name="about_preference_about_me_title">About Me</string>

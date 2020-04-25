@@ -58,7 +58,30 @@ public class SettingsActivity extends AppCompatActivity {
 
     private void shareMyApp(){
 
-        String shareQuery = "Hello,I have been playing this app for some time now, this is a wonderfull app,\nPlease Rate this app in the link below\n\n https://docs.google.com/forms/d/e/1FAIpQLSe_-pufKfnUmv06yXEIALgBKyxub3J8JHqFBaL54mljWidYLQ/viewform?usp=sf_link";
+        /*
+        * Atlast after 3weeks i have finally updated Google Drive space to have my first complete application.. I am more than just happy :D
+        * */
+        String shareQuery = "Hello,\n" +
+                "I am Shankha Shubhra Sanyal,\n" +
+                "I've been learning android for a long time now.\n" +
+                "For the first time I have built a complete android app.\n" +
+                "\n" +
+                "Give it a try. Download it from link below.\n" +
+                "(You have to download it from G-drive,\n" +
+                "as I don't have much resources to upload it to\n" +
+                "any renowned cloud store.)\n" +
+                "\n" +
+                "I have kept the entire code open-source \n" +
+                "for anyone who wants to learn android\n" +
+                "and built their own apps.\n" +
+                "(The source is given in the app itself)\n" +
+                "\n" +
+                "Download it, play and enjoy with your friends and family.\n" +
+                "Hope you will like it.\n" +
+                "Don't forget to give a feedback.\n" +
+                "Your feedback is very important to me.\n" +
+                "\n" +
+                "https://drive.google.com/open?id=1oE6eBm6eB_etAiLt2mXtSH27J7i0V9Hn";
 
             String mimeType = "text/plain";
             String title = "Sharing is caring!!";
@@ -75,6 +98,7 @@ public class SettingsActivity extends AppCompatActivity {
 
         if(null != intent.resolveActivity(getPackageManager())){
 
+            Toast.makeText(this, "Sharing is Caring!!", Toast.LENGTH_SHORT).show();
             startActivity(intent);
 
         }else {
