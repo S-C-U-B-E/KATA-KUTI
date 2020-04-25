@@ -56,6 +56,8 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
     //To determine if there is any valid winner after every move
      private static boolean foundWinner;
 
+     //To mark the fact that S.A.I chose a center cell or a corner cell first
+    // in One-Player Mode Insane logic and can proceed according to that
      private static boolean aiChoseCornerCellFirst;
 
     //To mark the choice of cells opted by individual players
