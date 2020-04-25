@@ -12,6 +12,9 @@ import android.os.Build;
 import androidx.core.app.NotificationCompat;
 import androidx.core.content.ContextCompat;
 
+import static com.example.kata_kuti.MainActivity.mMainActivityCurrentThemeChoice;
+import static com.example.kata_kuti.MainActivity.mThemeChoice;
+
 
 /*
 * <<<<<<<<<<<<<<<  CONFESSION   >>>>>>>>>>>>
@@ -65,8 +68,7 @@ public class NotificationUtils {
         PendingIntent actionIntent = PendingIntent.getBroadcast(context,0,broadCastIntent,PendingIntent.FLAG_UPDATE_CURRENT);
 
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(context, MATCH_IN_PROGRESS_NOTIFICATION_CHANNEL_ID)
-                .setColor(ContextCompat.getColor(context, R.color.colorPrimary_fire))
-                .setSmallIcon(R.drawable.ic_launcher_background)
+                .setSmallIcon(R.drawable.ic_stat_name)
                 .setContentTitle("Kata Kuti")
                 .setContentText("Match in Progress..")
                 .setStyle(new NotificationCompat.BigTextStyle().bigText("Current match is in progress... Tap here to resume!!"))
@@ -74,6 +76,17 @@ public class NotificationUtils {
                 .setOnlyAlertOnce(true)
                 .addAction(R.drawable.ic_notification_action,"IGNORE",actionIntent)
                 .setAutoCancel(true);
+
+        if(mMainActivityCurrentThemeChoice.equals("fire")){
+            notificationBuilder.setColor(ContextCompat.getColor(context, R.color.colorPrimary_fire));
+
+        }else if(mMainActivityCurrentThemeChoice.equals("water")){
+            notificationBuilder.setColor(ContextCompat.getColor(context, R.color.colorPrimary_water));
+
+        }else if(mMainActivityCurrentThemeChoice.equals("earth")){
+            notificationBuilder.setColor(ContextCompat.getColor(context, R.color.colorPrimaryDark_earth));
+
+        }
 
         if(MainActivity.isNotificationVibrationAllowed){
             notificationBuilder.setVibrate(new long[] { 0, 200, 300, 200, 300 });
@@ -125,8 +138,7 @@ public class NotificationUtils {
         PendingIntent actionIntent = PendingIntent.getBroadcast(context,0,broadCastIntent,PendingIntent.FLAG_UPDATE_CURRENT);
 
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(context, MATCH_IN_PROGRESS_NOTIFICATION_CHANNEL_ID)
-                .setColor(ContextCompat.getColor(context, R.color.colorPrimary_fire))
-                .setSmallIcon(R.drawable.ic_launcher_background)
+                .setSmallIcon(R.drawable.ic_stat_name)
                 .setContentTitle("Kata Kuti")
                 .setContentText("Match in Progress..")
                 .setStyle(new NotificationCompat.BigTextStyle().bigText("Current match is in progress... Tap here to resume!!"))
@@ -134,6 +146,17 @@ public class NotificationUtils {
                 .setOnlyAlertOnce(true)
                 .addAction(R.drawable.ic_notification_action,"IGNORE",actionIntent)
                 .setAutoCancel(true);
+
+        if(mMainActivityCurrentThemeChoice.equals("fire")){
+            notificationBuilder.setColor(ContextCompat.getColor(context, R.color.colorPrimary_fire));
+
+        }else if(mMainActivityCurrentThemeChoice.equals("water")){
+            notificationBuilder.setColor(ContextCompat.getColor(context, R.color.colorPrimary_water));
+
+        }else if(mMainActivityCurrentThemeChoice.equals("earth")){
+            notificationBuilder.setColor(ContextCompat.getColor(context, R.color.colorPrimaryDark_earth));
+
+        }
 
         if(MainActivity.isNotificationVibrationAllowed){
             notificationBuilder.setVibrate(new long[] { 0, 200, 300, 200, 300 });

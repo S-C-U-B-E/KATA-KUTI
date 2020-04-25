@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animation-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <!--<item
+        android:drawable="@drawable/gradient_peach"
+        android:duration="@integer/other_time_individual_gradient_duration"/>
+-->
+    <item
+        android:drawable="@drawable/gradient_seagreen"
+        android:duration="@integer/other_time_individual_gradient_duration"/>
+
+
+    <item
+        android:drawable="@drawable/gradient_jshine"
+        android:duration="@integer/other_time_individual_gradient_duration"/>
+
+    <!--<item
+        android:drawable="@drawable/gradient_bloodybeautiful"
+        android:duration="@integer/other_time_individual_gradient_duration"/>
+-->
+
+</animation-list>

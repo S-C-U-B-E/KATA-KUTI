@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/parent_linear"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="279dp"
+        android:layout_height="171dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerInParent="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="150dp"
+        app:srcCompat="@drawable/my_logo" />
+
+
+
+    <ImageView
+        android:id="@+id/my_avatar"
+        android:layout_width="135dp"
+        android:layout_height="86dp"
+        android:layout_above="@id/splash_text"
+        android:layout_centerInParent="true"
+        android:layout_marginBottom="5dp"
+        app:srcCompat="@drawable/my_avatar" />
+
+    <TextView
+        android:id="@+id/splash_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="16dp"
+        android:text="@string/about_preference_version_title"
+        android:textSize="16sp"
+        android:textColor="#000000"
+        android:textStyle="normal" />
+
+    <ImageView
+        android:id="@+id/splash_message_box"
+        android:layout_width="219dp"
+        android:layout_height="143dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="25dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginBottom="70dp"
+        app:srcCompat="@drawable/splash_welcome_message_box" />
+
+    <ImageView
+        android:id="@+id/splash_message"
+        android:layout_width="219dp"
+        android:layout_height="143dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="25dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginBottom="55dp"
+        app:srcCompat="@drawable/splash_welcome_message"/>
+
+</RelativeLayout>

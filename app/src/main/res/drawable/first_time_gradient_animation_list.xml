@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animation-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <item
+        android:drawable="@drawable/gradient_orange"
+        android:duration="@integer/first_time_individual_gradient_duration"/>
+
+    <item
+        android:drawable="@drawable/gradient_peach"
+        android:duration="@integer/first_time_individual_gradient_duration"/>
+
+    <item
+        android:drawable="@drawable/gradient_seagreen"
+        android:duration="@integer/first_time_individual_gradient_duration"/>
+
+
+    <item
+        android:drawable="@drawable/gradient_jshine"
+        android:duration="@integer/first_time_individual_gradient_duration"/>
+
+    <!--<item
+        android:drawable="@drawable/gradient_blue"
+        android:duration="@integer/individual_gradient_duration"/>-->
+
+
+
+    <item
+        android:drawable="@drawable/gradient_bloodybeautiful"
+        android:duration="@integer/first_time_individual_gradient_duration"/>
+
+    <item
+        android:drawable="@drawable/gradient_yoda"
+        android:duration="@integer/first_time_individual_gradient_duration"/>
+
+    <item
+        android:drawable="@drawable/gradient_darkpurple"
+        android:duration="@integer/first_time_individual_gradient_duration"/>
+
+
+    <item
+        android:drawable="@drawable/gradient_purple"
+        android:duration="@integer/first_time_individual_gradient_duration"/>
+
+
+
+</animation-list>

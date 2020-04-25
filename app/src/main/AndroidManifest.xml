@@ -8,18 +8,23 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true">
-        <activity android:name=".MainActivity"
-            android:screenOrientation="portrait"
-            android:launchMode="singleTask"
-            android:theme="@style/AppTheme_water">
+
+        <activity android:name=".SplashActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".SettingsActivity"
+
+        <activity android:name=".MainActivity"
+            android:screenOrientation="portrait"
+            android:launchMode="singleTask"
+            android:theme="@style/AppTheme_water"/>
+
+        <activity android:name=".SettingsActivity"
             android:theme="@style/SettingAppTheme_water"
             android:screenOrientation="portrait"
             android:label="Settings"
@@ -29,7 +34,9 @@
                     android:name="android.support.PARENT_ACTIVITY"
                     android:value=".MainActivity"/>
         </activity>
+
         <receiver android:name=".NotificationReceiver"/>
+
     </application>
 
 </manifest>

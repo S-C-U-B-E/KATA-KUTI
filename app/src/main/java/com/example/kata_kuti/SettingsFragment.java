@@ -1,5 +1,6 @@
 package com.example.kata_kuti;
 
+import com.example.kata_kuti.R;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -16,7 +17,7 @@ import androidx.preference.SwitchPreference;
 
 public class SettingsFragment extends PreferenceFragmentCompat implements SharedPreferences.OnSharedPreferenceChangeListener {
 
-    private Preference difficultyPreference, themePreference, symbolPreference;
+    private Preference difficultyPreference, themePreference;
     private String googleFormFeedback = "https://docs.google.com/forms/d/e/1FAIpQLSe_-pufKfnUmv06yXEIALgBKyxub3J8JHqFBaL54mljWidYLQ/viewform?usp=sf_link";
 
 
@@ -27,16 +28,13 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Shared
             String difficulty_summary,theme_summary,symbol_summary;
         difficultyPreference = findPreference("difficulty");
         themePreference = findPreference("theme");
-        symbolPreference = findPreference("symbol");
 
         if(MainActivity.mIsMatchInProgress){
             difficulty_summary = difficultyPreference.getSharedPreferences().getString("difficulty","easy");
             difficultyPreference.setSummary(difficulty_summary+"\n(Disabled, Match is in progress!!)");
             difficultyPreference.setEnabled(false);
 
-           /* symbol_summary = symbolPreference.getSummary().toString();
-            symbolPreference.setSummary(symbol_summary+"\n(Disabled, Match is in progress!!)");
-            symbolPreference.setEnabled(false);*/
+
 
         }else{
 
@@ -44,13 +42,25 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Shared
             difficultyPreference.setSummary(difficulty_summary);
             difficultyPreference.setEnabled(true);
 
-           /* symbol_summary = symbolPreference.getSummary().toString();
-            symbolPreference.setSummary(symbol_summary);
-            symbolPreference.setEnabled(true);*/
+
         }
 
             theme_summary = themePreference.getSharedPreferences().getString("theme","water");
-            themePreference.setSummary(theme_summary);
+
+        /*
+        * Suddenly i decided to rename the themes that's why i had to use this not so good coading
+        * for setting the theme summary
+        * */
+
+            if(theme_summary.equals("fire")){
+                themePreference.setSummary("sunset");
+            }else if(theme_summary.equals("water")){
+                themePreference.setSummary("ocean");
+            }else if(theme_summary.equals("earth")){
+                themePreference.setSummary("mountain");
+            }else{
+                themePreference.setSummary(theme_summary); //future summaries will have correct label-value pairs
+            }
     }
 
     @Override
@@ -79,8 +89,21 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Shared
         if(null != preference){
             if( !(preference instanceof CheckBoxPreference) && !(preference instanceof SwitchPreference) ){
                 String value = sharedPreferences.getString(preference.getKey(),"");
-                preference.setSummary(value);
 
+                /*
+                 * Suddenly i decided to rename the themes that's why i had to use this not so good coading
+                 * for setting the theme summary
+                 * */
+
+                if(value.equals("fire")){
+                    preference.setSummary("sunset");
+                }else if(value.equals("water")){
+                    preference.setSummary("ocean");
+                }else if(value.equals("earth")){
+                    preference.setSummary("mountain");
+                }else{
+                    preference.setSummary(value);  //future summaries will have correct label-value pairs
+                }
             }
 
         }
@@ -156,11 +179,12 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Shared
     }
 
     private void showDetailsAboutGame(DialogInterface.OnClickListener discardButtonClickListener) {
-        // Create an AlertDialog.Builder and set the message, and click listeners
+        // Create an AlertDialog.Builder and set the splash_welcome_message, and click listeners
         // for the positive and negative response buttons on the dialog.
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-        builder.setTitle("About Kata_Kuti");
-        builder.setMessage("The game Kata-Kuti is the most famous game among students,\nnow you can also play it on your android device,it consists of two modes\n1. You v/s Your Friend (can be a cat too !!)\n2. You v/s Scube Artificial Intelligence ( aka S.A.I );\nS.A.I is pretty good in this game and at times he can even play better.\nThe rules are the same,but here you can play a match with multiple rounds.");
+        builder.setIcon(R.drawable.ic_stat_name);
+        builder.setTitle(getContext().getResources().getString(R.string.about_game_title));
+        builder.setMessage(getContext().getResources().getString(R.string.about_game_message));
         builder.setPositiveButton("Rate This App", discardButtonClickListener);
         builder.setNegativeButton("OK", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
@@ -181,8 +205,9 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Shared
     public void aboutMePressed() {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-        builder.setTitle("About Me");
-        builder.setMessage("Hi, I am Shankha Shubhra\ni've been learning Android for a year now, this is my first fully working app.\nYou can overcome your boredom playing the game with your siblings or parents\nor,you can also try to beat S.A.I !!\nExplore the app, play and enjoy!! hope you like this app.\nPlease give a feedback below\nThank You.");
+        builder.setIcon(R.drawable.my_avatar);
+        builder.setTitle(getContext().getResources().getString(R.string.about_me_title));
+        builder.setMessage(getContext().getResources().getString(R.string.about_me_message));
         builder.setNegativeButton("OK", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 // User clicked the "Keep Playing" button, so dismiss the dialog

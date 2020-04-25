@@ -325,7 +325,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
             }
         });
 
-        Toast.makeText(MainActivity.this,"onCreate()",Toast.LENGTH_SHORT).show();
+        //Toast.makeText(MainActivity.this,"onCreate()",Toast.LENGTH_SHORT).show();
     }
 
     private void initializeCornerEdgeCenterList(){
@@ -1332,7 +1332,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
     }
 
     /*
-    * Game rounds message creator
+    * Game rounds splash_welcome_message creator
     * */
     private void createGameRoundMessage(int mCurrentRound){
         mGameRoundMessage = "Round - "+mCurrentRound+"/"+mRound;
@@ -1404,7 +1404,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
      * if they continue leaving the editor.
      */
     private void showUnsavedChangesDialog(DialogInterface.OnClickListener discardButtonClickListener) {
-        // Create an AlertDialog.Builder and set the message, and click listeners
+        // Create an AlertDialog.Builder and set the splash_welcome_message, and click listeners
         // for the positive and negative response buttons on the dialog.
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage("Current Match In Progress,Want to Exit?");
@@ -1444,7 +1444,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
     * */
     private void showFinalWinnerDialog(
             DialogInterface.OnClickListener discardButtonClickListener) {
-        // Create an AlertDialog.Builder and set the message, and click listeners
+        // Create an AlertDialog.Builder and set the splash_welcome_message, and click listeners
         // for the positive and negative response buttons on the dialog.
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
@@ -1627,12 +1627,12 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         }
     }
 
-    @Override
+    /*@Override
     protected void onStart() {
         super.onStart();
         Toast.makeText(MainActivity.this,"onStart()",Toast.LENGTH_SHORT).show();
 
-    }
+    }*/
 
     /*
     * called onStop to release resources when app is closed
@@ -1646,7 +1646,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
 
         mAudioManager.abandonAudioFocus(mOnAudioFocusChangeListener);
 
-        Toast.makeText(MainActivity.this,"onStop()",Toast.LENGTH_SHORT).show();
+        //Toast.makeText(MainActivity.this,"onStop()",Toast.LENGTH_SHORT).show();
     }
 
     /*
@@ -1675,7 +1675,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
             }
         }
 
-        Toast.makeText(MainActivity.this,"onResume()",Toast.LENGTH_SHORT).show();
+        //Toast.makeText(MainActivity.this,"onResume()",Toast.LENGTH_SHORT).show();
 
 
         NotificationUtils.clearAllNotifications(MainActivity.this);
@@ -1705,7 +1705,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
 
             maintainSymbolImage();
         }
-        Toast.makeText(MainActivity.this,"onRestart()",Toast.LENGTH_SHORT).show();
+        //.makeText(MainActivity.this,"onRestart()",Toast.LENGTH_SHORT).show();
 
     }
 
@@ -1719,7 +1719,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         if(mIsMatchInProgress && isNotificationAllowed && !isSettingsScreenOpened){
         NotificationUtils.remindUserOfTheOnGoingMatch(MainActivity.this);}
 
-        Toast.makeText(MainActivity.this,"onPause()",Toast.LENGTH_SHORT).show();
+        //Toast.makeText(MainActivity.this,"onPause()",Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -1730,7 +1730,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
 
         NotificationUtils.clearAllNotifications(MainActivity.this);
 
-       Toast.makeText(MainActivity.this,"onDestroy()",Toast.LENGTH_SHORT).show();
+       //Toast.makeText(MainActivity.this,"onDestroy()",Toast.LENGTH_SHORT).show();
     }
 
     public void didTapButton(View view) {

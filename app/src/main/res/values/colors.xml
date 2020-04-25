@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+<!--<<<<<<<<<<< GRADIENT COLORS STARTS HERE >>>>>>>>>>>>>>>>>-->
+
+    <!--  Gradient_purple color -->
+    <color name="colorPurple_A400">#99D500F9</color>
+    <color name="colorPurple_900">#994A148C</color>
+    <!-- ./ 1st Gradient color -->
+
+    <!--  Gradient_yellow color -->
+    <color name="colorAmber_A400">#99FFC400</color>
+    <color name="colorAmber_900">#99FF6F00</color>
+
+
+
 <!--<<<<<<<<<<< FIRE STARTS HERE >>>>>>>>>>>>>>>>>-->
 
     <color name="colorPrimary_fire">#FF6D00</color>
