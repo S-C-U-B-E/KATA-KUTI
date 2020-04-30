@@ -52,4 +52,4 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 ## Tip for the beginners
 - First try to learn how to build consistent layouts
 - Try to know as much you can about Android Lifecycle.. before jumping into any big project. This is where you might get stuck frequently.
-- Last.. Happy Coading!!!!
+- Last.. Happy Coding!!!!
