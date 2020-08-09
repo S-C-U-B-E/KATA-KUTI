@@ -1464,15 +1464,33 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
 
             if(mScorePlayer1!=mScorePlayer2)
             {
-                mMediaPlayer = MediaPlayer.create(MainActivity.this,R.raw.drum_roll_audio_clip);
-                mMediaPlayer.start();
-                mMediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                    @Override
-                    public void onCompletion(MediaPlayer mediaPlayer) {
-                        mMediaPlayer = MediaPlayer.create(MainActivity.this,R.raw.during_winningmessage);
-                        mMediaPlayer.start();
-                    }
-                });
+                /*
+                * Giving a different voice to S.A.I
+                * */
+                if((!isTwoPlayerModeAllowed && mDifficultyChoice.equals("insane") && (mScorePlayer1>mScorePlayer2)) ||
+                        ((!isTwoPlayerModeAllowed && !mDifficultyChoice.equals("insane") && (mScorePlayer1<mScorePlayer2)))){
+                    mMediaPlayer = MediaPlayer.create(MainActivity.this,R.raw.sai_robot_laughing);
+                    mMediaPlayer.start();
+                    mMediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                        @Override
+                        public void onCompletion(MediaPlayer mediaPlayer) {
+                            mMediaPlayer = MediaPlayer.create(MainActivity.this,R.raw.sai_voice_game_over);
+                            mMediaPlayer.start();
+                        }
+                    });
+                }
+                else{
+                    mMediaPlayer = MediaPlayer.create(MainActivity.this,R.raw.drum_roll_audio_clip);
+                    mMediaPlayer.start();
+                    mMediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                        @Override
+                        public void onCompletion(MediaPlayer mediaPlayer) {
+                            mMediaPlayer = MediaPlayer.create(MainActivity.this,R.raw.during_winningmessage);
+                            mMediaPlayer.start();
+                        }
+                    });
+                }
+
             }
             else{
                 mMediaPlayer = MediaPlayer.create(MainActivity.this,R.raw.sad_gamelost_audio_clip);
@@ -1727,7 +1745,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         NotificationUtils.remindUserOfTheOnGoingMatch(MainActivity.this);}
 
         //CHANGE 09/08/2020
-        Toast.makeText(MainActivity.this,"Sound:"+MainActivity.isNotificationSoundAllowed+"\nVibration:"+MainActivity.isNotificationVibrationAllowed,Toast.LENGTH_SHORT).show();
+        //Toast.makeText(MainActivity.this,"Sound:"+MainActivity.isNotificationSoundAllowed+"\nVibration:"+MainActivity.isNotificationVibrationAllowed,Toast.LENGTH_SHORT).show();
         //Toast.makeText(MainActivity.this,"onPause()",Toast.LENGTH_SHORT).show();
     }
 

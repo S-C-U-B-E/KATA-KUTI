@@ -47,7 +47,9 @@ public class NotificationUtils {
 
         ID_Counter++;
         NEW_MATCH_IN_PROGRESS_NOTIFICATION_CHANNEL_ID = MATCH_IN_PROGRESS_NOTIFICATION_CHANNEL_ID+Long.toString(ID_Counter);
-
+/*
+* Each time the Notification channel gets created with same name but different ID... to apply changes in shared preferences.
+* */
         NotificationManager notificationManager = (NotificationManager)
                 context.getSystemService(Context.NOTIFICATION_SERVICE);  //Getting Notification Service
 
@@ -55,7 +57,7 @@ public class NotificationUtils {
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) // Since this is not available below Oreo and stuff (I will provide links!!!)
         {
 
-            Toast.makeText(context,"API 29 check main screen",Toast.LENGTH_SHORT).show();
+            //Toast.makeText(context,"API 29 check main screen",Toast.LENGTH_SHORT).show();
 
             //CHANGE 09/08/2020
             if(null != notificationManager.getNotificationChannel(MATCH_IN_PROGRESS_NOTIFICATION_CHANNEL_ID))
@@ -126,7 +128,7 @@ public class NotificationUtils {
 
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN
             && Build.VERSION.SDK_INT < Build.VERSION_CODES.O){
-            Toast.makeText(context,"API Others check main screen",Toast.LENGTH_SHORT).show();
+            //Toast.makeText(context,"API Others check main screen",Toast.LENGTH_SHORT).show();
             notificationBuilder.setPriority(NotificationCompat.PRIORITY_HIGH); // FOR VERSIONS ABOVE JELLY_BEAN AND BELOW OREO
 
             if(MainActivity.isNotificationVibrationAllowed){
@@ -154,7 +156,7 @@ public class NotificationUtils {
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) // Since this is not available below Oreo and stuff (I will provide links!!!)
         {
 
-            Toast.makeText(context,"API 29 check settings",Toast.LENGTH_SHORT).show();
+            //Toast.makeText(context,"API 29 check settings",Toast.LENGTH_SHORT).show();
 
             //CHANGE 09/08/2020
             if(null != notificationManager.getNotificationChannel(MATCH_IN_PROGRESS_NOTIFICATION_CHANNEL_ID))
@@ -231,7 +233,7 @@ public class NotificationUtils {
 
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN
                 && Build.VERSION.SDK_INT < Build.VERSION_CODES.O){
-            Toast.makeText(context,"API Others check settings",Toast.LENGTH_SHORT).show();
+            //Toast.makeText(context,"API Others check settings",Toast.LENGTH_SHORT).show();
             notificationBuilder.setPriority(NotificationCompat.PRIORITY_HIGH); // FOR VERSIONS ABOVE JELLY_BEAN AND BELOW OREO
 
             if(MainActivity.isNotificationVibrationAllowed){
