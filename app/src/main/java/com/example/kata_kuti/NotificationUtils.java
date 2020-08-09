@@ -7,10 +7,14 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Build;
+import android.widget.Toast;
 
 import androidx.core.app.NotificationCompat;
 import androidx.core.content.ContextCompat;
+
+import java.io.File;
 
 import static com.example.kata_kuti.MainActivity.mMainActivityCurrentThemeChoice;
 import static com.example.kata_kuti.MainActivity.mThemeChoice;
@@ -33,20 +37,49 @@ public class NotificationUtils {
 
     public static final int MATCH_IN_PROGRESS_NOTIFICATION_ID = 1010; //Notification ID
 
-    public static final String MATCH_IN_PROGRESS_NOTIFICATION_CHANNEL_ID = "match_in_progress_notification_channel"; //Notification Channel ID
+    public static  String MATCH_IN_PROGRESS_NOTIFICATION_CHANNEL_ID = "match_in_progress_notification_channel"; //Notification Channel ID
+
+    public static String NEW_MATCH_IN_PROGRESS_NOTIFICATION_CHANNEL_ID = "";
+
+    public static long ID_Counter = 0;
 
     public static void remindUserOfTheOnGoingMatch(Context context){
+
+        ID_Counter++;
+        NEW_MATCH_IN_PROGRESS_NOTIFICATION_CHANNEL_ID = MATCH_IN_PROGRESS_NOTIFICATION_CHANNEL_ID+Long.toString(ID_Counter);
 
         NotificationManager notificationManager = (NotificationManager)
                 context.getSystemService(Context.NOTIFICATION_SERVICE);  //Getting Notification Service
 
+
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) // Since this is not available below Oreo and stuff (I will provide links!!!)
         {
-            NotificationChannel mChannel = new NotificationChannel(
-                    MATCH_IN_PROGRESS_NOTIFICATION_CHANNEL_ID,
-                    "MATCH IN PROGRESS",
-                    NotificationManager.IMPORTANCE_HIGH);
 
+            Toast.makeText(context,"API 29 check main screen",Toast.LENGTH_SHORT).show();
+
+            //CHANGE 09/08/2020
+            if(null != notificationManager.getNotificationChannel(MATCH_IN_PROGRESS_NOTIFICATION_CHANNEL_ID))
+                {notificationManager.deleteNotificationChannel(MATCH_IN_PROGRESS_NOTIFICATION_CHANNEL_ID);}
+
+
+            NotificationChannel mChannel = new NotificationChannel(
+                    NEW_MATCH_IN_PROGRESS_NOTIFICATION_CHANNEL_ID,
+                    "MATCH IN PROGRESS",
+                    NotificationManager.IMPORTANCE_HIGH);        //CHANGE MADE 08/08
+
+            if(!MainActivity.isNotificationSoundAllowed){
+                mChannel.setSound(null, null);
+            }
+
+            if(MainActivity.isNotificationVibrationAllowed){
+                mChannel.enableVibration(true);
+                mChannel.setVibrationPattern(new long[] { 0, 200, 300, 200, 300 });
+
+            }else{
+                mChannel.enableVibration(false);
+            }
+
+            MATCH_IN_PROGRESS_NOTIFICATION_CHANNEL_ID = NEW_MATCH_IN_PROGRESS_NOTIFICATION_CHANNEL_ID;
             notificationManager.createNotificationChannel(mChannel);
         }
 
@@ -88,7 +121,15 @@ public class NotificationUtils {
 
         }
 
-        if(MainActivity.isNotificationVibrationAllowed){
+
+
+
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN
+            && Build.VERSION.SDK_INT < Build.VERSION_CODES.O){
+            Toast.makeText(context,"API Others check main screen",Toast.LENGTH_SHORT).show();
+            notificationBuilder.setPriority(NotificationCompat.PRIORITY_HIGH); // FOR VERSIONS ABOVE JELLY_BEAN AND BELOW OREO
+
+            if(MainActivity.isNotificationVibrationAllowed){
             notificationBuilder.setVibrate(new long[] { 0, 200, 300, 200, 300 });
         }
 
@@ -96,27 +137,48 @@ public class NotificationUtils {
             notificationBuilder.setDefaults(Notification.DEFAULT_SOUND);
         }
 
-
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN
-            && Build.VERSION.SDK_INT < Build.VERSION_CODES.O){
-            notificationBuilder.setPriority(NotificationCompat.PRIORITY_HIGH); // FOR VERSIONS ABOVE JELLY_BEAN AND BELOW OREO
-        }
+        }       //CHANGE MADE 08/08
 
         notificationManager.notify(MATCH_IN_PROGRESS_NOTIFICATION_ID, notificationBuilder.build());
     }
 
     public static void remindUserOfTheOnGoingMatchFromSettings(Context context){
 
+        ID_Counter++;
+        NEW_MATCH_IN_PROGRESS_NOTIFICATION_CHANNEL_ID = MATCH_IN_PROGRESS_NOTIFICATION_CHANNEL_ID+Long.toString(ID_Counter);
+
         NotificationManager notificationManager = (NotificationManager)
                 context.getSystemService(Context.NOTIFICATION_SERVICE);  //Getting Notification Service
 
+
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) // Since this is not available below Oreo and stuff (I will provide links!!!)
         {
-            NotificationChannel mChannel = new NotificationChannel(
-                    MATCH_IN_PROGRESS_NOTIFICATION_CHANNEL_ID,
-                    "MATCH IN PROGRESS FROM NOTIFICATION",
-                    NotificationManager.IMPORTANCE_HIGH);
 
+            Toast.makeText(context,"API 29 check settings",Toast.LENGTH_SHORT).show();
+
+            //CHANGE 09/08/2020
+            if(null != notificationManager.getNotificationChannel(MATCH_IN_PROGRESS_NOTIFICATION_CHANNEL_ID))
+            {notificationManager.deleteNotificationChannel(MATCH_IN_PROGRESS_NOTIFICATION_CHANNEL_ID);}
+
+
+            NotificationChannel mChannel = new NotificationChannel(
+                    NEW_MATCH_IN_PROGRESS_NOTIFICATION_CHANNEL_ID,
+                    "MATCH IN PROGRESS",
+                    NotificationManager.IMPORTANCE_HIGH);        //CHANGE MADE 08/08
+
+            if(!MainActivity.isNotificationSoundAllowed){
+                mChannel.setSound(null, null);
+            }
+
+            if(MainActivity.isNotificationVibrationAllowed){
+                mChannel.enableVibration(true);
+                mChannel.setVibrationPattern(new long[] { 0, 200, 300, 200, 300 });
+
+            }else{
+                mChannel.enableVibration(false);
+            }
+
+            MATCH_IN_PROGRESS_NOTIFICATION_CHANNEL_ID = NEW_MATCH_IN_PROGRESS_NOTIFICATION_CHANNEL_ID;
             notificationManager.createNotificationChannel(mChannel);
         }
 
@@ -158,19 +220,29 @@ public class NotificationUtils {
 
         }
 
-        if(MainActivity.isNotificationVibrationAllowed){
+        /*if(MainActivity.isNotificationVibrationAllowed){
             notificationBuilder.setVibrate(new long[] { 0, 200, 300, 200, 300 });
         }
 
         if(MainActivity.isNotificationSoundAllowed){
             notificationBuilder.setDefaults(Notification.DEFAULT_SOUND);
         }
-
+*/
 
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN
                 && Build.VERSION.SDK_INT < Build.VERSION_CODES.O){
+            Toast.makeText(context,"API Others check settings",Toast.LENGTH_SHORT).show();
             notificationBuilder.setPriority(NotificationCompat.PRIORITY_HIGH); // FOR VERSIONS ABOVE JELLY_BEAN AND BELOW OREO
-        }
+
+            if(MainActivity.isNotificationVibrationAllowed){
+                notificationBuilder.setVibrate(new long[] { 0, 200, 300, 200, 300 });
+            }
+
+            if(MainActivity.isNotificationSoundAllowed){
+                notificationBuilder.setDefaults(Notification.DEFAULT_SOUND);
+            }
+
+        }  //CHANGE MADE 08/08
 
         notificationManager.notify(MATCH_IN_PROGRESS_NOTIFICATION_ID, notificationBuilder.build());
     }

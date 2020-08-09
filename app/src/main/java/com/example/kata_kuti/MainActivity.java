@@ -943,9 +943,11 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
 
                 if (corner.contains(Player2.get(Player2.size() - 1))) {
                     corner.remove((Integer) Player2.get(Player2.size() - 1));
-                } else if (edge.contains(Player2.get(Player2.size() - 1))) {
+                }
+                else if (edge.contains(Player2.get(Player2.size() - 1))) {
                     edge.remove((Integer) Player2.get(Player2.size() - 1));
-                } else {
+                }
+                else {
                     center.remove(0);
                 }
 
@@ -960,7 +962,8 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
                         scorePlayerTwoParent.setBackgroundResource(scorePlayer_idle);
 
                         markWonCells(2);
-                    } else {
+                    }
+                    else {
                         mScorePlayer1++;
                         gameResultMessageBox.setText("S.A.I WON");
                         textViewPlayer2.setBackgroundResource(playerIdle);
@@ -972,7 +975,8 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
                     }
                     if (mCurrentRound < mRound) {
                         mButtonNext.setVisibility(View.VISIBLE);
-                    } else {
+                    }
+                    else {
                         mButtonRestart.setVisibility(View.VISIBLE);
                         mIsMatchInProgress = false;
                         displayFinalWinner();
@@ -1013,7 +1017,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
             }
 
             clickCount++;
-            if(clickCount%2!=0 && clickCount<10){
+            if(clickCount%2!=0 && clickCount<10 && !foundWinner){   //CHANGE 09/08/2020
             onePlayerAiLogic_Insane();
 
             foundWinner = theWinner(clickCount);
@@ -1027,7 +1031,8 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
                     scorePlayerTwoParent.setBackgroundResource(scorePlayer_idle);
 
                     markWonCells(2);
-                } else {
+                }
+                else {
                     mScorePlayer1++;
                     gameResultMessageBox.setText("S.A.I WON");
                     textViewPlayer2.setBackgroundResource(playerIdle);
@@ -1039,7 +1044,8 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
                 }
                 if (mCurrentRound < mRound) {
                     mButtonNext.setVisibility(View.VISIBLE);
-                } else {
+                }
+                else {
                     mButtonRestart.setVisibility(View.VISIBLE);
                     mIsMatchInProgress = false;
                     displayFinalWinner();
@@ -1080,7 +1086,8 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
 
 
 
-            } else  /*FROM HERE THE LOGIC IS ONLY FOR HARD AND EASY MODE OF AI.. SINCE THE USER'S TURN WILL BE FIRST.*/
+            }
+                else  /*FROM HERE THE LOGIC IS ONLY FOR HARD AND EASY MODE OF AI.. SINCE THE USER'S TURN WILL BE FIRST.*/
                     {
                         Player1.add(cellMap.get(view.getId()));
                         imageView.setImageResource(Player1_symbol);
@@ -1719,6 +1726,8 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         if(mIsMatchInProgress && isNotificationAllowed && !isSettingsScreenOpened){
         NotificationUtils.remindUserOfTheOnGoingMatch(MainActivity.this);}
 
+        //CHANGE 09/08/2020
+        Toast.makeText(MainActivity.this,"Sound:"+MainActivity.isNotificationSoundAllowed+"\nVibration:"+MainActivity.isNotificationVibrationAllowed,Toast.LENGTH_SHORT).show();
         //Toast.makeText(MainActivity.this,"onPause()",Toast.LENGTH_SHORT).show();
     }
 
@@ -1859,8 +1868,8 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
     private void onePlayerAiLogic_Insane(){
 
         /*
-         * In Insane logic there is no chance of opponent winning XD.. and i don't know if people will this or not XD
-         * Opponent(of SAI) maximum can make a Tie or Lose the game
+         * In Insane logic there is ONLY ONE WAY chance of opponent winning XD.. and i don't know if people will like this or not XD
+         * Opponent(of SAI) most of the time supposed to make a Tie or Lose the game or in best case win
          *
          * In the quest of building this logic i myself became a "almost" TIC-TAC-TOE champ LOL...
          *
@@ -2070,7 +2079,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         }
 
         /*
-         * THIS NEXT PART OF ASSIGNUNG SYMBOL IS SAME AS HARD OR EASY MODE...
+         * THIS NEXT PART OF ASSIGNING SYMBOL IS SAME AS HARD OR EASY MODE...
          * */
         int cellIdChoice = reverseCellMap.get(cellChoice);        //Take the cell id for that particular value by reverse-mapping to it's ID
 

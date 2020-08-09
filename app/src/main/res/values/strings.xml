@@ -158,7 +158,7 @@ Coming Soon!!
     <!--   ABOUT   -->
     <string name="about_preference_category_title">About</string>
 
-    <string name="about_preference_version_title">Version 2.5.3</string>
+    <string name="about_preference_version_title">Version 2.5.4</string>
     <string name="about_preference_version_key" translatable="false">about_game</string>
 
     <string name="about_preference_about_me_title">About Me</string>

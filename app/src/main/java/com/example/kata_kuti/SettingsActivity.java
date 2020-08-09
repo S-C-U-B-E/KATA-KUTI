@@ -137,7 +137,8 @@ public class SettingsActivity extends AppCompatActivity {
         if(mIsMatchInProgress && isNotificationAllowed && isUserInSettingsScreen ){
             NotificationUtils.remindUserOfTheOnGoingMatchFromSettings(SettingsActivity.this);}
 
-
+        //CHANGE 09/08/2020
+        Toast.makeText(SettingsActivity.this,"Sound:"+MainActivity.isNotificationSoundAllowed+"\nVibration:"+MainActivity.isNotificationVibrationAllowed,Toast.LENGTH_SHORT).show();
         //Toast.makeText(SettingsActivity.this,"stngs onStop()",Toast.LENGTH_SHORT).show();
     }
 
